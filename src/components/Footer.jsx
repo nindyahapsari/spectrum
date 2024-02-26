@@ -1,4 +1,4 @@
-import './Footer.css';
+import './Footer.css'
 
 const Footer = () => {
   return (
@@ -22,7 +22,7 @@ const Footer = () => {
         <p>&copy; 2024 Your Company. All rights reserved.</p>
       </div>
     </footer>
-  );
-};
+  )
+}
 
-export default Footer;
+export default Footer

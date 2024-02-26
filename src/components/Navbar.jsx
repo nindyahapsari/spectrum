@@ -1,12 +1,12 @@
-import { useState } from 'react';
-import './Navbar.css';
+import { useState } from 'react'
+import './Navbar.css'
 
 const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false)
 
   const toggleNavbar = () => {
-    setIsOpen(!isOpen);
-  };
+    setIsOpen(!isOpen)
+  }
 
   return (
     <nav className="navbar">
@@ -27,7 +27,7 @@ const Navbar = () => {
         </div>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar
