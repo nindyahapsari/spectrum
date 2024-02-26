@@ -13,14 +13,9 @@ describe('Navbar.jsx', () => {
       cy.get('.navbar').should('be.visible')
     })
 
-    it.skip('should show the navbar', () => {
+    it('should show the logo', () => {
       renderNavbar()
-      cy.get('.navbar').should('exist')
-    })
-
-    it.skip('should show the logo', () => {
-      renderNavbar()
-      cy.get('.navbar-logo').should('exist')
+      cy.get('.navbar-logo').should('be.visible')
     })
   })
 })

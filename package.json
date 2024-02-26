@@ -4,7 +4,10 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "test": "jest",
+    "test:cypress": "npx cypress open",
+    "test:cypress:ct": "npx cypress open --component --browser chrome",
+    "test:cypress:ct:headless": "npx cypress run --component --browser chrome",
+    "test": "npm run test:cypress:ct:headless",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
