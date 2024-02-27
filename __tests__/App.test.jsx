@@ -1,16 +1,24 @@
 import { render, screen } from '@testing-library/react'
+import { MemoryRouter } from 'react-router-dom'
 import { describe, it, expect } from 'vitest'
 import App from '../src/App'
 
 describe('App', () => {
   function renderApp() {
-    return render(<App />)
+    return render(
+      <MemoryRouter>
+        <App />
+      </MemoryRouter>,
+    )
   }
+
+  const logoText = 'PlaneWreck'
 
   describe('when render App component', () => {
     it('should render the whole app', () => {
       renderApp()
-      expect(screen.getByText(/PlaneWreck/i)).toBeInTheDocument()
+      const logo = screen.getByText(logoText)
+      expect(logo).toBeInTheDocument()
     })
 
     it('should render the Navbar', () => {
