@@ -1,0 +1,31 @@
+body {
+  margin-top: 330px;
+  padding-top: 80px;
+}
+
+.boxes {
+  display: flex;
+  justify-content: space-around;
+}
+
+.box {
+  position: relative;
+  width: 350px;
+  height: 320px;
+  padding: 30px;
+  padding-right: 45px;
+  background-color: white;
+  color: black;
+  margin: 0 10px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+}
+
+.box h1 {
+  font-size: 4em;
+  bottom: 12rem;
+  color: #f8f697;
+  position: absolute;
+  right: 25px;
+}
