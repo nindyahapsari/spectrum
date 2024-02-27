@@ -7,7 +7,7 @@ describe('App', () => {
     return render(<App />)
   }
 
-  describe.skip('when render App component', () => {
+  describe('when render App component', () => {
     it('should render the whole app', () => {
       renderApp()
       expect(screen.getByText(/PlaneWreck/i)).toBeInTheDocument()
