@@ -7,12 +7,12 @@ const SearchBar = () => {
   const [results, setResults] = useState([])
 
   const handleSearch = () => {
-    // const filteredResults = data.filter(
-    //   (item) =>
-    //     item.name.toLowerCase().includes(input.toLowerCase()) &&
-    //     (selectedCategory === 'All' || item.category === selectedCategory),
-    // )
-    // setResults(filteredResults)
+    const filteredResults = data.filter(
+      (item) =>
+        item.name.toLowerCase().includes(input.toLowerCase()) &&
+        (selectedCategory === 'All' || item.category === selectedCategory),
+    )
+    setResults(filteredResults)
   }
 
   const handleCategoryChange = (e) => {
