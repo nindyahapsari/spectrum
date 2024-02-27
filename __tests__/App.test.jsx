@@ -27,6 +27,12 @@ describe('App', () => {
       expect(navbarElement).toBeInTheDocument()
     })
 
+    it('should render the logo', () => {
+      const { container } = renderApp()
+      const navbarLogo = container.querySelector('.navbar-logo')
+      expect(navbarLogo).toBeInTheDocument()
+    })
+
     it('should render the Footer', () => {
       const { container } = renderApp()
       const footerElement = container.querySelector('.footer')
