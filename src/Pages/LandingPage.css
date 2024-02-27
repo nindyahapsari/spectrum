@@ -1,0 +1,45 @@
+.landing-page {
+  position: relative;
+  text-align: center;
+  padding: 20px;
+  padding-top: 300px;
+  padding-bottom: 300px; 
+  min-height: calc(
+    100vh - 300px
+  );
+  overflow-y: auto; 
+  box-sizing: border-box;
+}
+
+.search-section {
+  padding: 50px;
+}
+
+.search-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+input {
+  width: 300px;
+  padding: 10px;
+  font-size: 16px;
+}
+
+button {
+  background-color: #61dafb;
+  color: white;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border: none;
+}
+
+h2 {
+  margin-bottom: 20px;
+}
+
+
