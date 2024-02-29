@@ -1,20 +1,21 @@
 body {
-  margin-top: 330px;
-  padding-top: 400px;
+  margin-top: 100px;
+  padding-top: 300px;
 }
 
-.boxes {
+.boxes1 {
   display: flex;
   justify-content: space-around;
 }
 
-.box {
+.box1 {
   position: relative;
-  width: 350px;
-  height: 370px;
-  padding: 30px;
-  right: 50px;
-  padding-right: 40px;
+  width: 1000px;
+  height: 400px;
+  padding: 40px;
+  right: 10px;
+  padding-top: 130px;
+  padding-right: 50px;
   background-color: white;
   color: black;
   margin: 0 10px;
@@ -23,10 +24,11 @@ body {
   box-sizing: border-box;
 }
 
-.box h1 {
-  font-size: 4em;
+.box1 h1 {
+  font-size: 3.5em;
   bottom: 17rem;
   color: #f8f697;
   position: absolute;
-  right: 25px;
+  right: 680px;
+  top: 1px;
 }

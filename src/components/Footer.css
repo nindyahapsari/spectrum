@@ -36,3 +36,10 @@ p {
   text-align: center;
   font-size: 16px;
 }
+.about {
+  text-decoration: none;
+  color: gray;
+  padding-left: 30px;
+  font-size: 18px;
+  padding: 0px 0px 0px 30px;
+}
