@@ -30,7 +30,7 @@ function SignupPage() {
         const errorDescription = error.response.data.message
         setErrorMessage(errorDescription)
       })
-  }   ^^^1    ^   ^   12qays4rgfb67zh ^ 
+  }
 
   return (
     <div className="SignupPage">
