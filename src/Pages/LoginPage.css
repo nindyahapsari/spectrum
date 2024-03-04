@@ -1,0 +1,67 @@
+body {
+  background-color: #f2f2f2;
+  font-family: 'Arial', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.LoginPage {
+  text-align: center;
+  margin-top: 400px;
+}
+
+h1 {
+  color: #333;
+}
+
+form {
+  width: 300px;
+  margin: 20px auto;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+input {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: #f8f697;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #f8f697;
+}
+
+.error-message {
+  color: #ff0000;
+  margin-top: 10px;
+}
+
+p {
+  color: #555;
+  margin-top: 20px;
+}
+
+Link {
+  text-decoration: none;
+  color: #007bff;
+  font-weight: bold;
+}
+
+Link:hover {
+  text-decoration: underline;
+}
