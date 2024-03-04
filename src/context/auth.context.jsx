@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import React, { useState, useEffect, createContext } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
@@ -21,25 +20,25 @@ function AuthProviderWrapper(props) {
    
     if (storedToken) {
       console.log('axios is working')
-    //   axios
-    //     .get(`${API_URL}/auth/verify`, {
-    //       headers: { Authorization: `Bearer ${storedToken}` },
-    //     })
-    //     .then((response) => {
-    //       const user = response.data;
-    //       setIsLoggedIn(true);
-    //       setIsLoading(false);
-    //       setUser(user);
-    //     })
-    //     .catch(() => {
-    //       setIsLoggedIn(false);
-    //       setIsLoading(false);
-    //       setUser(null);
-    //     });
-    // } else {
-    //   setIsLoggedIn(false);
-    //   setIsLoading(false);
-    //   setUser(null);
+      axios
+        .get(`${API_URL}/auth/verify`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
+        .then((response) => {
+          const user = response.data;
+          setIsLoggedIn(true);
+          setIsLoading(false);
+          setUser(user);
+        })
+        .catch(() => {
+          setIsLoggedIn(false);
+          setIsLoading(false);
+          setUser(null);
+        });
+    } else {
+      setIsLoggedIn(false);
+      setIsLoading(false);
+      setUser(null);
     }
   }
 

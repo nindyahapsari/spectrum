@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import "./SignupPage.css"
+import './SignupPage.css'
 
 const API_URL = 'http://localhost:5005'
 
@@ -20,7 +20,7 @@ function SignupPage() {
   const handleSignupSubmit = (e) => {
     e.preventDefault()
     const requestBody = { email, password, name }
-
+    console.log(email)
     axios
       .post(`${API_URL}/auth/signup`, requestBody)
       .then(() => {
@@ -30,7 +30,7 @@ function SignupPage() {
         const errorDescription = error.response.data.message
         setErrorMessage(errorDescription)
       })
-  }
+  }   ^^^1    ^   ^   12qays4rgfb67zh ^ 
 
   return (
     <div className="SignupPage">
