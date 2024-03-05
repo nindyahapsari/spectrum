@@ -2,11 +2,11 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
-// import { AuthContext } from '../context/auth.context'
+import { AuthContext } from '../context/auth.context'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  // const { isLoggedIn, user, logOutUser } = useContext(AuthContext)
+  const { isLoggedIn, user, logOutUser } = useContext(AuthContext)
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen)
@@ -22,12 +22,9 @@ const Navbar = () => {
         </div>
         <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
           <Link to="/">Home</Link>
-          <a href="#flights">Flights</a>
+          <a href="/flights">Flights</a>
           <Link to="/signup">Signup</Link>
           <Link to="/login">Login</Link>
-
-          {/* <Link onClick={logOutUser}>Logout</Link> */}
-          {/* <span>{user && user.name}</span> */}
         </div>
         <div className="navbar-toggle" onClick={toggleNavbar}>
           <span></span>

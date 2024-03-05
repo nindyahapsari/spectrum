@@ -1,18 +1,22 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types'
+import axios from 'axios'
 import './SearchBar.css'
+import PropTypes from 'prop-types'
+import Flights from '../Pages/FlightsPage'
 
-const SearchBar = ({ data }) => {
+const URL = 'http://localhost:5005'
+
+const SearchBar = () => {
   const [input, setInput] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [results, setResults] = useState([])
 
-  const filterData = () => {
+  const filterData = (apiData) => {
     try {
-      return data.filter(
+      return apiData.filter(
         (item) =>
-          item.name.toLowerCase().includes(input.toLowerCase()) &&
-          (selectedCategory === 'All' || item.category === selectedCategory),
+          item.airline.toLowerCase().includes(input.toLowerCase()) &&
+          (selectedCategory === 'All' || item.destination === selectedCategory),
       )
     } catch (error) {
       console.error('Error filtering data:', error)
@@ -20,9 +24,16 @@ const SearchBar = ({ data }) => {
     }
   }
 
-  const handleSearch = () => {
-    const filteredResults = filterData()
-    setResults(filteredResults)
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get(`${URL}/api/flights/all`)
+      const apiData = response.data
+      const filteredResults = filterData(apiData)
+      setResults(filteredResults)
+    } catch (error) {
+      console.error('Error fetching data:', error)
+      setResults([])
+    }
   }
 
   const handleCategoryChange = (e) => {
@@ -51,14 +62,10 @@ const SearchBar = ({ data }) => {
         Search
       </button>
 
-      {results.length > 0 && (
-        <div className="results-container">
-          <ul>
-            {results.map((result) => (
-              <li key={result.id}>{result.name}</li>
-            ))}
-          </ul>
-        </div>
+      {results.length > 0 ? (
+        <Flights flights={results} />
+      ) : (
+        <div className="no-results-message">No results found.</div>
       )}
     </div>
   )
@@ -67,9 +74,9 @@ const SearchBar = ({ data }) => {
 SearchBar.propTypes = {
   data: PropTypes.arrayOf(
     PropTypes.shape({
-      id: PropTypes.string.isRequired,
-      name: PropTypes.string.isRequired,
-      category: PropTypes.string.isRequired,
+      airline: PropTypes.string.isRequired,
+      destination: PropTypes.string.isRequired,
+      departureTime: PropTypes.string.isRequired,
     }),
   ).isRequired,
 }

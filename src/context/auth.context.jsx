@@ -2,7 +2,7 @@ import React, { useState, useEffect, createContext } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
 
-const API_URL = 'http://localhost:5005'
+const URL = 'http://localhost:5005'
 
 const AuthContext = createContext()
 
@@ -17,28 +17,28 @@ function AuthProviderWrapper(props) {
 
   const authenticateUser = () => {
     const storedToken = localStorage.getItem('authToken')
-   
+
     if (storedToken) {
       console.log('axios is working')
       axios
-        .get(`${API_URL}/auth/verify`, {
+        .get(`${URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {
-          const user = response.data;
-          setIsLoggedIn(true);
-          setIsLoading(false);
-          setUser(user);
+          const user = response.data
+          setIsLoggedIn(true)
+          setIsLoading(false)
+          setUser(user)
         })
         .catch(() => {
-          setIsLoggedIn(false);
-          setIsLoading(false);
-          setUser(null);
-        });
+          setIsLoggedIn(false)
+          setIsLoading(false)
+          setUser(null)
+        })
     } else {
-      setIsLoggedIn(false);
-      setIsLoading(false);
-      setUser(null);
+      setIsLoggedIn(false)
+      setIsLoading(false)
+      setUser(null)
     }
   }
 
