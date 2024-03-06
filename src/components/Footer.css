@@ -5,7 +5,7 @@
   flex-wrap: wrap;
   flex-direction: row;
   align-items: flex-start;
-  gap: 60px;
+
   left: -9px;
   bottom: -9px;
   width: 100%;
@@ -15,7 +15,7 @@
 .footer-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 40px;
+  gap: 30px;
 }
 
 .footer-section {

@@ -1,0 +1,79 @@
+body {
+  font-family: 'Arial', sans-serif;
+}
+
+.flight-cards-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0;
+  gap: 32px;
+}
+
+.flight-card {
+  border: 1px solid #ddd;
+  border-radius: 15px;
+  width: 100%;
+  max-width: 900px;
+  background-color: white;
+  color: black;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  margin-left: 100px;
+  margin-bottom: 100px;
+}
+
+.flight-card-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.flight-card h2 {
+  color: #333;
+  margin: 0;
+}
+
+.flight-card p {
+  margin: 0;
+  font-weight: bold;
+}
+
+.flight-card-img {
+  width: 2px;
+  height: 100%;
+  background-color: #ccc;
+}
+
+.flight-card-price {
+  font-weight: bold;
+  padding-top: 100px;
+  padding-right: 10px;
+}
+
+.flight-card button {
+  background-color: #f8f697;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-right: 20px;
+  margin-top: 100px;
+}
+
+.flight-card button:hover {
+  background-color: #f8f697;
+}
+
+.small-bold {
+  font-size: 9px;
+  color: gray;
+}
