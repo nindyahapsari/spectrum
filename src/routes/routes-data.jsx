@@ -6,14 +6,20 @@ import LoginPage from '../Pages/LoginPage'
 import SignupPage from '../Pages/SignupPage'
 import Cart from '../Pages/Cart'
 import ConfirmationPage from '../Pages/ConfirmationPage'
+import FlightsPage from '../Pages/FlightsPage'
+import ResultPage from '../Pages/ResultsPage'
 
 export const routes = [
   { path: '/landingpage', Element: LandingPage },
   { path: '/', Element: HomePage },
   { path: '/about', Element: AboutPage },
   { path: '/signup', Element: SignupPage },
-  { path: '*', Element: ErrorPage },
   { path: '/login', Element: LoginPage },
   { path: '/cart', Element: Cart },
   { path: '/confirmation', Element: ConfirmationPage },
+  { path: '/flights', Element: FlightsPage },
+  { path: '/resultpage', Element: ResultPage },
+  { path: '*', Element: ErrorPage },
 ]
+
+export default routes

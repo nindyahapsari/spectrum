@@ -2,13 +2,11 @@ import './HomePage.css'
 import SearchBar from '../components/SearchBar'
 
 const HomePage = () => {
-
   return (
-
     <div className="boxes">
-        <div>
-    <SearchBar />
-    </div>
+      <div>
+        <SearchBar />
+      </div>
       <div className="box find-box">
         <h1>01</h1>
         <h2>FIND</h2>
@@ -51,7 +49,6 @@ const HomePage = () => {
         </p>
       </div>
     </div>
-
   )
 }
 
