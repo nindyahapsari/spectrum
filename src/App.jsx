@@ -1,6 +1,5 @@
 import './App.css'
 import Navbar from './components/Navbar'
-import Footer from './components/Footer'
 import RoutesRender from './routes'
 import axios from 'axios'
 
@@ -12,7 +11,6 @@ const App = () => {
     <div>
       <Navbar />
       <RoutesRender />
-      <Footer />
     </div>
   )
 }
