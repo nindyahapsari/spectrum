@@ -25,6 +25,7 @@ const Navbar = () => {
           <a href="#flights">Flights</a>
           <Link to="/signup">Signup</Link>
           <Link to="/login">Login</Link>
+          <Link to="/cart">Checkout</Link>
 
           {/* <Link onClick={logOutUser}>Logout</Link> */}
           {/* <span>{user && user.name}</span> */}
