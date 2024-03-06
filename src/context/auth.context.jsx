@@ -1,12 +1,11 @@
 import React, { useState, useEffect, createContext } from 'react'
 import axios from 'axios'
 import PropTypes from 'prop-types'
-
 const URL = 'http://localhost:5005'
 
 const AuthContext = createContext()
 
-function AuthProviderWrapper(props) {
+function AuthProviderWrapper({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState(null)
@@ -66,7 +65,7 @@ function AuthProviderWrapper(props) {
         logOutUser,
       }}
     >
-      {props.children}
+      {children}
     </AuthContext.Provider>
   )
 }
