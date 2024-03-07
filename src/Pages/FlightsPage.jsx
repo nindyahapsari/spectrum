@@ -1,8 +1,7 @@
-// eslint-disable-next-line react/prop-types
-/* eslint-disable react/prop-types */
 import React from 'react'
 import './FlightsPage.css'
 import SearchBar from '../components/SearchBar'
+import FlightCards from '../components/FlightCards'
 
 const FlightsPage = ({ data }) => {
   return (
@@ -11,7 +10,8 @@ const FlightsPage = ({ data }) => {
       <SearchBar
         onSearch={(input, category) => console.log('Search:', input, category)}
       />
-      <div>{data && <p>{data.destination}</p>}</div>
+
+      <FlightCards />
     </div>
   )
 }
