@@ -24,7 +24,7 @@ const SearchBar = () => {
     axios
       .get(`${URL}/api/flights/all`)
       .then((response) => {
-        console.log('Response =>', response)
+        // console.log('Response =>', response)
         setResultsFromFlightsAll(response.data)
       })
       .catch((error) => {
@@ -60,16 +60,9 @@ const SearchBar = () => {
   const handleFromWhereChange = (e) => {
     setFromWhereInput(e.target.value)
   }
-
-  const handleToWhereChange = (e) => {
-    setToWhereInput(e.target.value)
-  }
-
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value)
   }
-
-  console.log('Filtered results =>', filteredResults)
 
   return (
     <div className="search-container">

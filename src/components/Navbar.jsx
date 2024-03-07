@@ -20,6 +20,16 @@ const Navbar = () => {
             PlaneWreck
           </Link>
         </div>
+        <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
+          <Link to="/">Home</Link>
+          <a href="/flights">Flights</a>
+          <Link to="/signup">Signup</Link>
+          <Link to="/login">Login</Link>
+          <Link to="/cart">Checkout</Link>
+
+          {/* <Link onClick={logOutUser}>Logout</Link> */}
+          {/* <span>{user && user.name}</span> */}
+        </div>
 
         {isLoggedIn && (
           <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
