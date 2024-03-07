@@ -20,17 +20,11 @@ const Navbar = () => {
             PlaneWreck
           </Link>
         </div>
-        <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
-          <Link to="/">Home</Link>
-          <a href="/flights">Flights</a>
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
-        </div>
 
         {isLoggedIn && (
           <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
             <Link to="/">Home</Link>
-            <Link to="/resultpage">Flights</Link>
+            <Link to="/flights">Flights</Link>
             <Link onClick={logOutUser}>Logout</Link>
             <span>{user && user.name}</span>
           </div>
