@@ -1,12 +1,10 @@
 body {
-  margin-top: 330px;
-  padding-top: 400px;
-  width: 100vw;
 }
 
 .boxes {
   display: flex;
   justify-content: space-around;
+  padding-top: 400px;
 }
 
 .box {
