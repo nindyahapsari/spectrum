@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './SearchBar.css'
-// import Flights from '../Pages/FlightsPage'
+import FlightCards from './FlightCards'
 import DatePicker from 'react-date-picker'
 import 'react-calendar/dist/Calendar.css'
 import 'react-date-picker/dist/DatePicker.css'
-import FlightCards from './FlightCards'
 
 const URL = 'http://localhost:5005'
 
 const SearchBar = () => {
-  const [fromWhereInput, setFromWhereInput] = useState('')
+  const [fromWhereInput] = useState('')
   const [toWhereInput, setToWhereInput] = useState('')
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [resultsFromFlightsAll, setResultsFromFlightsAll] = useState([])
@@ -54,10 +53,6 @@ const SearchBar = () => {
   console.log('From where input =>', fromWhereInput)
   console.log('Where to input =>', toWhereInput)
 
-  const handleFromWhereChange = (e) => {
-    setFromWhereInput(e.target.value)
-  }
-
   const handleToWhereChange = (e) => {
     setToWhereInput(e.target.value)
   }
@@ -73,8 +68,8 @@ const SearchBar = () => {
           <input
             type="text"
             placeholder="From where?"
-            value={fromWhereInput}
-            onChange={handleFromWhereChange}
+            value="Berlin"
+            readOnly
             className="search-input"
           />
           <input
@@ -84,20 +79,27 @@ const SearchBar = () => {
             onChange={handleToWhereChange}
             className="search-input"
           />
-          <DatePicker
-            className="date"
-            selected={date}
-            onChange={(date) => setDate(date)}
-          />
+          <div className="date-picker-container">
+            <DatePicker
+              className="date"
+              selected={date}
+              onChange={(date) => setDate(date)}
+            />
+            <DatePicker
+              className="date"
+              selected={date}
+              onChange={(date) => setDate(date)}
+            />
+          </div>
         </div>
       </div>
       <div className="additional-options">
         <div className="checkbox-container">
-          <label>
+          <label className="label">
             One Way
             <input type="checkbox" />
           </label>
-          <label>
+          <label className="label">
             Return
             <input type="checkbox" />
           </label>
