@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './SearchBar.css'
@@ -58,6 +59,9 @@ const SearchBar = () => {
   console.log('Where to input =>', toWhereInput)
 
   const handleFromWhereChange = (e) => {
+    setFromWhereInput(e.target.value)
+  }
+  const handleToWhereChange = (e) => {
     setFromWhereInput(e.target.value)
   }
   const handleCategoryChange = (e) => {
