@@ -27,7 +27,6 @@ const FlightsPage = () => {
   const filterData = (apiData) => {
     try {
       return apiData.filter((data) =>
-        // data.destination.toLowerCase() === destinationInput.toLowerCase(),
         data.destination
           .trim()
           .toLowerCase()
