@@ -3,7 +3,7 @@ import './FlightsPage.css'
 import SearchBar from '../components/SearchBar'
 import FlightCards from '../components/FlightCards'
 
-const FlightsPage = ({ data }) => {
+const FlightsPage = () => {
   return (
     <div>
       <h2>Flights</h2>

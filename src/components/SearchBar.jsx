@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import './SearchBar.css'
-import Flights from '../Pages/FlightsPage'
+// import Flights from '../Pages/FlightsPage'
 import DatePicker from 'react-date-picker'
 import 'react-calendar/dist/Calendar.css'
 import 'react-date-picker/dist/DatePicker.css'
+import FlightCards from './FlightCards'
 
 const URL = 'http://localhost:5005'
 
@@ -40,8 +41,10 @@ const SearchBar = () => {
 
   const filterData = (apiData) => {
     try {
-      let filteredResult = apiData.filter((data) => data.destination === input)
-      return filteredResult
+      let filteredResult = apiData.filter(
+        (data) => data.destination === fromWhereInput && data.cards.length > 0,
+      )
+      return filteredResult.map((data) => data.cards)
     } catch (error) {
       console.error('Error filtering data:', error)
       return []
@@ -62,8 +65,6 @@ const SearchBar = () => {
   const handleCategoryChange = (e) => {
     setSelectedCategory(e.target.value)
   }
-
-  console.log('Filtered results =>', filteredResults)
 
   return (
     <div className="search-container">
@@ -116,8 +117,12 @@ const SearchBar = () => {
       </div>
       {filteredResults.length > 0 ? (
         <div>
-          {filteredResults.map((flight, index) => (
-            <div key={index}>{flight.destination}</div>
+          {filteredResults.map((cards, index) => (
+            <div key={index}>
+              {cards.map((card, cardIndex) => (
+                <FlightCards key={`${index}-${cardIndex}`} {...card} />
+              ))}
+            </div>
           ))}
         </div>
       ) : (
