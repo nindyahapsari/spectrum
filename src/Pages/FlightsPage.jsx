@@ -1,5 +1,6 @@
-import { useState, useEffect } from 'react'
-import { useContext } from 'react'
+import { useState, useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
+// import { useContext } from 'react'
 import { CartContext } from '../context/cart.context'
 import SearchBar from '../components/SearchBar'
 import FlightCards from '../components/FlightCards'
@@ -7,10 +8,14 @@ import FlightCards from '../components/FlightCards'
 import './FlightsPage.css'
 
 const FlightsPage = () => {
+  const { initData } = useContext(CartContext)
+
   const [flights, setFlights] = useState([])
   const [filteredResults, setFilteredResults] = useState([])
   const [destinationInput, setDestinationInput] = useState('')
-  const { initData } = useContext(CartContext)
+
+  let navigateTo = useNavigate()
+  console.log(navigateTo)
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,6 +44,7 @@ const FlightsPage = () => {
   }
 
   const handleSearch = () => {
+    navigateTo('/flights')
     if (flights.length > 0) {
       const filteredResults = filterData(initData)
       console.log(filteredResults)
