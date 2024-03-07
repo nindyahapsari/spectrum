@@ -1,60 +1,15 @@
-import React, { useState, useEffect } from 'react'
-import axios from 'axios'
+import React, { useState } from 'react'
 import './SearchBar.css'
-import FlightCards from './FlightCards'
 import DatePicker from 'react-date-picker'
 import 'react-calendar/dist/Calendar.css'
 import 'react-date-picker/dist/DatePicker.css'
 
-const URL = 'http://localhost:5005'
-
-const SearchBar = () => {
-  const [fromWhereInput] = useState('')
-  const [toWhereInput, setToWhereInput] = useState('')
+const SearchBar = ({ destinationInput, setDestinationInput, handleSearch }) => {
   const [selectedCategory, setSelectedCategory] = useState('All')
-  const [resultsFromFlightsAll, setResultsFromFlightsAll] = useState([])
-  const [filteredResults, setFilteredResults] = useState([])
   const [date, setDate] = useState(new Date())
 
-  useEffect(() => {
-    fetchFlight()
-  }, [])
-
-  const fetchFlight = () => {
-    axios
-      .get(`${URL}/api/flights/all`)
-      .then((response) => {
-        setResultsFromFlightsAll(response.data)
-      })
-      .catch((error) => {
-        console.log('Error =>', error)
-      })
-  }
-
-  const handleSearch = () => {
-    if (resultsFromFlightsAll.length > 0) {
-      const filteredResults = filterData(resultsFromFlightsAll)
-      setFilteredResults(filteredResults)
-    }
-  }
-
-  const filterData = (apiData) => {
-    try {
-      let filteredResult = apiData.filter(
-        (data) => data.destination === fromWhereInput && data.cards.length > 0,
-      )
-      return filteredResult.map((data) => data.cards)
-    } catch (error) {
-      console.error('Error filtering data:', error)
-      return []
-    }
-  }
-
-  console.log('From where input =>', fromWhereInput)
-  console.log('Where to input =>', toWhereInput)
-
-  const handleToWhereChange = (e) => {
-    setToWhereInput(e.target.value)
+  const handleDestination = (e) => {
+    setDestinationInput(e.target.value)
   }
 
   const handleCategoryChange = (e) => {
@@ -75,8 +30,8 @@ const SearchBar = () => {
           <input
             type="text"
             placeholder="Where to?"
-            value={toWhereInput}
-            onChange={handleToWhereChange}
+            value={destinationInput}
+            onChange={handleDestination}
             className="search-input"
           />
           <div className="date-picker-container">
@@ -117,19 +72,6 @@ const SearchBar = () => {
           </button>
         </div>
       </div>
-      {filteredResults.length > 0 ? (
-        <div>
-          {filteredResults.map((cards, index) => (
-            <div key={index}>
-              {cards.map((card, cardIndex) => (
-                <FlightCards key={`${index}-${cardIndex}`} {...card} />
-              ))}
-            </div>
-          ))}
-        </div>
-      ) : (
-        <div className="no-results-message"></div>
-      )}
     </div>
   )
 }
