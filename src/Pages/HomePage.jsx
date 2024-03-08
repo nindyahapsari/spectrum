@@ -7,8 +7,12 @@ import FirstStep from '../components/FirstStep'
 const HomePage = () => {
   return (
     <div className="home-container">
-      <SearchBar setFilteredResults="London" />
-      <FirstStep />
+      <div>
+        <SearchBar setFilteredResults="London" />
+      </div>
+      <div>
+        <FirstStep />
+      </div>
     </div>
   )
 }

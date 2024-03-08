@@ -1,5 +1,6 @@
 import './App.css'
 import Navbar from './components/Navbar'
+
 import RoutesRender from './routes'
 import axios from 'axios'
 import { useTheme } from './components/ThemeContext'
@@ -16,7 +17,6 @@ const App = () => {
       <ThemeSwitcher>
         <RoutesRender />
       </ThemeSwitcher>
-      <Footer />
     </div>
   )
 }
