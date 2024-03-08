@@ -6,7 +6,7 @@ import LoginPage from '../Pages/LoginPage'
 import SignupPage from '../Pages/SignupPage'
 import Cart from '../Pages/Cart'
 import ConfirmationPage from '../Pages/ConfirmationPage'
-import FlightsPage from '../Pages/FlightsPage'
+import FlightsPage from '../components/Flights'
 import ResultPage from '../Pages/ResultsPage'
 
 export const routes = [

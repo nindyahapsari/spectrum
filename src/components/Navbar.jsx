@@ -29,7 +29,6 @@ const Navbar = () => {
         {isLoggedIn && (
           <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
             <Link to="/">Home</Link>
-            <Link to="/flights">Flights</Link>
             <Link onClick={logOutUser}>Logout</Link>
             <Link to="/cart">
               <span>{user && user.name}</span>

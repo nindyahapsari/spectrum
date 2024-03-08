@@ -1,28 +1,11 @@
 .boxes {
   width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  padding: 5% 20%;
+
 }
 
-.box {
-  position: relative;
-  width: 350px;
-  height: 370px;
-  padding: 30px;
-  right: 50px;
-  padding-right: 40px;
-  background-color: white;
-  color: black;
-  margin: 0 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  box-sizing: border-box;
-}
-
-.box h1 {
-  font-size: 4em;
-  bottom: 17rem;
-  color: #f8f697;
-  position: absolute;
-  right: 25px;
+.step-img {
+  width: 25em;
 }

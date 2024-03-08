@@ -15,7 +15,12 @@ const DataSourceProvider = (props) => {
   const [initFlightsData, setInitFlightData] = useState([])
 
   useEffect(() => {
-    setInitFlightData(fetchAllFlights())
+    const fetchData = async () => {
+      const data = await fetchAllFlights()
+      setInitFlightData(data)
+    }
+
+    fetchData()
   }, [])
 
   const contextValue = {
