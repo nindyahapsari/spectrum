@@ -2,41 +2,38 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
-import { AuthContext } from '../context/Auth.context'
+
+import { AuthContext } from '../context/auth.context'
+import { useTheme } from './ThemeContext'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext)
+  const { darkMode, toggleDarkMode } = useTheme()
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen)
   }
 
   return (
-    <nav className="navbar">
+    <nav className={`navbar ${darkMode ? 'dark' : 'light'}`}>
       <div className="navbar-container">
         <div className="navbar-logo">
           <Link className="logo" to="/">
             PlaneWreck
           </Link>
         </div>
-        <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
-          <Link to="/">Home</Link>
-          <a href="/flights">Flights</a>
-          <Link to="/signup">Signup</Link>
-          <Link to="/login">Login</Link>
-          <Link to="/cart">Checkout</Link>
-
-          {/* <Link onClick={logOutUser}>Logout</Link> */}
-          {/* <span>{user && user.name}</span> */}
-        </div>
-
+        <button className="switchdark" onClick={toggleDarkMode}>
+          {darkMode ? '☀︎' : '☾'}
+        </button>
         {isLoggedIn && (
           <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
             <Link to="/">Home</Link>
             <Link to="/flights">Flights</Link>
             <Link onClick={logOutUser}>Logout</Link>
-            <span>{user && user.name}</span>
+            <Link to="/cart">
+              <span>{user && user.name}</span>
+            </Link>
           </div>
         )}
         {!isLoggedIn && (

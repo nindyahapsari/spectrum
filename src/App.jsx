@@ -2,15 +2,21 @@ import './App.css'
 import Navbar from './components/Navbar'
 import RoutesRender from './routes'
 import axios from 'axios'
+import { useTheme } from './components/ThemeContext'
+import ThemeSwitcher from './components/ThemeSwitch'
 
 axios.defaults.baseURL = 'http://localhost:5005'
 axios.defaults.withCredentials = true
 
 const App = () => {
+  const { darkMode } = useTheme()
   return (
-    <div>
+    <div className={darkMode ? 'dark' : 'light' + 'App'}>
       <Navbar />
-      <RoutesRender />
+      <ThemeSwitcher>
+        <RoutesRender />
+      </ThemeSwitcher>
+      <Footer />
     </div>
   )
 }

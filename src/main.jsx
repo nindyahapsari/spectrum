@@ -6,6 +6,7 @@ import { BrowserRouter } from 'react-router-dom'
 import { AuthProviderWrapper } from './context/Auth.context.jsx'
 import { CartContextProvider } from './context/Cart.context.jsx'
 import { DataSourceProvider } from './context/DataSource.context.jsx'
+import { ThemeProvider } from './components/ThemeContext.jsx'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
@@ -13,7 +14,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       <AuthProviderWrapper>
         <DataSourceProvider>
           <CartContextProvider>
+   <ThemeProvider>
             <App />
+          </ThemeProvider>
           </CartContextProvider>
         </DataSourceProvider>
       </AuthProviderWrapper>

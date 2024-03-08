@@ -1,5 +1,6 @@
 import React from 'react'
 import './ConfirmationPage.css'
+import { Link } from 'react-router-dom'
 
 const ConfirmationPage = () => {
   return (
@@ -17,7 +18,9 @@ const ConfirmationPage = () => {
         </div>
         <div>
           <button>Card</button>
-          <button>Paypal</button>
+          <Link target="_blank" to="https://www.paypal.com/de/home">
+            <button>Paypal</button>
+          </Link>
         </div>
       </div>
     </div>
