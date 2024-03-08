@@ -2,6 +2,7 @@
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 import './Navbar.css'
+
 import { AuthContext } from '../context/auth.context'
 import { useTheme } from './ThemeContext'
 

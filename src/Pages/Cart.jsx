@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react'
-import { CartContext } from '../context/cart.context'
+import { CartContext } from '../context/Cart.context'
 import { useNavigate } from 'react-router-dom'
 
 import CartItem from '../components/CardCheckout'

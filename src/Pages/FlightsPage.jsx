@@ -1,43 +1,35 @@
-import { useState, useEffect } from 'react'
-import { useContext } from 'react'
-import { CartContext } from '../context/cart.context'
+import { useState, useContext } from 'react'
+
+import { DataSourceContext } from '../context/DataSource.context'
 import SearchBar from '../components/SearchBar'
 import FlightCards from '../components/FlightCards'
 
 import './FlightsPage.css'
 
 const FlightsPage = () => {
-  const [flights, setFlights] = useState([])
-  const { initData } = useContext(CartContext)
+  const [filteredResults, setFilteredResults] = useState([])
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        setFlights(initData)
-        // console.log(initData)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
-    }
+  const { initFlightsData } = useContext(DataSourceContext)
 
-    fetchData()
-  }, [initData])
+  const renderFlightsList = () => {
+    const flightsList =
+      filteredResults.length > 0 ? filteredResults : initFlightsData
 
-  //temp loader
-  if (flights.length === 0) {
+    console.log('flightsList', flightsList)
+    return flightsList.map((flight) => (
+      <FlightCards key={flight._id} flight={flight} />
+    ))
+  }
+
+  if (initFlightsData.length === 0) {
     return <div className="flight-loader">Loading...</div>
   }
 
   return (
     <div>
-      <SearchBar />
+      <SearchBar setFilteredResults={setFilteredResults} />
 
-      <div className="flight-list-container">
-        {flights &&
-          flights.map((flight) => {
-            return <FlightCards key={flight._id} flight={flight} />
-          })}
-      </div>
+      <div className="flight-list-container">{renderFlightsList()}</div>
     </div>
   )
 }
