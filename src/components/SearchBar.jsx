@@ -20,7 +20,7 @@ const SearchBar = (props) => {
     handleSearch,
   } = props
 
-  const [selectedCategory, setSelectedCategory] = useState('All')
+  const [departureInput, setDepartureInput] = useState('Berlin')
   const [passenger, setPassenger] = useState('')
   const [date, setDate] = useState(new Date())
 
@@ -29,7 +29,7 @@ const SearchBar = (props) => {
   }
 
   const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value)
+    // setSelectedCategory(e.target.value)
   }
 
   return (
@@ -37,7 +37,7 @@ const SearchBar = (props) => {
       <div className="flex flex-row justify-between my-5">
         <div className="flex flex-row justify-between">
           <div className="mx-2">
-            <Input label="From" size="lg" value="Berlin" />
+            <Input label="From" size="lg" value={departureInput} />
           </div>
           <div>
             <Input
@@ -67,9 +67,9 @@ const SearchBar = (props) => {
             variant="outlined"
             onChange={() => console.log('option')}
           >
-            <Option>1</Option>
-            <Option>2</Option>
-            <Option>3</Option>
+            <Option>1 Person</Option>
+            <Option>2 Person</Option>
+            <Option>3 Person</Option>
           </Select>
         </div>
       </div>
