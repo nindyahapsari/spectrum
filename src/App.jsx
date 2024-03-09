@@ -18,6 +18,7 @@ const App = () => {
       <ThemeSwitcher>
         <RoutesRender />
       </ThemeSwitcher>
+
       <Footer />
     </div>
   )

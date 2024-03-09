@@ -53,7 +53,7 @@ const HomePage = () => {
       />
 
       {filteredResults.length > 0 ? (
-        <div className="">
+        <div className=" px-40">
           <Flights filteredResults={filteredResults} />
         </div>
       ) : (
@@ -61,6 +61,7 @@ const HomePage = () => {
           <FirstStep />
         </div>
       )}
+
     </div>
   )
 }

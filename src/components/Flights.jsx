@@ -54,22 +54,34 @@ const AIRLINES = [
 const Flights = (props) => {
   const { filteredResults } = props
 
+  // const [open, setOpen] = useState(0)
+
+  // const handleOpen = (value) => setOpen(open === value ? 0 : value)
+
+  const [openAcc1, setOpenAcc1] = useState(true)
+  const [openAcc2, setOpenAcc2] = useState(true)
+  const [openAcc3, setOpenAcc3] = useState(true)
+
   const [open, setOpen] = useState(0)
+
+  const handleOpenAcc1 = () => setOpenAcc1((cur) => !cur)
+  const handleOpenAcc2 = () => setOpenAcc2((cur) => !cur)
+  const handleOpenAcc3 = () => setOpenAcc3((cur) => !cur)
 
   const handleOpen = (value) => setOpen(open === value ? 0 : value)
 
   return (
-    <div className="flex flex-row justify-between my-10 border-2 border-red-700">
+    <div className="flex flex-row justify-between my-10 ">
       <div>
         {filteredResults.map((flight) => (
           <FlightCards key={flight._id} flight={flight} />
         ))}
       </div>
-      <div className="px-30 ml-5 border-2 border-red-500">
-        <Accordion open={open === 1} icon={<Icon id={1} open={open} />}>
+      <div className="mb-2 rounded-lg border border-blue-gray-100 px-4 ">
+        <Accordion open={openAcc1}>
           <AccordionHeader
             className="text-sm font-bold"
-            onClick={() => handleOpen(1)}
+            onClick={handleOpenAcc1}
           >
             Stops
           </AccordionHeader>
@@ -81,18 +93,21 @@ const Flights = (props) => {
             </div>
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 2} icon={<Icon id={2} open={open} />}>
+        <Accordion open={openAcc2}>
           <AccordionHeader
             className="text-sm font-bold"
-            onClick={() => handleOpen(2)}
+            onClick={handleOpenAcc2}
           >
             Departures times
           </AccordionHeader>
           <AccordionBody>
-            <div className="px-2">
+            <div className="px-1">
               {DepTimes.map((dep, i) => {
                 return (
-                  <div key={i} className='my-3'>
+                  <div
+                    key={i}
+                    className="my-3 flex flex-col justify-start items-start"
+                  >
                     <Typography>{dep.type}</Typography>
                     <Typography>{dep.time}</Typography>
                     <Slider size="sm" defaultValue={50} />
@@ -102,10 +117,10 @@ const Flights = (props) => {
             </div>
           </AccordionBody>
         </Accordion>
-        <Accordion open={open === 3} icon={<Icon id={3} open={open} />}>
+        <Accordion open={openAcc3}>
           <AccordionHeader
             className="text-sm font-bold"
-            onClick={() => handleOpen(3)}
+            onClick={handleOpenAcc3}
           >
             Rating
           </AccordionHeader>

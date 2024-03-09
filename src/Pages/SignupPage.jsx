@@ -3,6 +3,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './SignupPage.css'
 
+import {
+  Card,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+} from '@material-tailwind/react'
+
 const API_URL = 'http://localhost:3000'
 
 function SignupPage() {
@@ -33,32 +41,80 @@ function SignupPage() {
   }
 
   return (
-    <div className="SignupPage">
-      <h1>Sign Up</h1>
+    <Card color="transparent" className="my-10" shadow={false}>
+      <form
+        onSubmit={handleSignupSubmit}
+        className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+      >
+        <div className="mb-1 flex flex-col gap-6">
+          <Typography variant="h4" color="blue-gray" className="text-center">
+            Sign Up
+          </Typography>
 
-      <form onSubmit={handleSignupSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
+          <Typography variant="h6" color="blue-gray" className="-mb-3">
+            Your Name
+          </Typography>
+          <Input
+            size="lg"
+            placeholder="name@mail.com"
+            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: 'before:content-none after:content-none',
+            }}
+            onChange={handleName}
+          />
+          <Typography variant="h6" color="blue-gray" className="-mb-3">
+            Your Email
+          </Typography>
+          <Input
+            size="lg"
+            placeholder="name@mail.com"
+            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: 'before:content-none after:content-none',
+            }}
+            onChange={handleEmail}
+          />
+          <Typography variant="h6" color="blue-gray" className="-mb-3">
+            Password
+          </Typography>
+          <Input
+            type="password"
+            size="lg"
+            placeholder="********"
+            className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+            labelProps={{
+              className: 'before:content-none after:content-none',
+            }}
+            onChange={handlePassword}
+          />
+        </div>
+        <Checkbox
+          label={
+            <Typography
+              variant="small"
+              color="gray"
+              className="flex items-center font-normal"
+            >
+              I agree the
+              <a
+                href="#"
+                className="font-medium transition-colors hover:text-gray-900"
+              >
+                &nbsp;Terms and Conditions
+              </a>
+            </Typography>
+          }
+          containerProps={{ className: '-ml-2.5' }}
         />
-
-        <label>Name:</label>
-        <input type="text" name="name" value={name} onChange={handleName} />
-
-        <button type="submit">Sign Up</button>
+        <Button className="mt-6" fullWidth>
+          sign up
+        </Button>
+        <Typography color="gray" className="mt-4 text-center font-normal">
+          Already have an account? <Link to={'/login'}> Login</Link>
+        </Typography>
       </form>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Already have an account?</p>
-      <Link to={'/login'}> Login</Link>
-    </div>
+    </Card>
   )
 }
 

@@ -1,12 +1,5 @@
 import { useState } from 'react'
-import {
-  Card,
-  Input,
-  Select,
-  Option,
-  Button,
-  Radio,
-} from '@material-tailwind/react'
+import { Input, Select, Option, Button, Radio } from '@material-tailwind/react'
 
 import DatePicker from './DatePicker'
 
@@ -41,15 +34,19 @@ const SearchBar = (props) => {
 
   return (
     <div className="h-56 my-10 py-5 px-20 border border-3 rounded-lg bg-gray-300 backdrop-opacity-50">
-      <div className="flex flex-row justify-evenly my-5">
-        <div className="flex flex-row">
-          <Input label="From" size="lg" value="Berlin" />
-          <Input
-            label="Where to"
-            size="lg"
-            value={destinationInput}
-            onChange={handleDestination}
-          />
+      <div className="flex flex-row justify-between my-5">
+        <div className="flex flex-row justify-between">
+          <div className="mx-2">
+            <Input label="From" size="lg" value="Berlin" />
+          </div>
+          <div>
+            <Input
+              label="Where to"
+              size="lg"
+              value={destinationInput}
+              onChange={handleDestination}
+            />
+          </div>
         </div>
 
         <div className="flex flex-row mx-10">

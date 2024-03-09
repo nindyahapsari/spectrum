@@ -4,6 +4,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/Auth.context'
 import './LoginPage.css'
 
+import {
+  Card,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+} from '@material-tailwind/react'
+
 const API_URL = 'http://localhost:5005'
 
 function LoginPage() {
@@ -39,26 +47,68 @@ function LoginPage() {
 
   return (
     <div className="LoginPage">
-      <h1>Login</h1>
+      <Card color="transparent" className="my-10" shadow={false}>
+        <form
+          onSubmit={handleLoginSubmit}
+          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+        >
+          <div className="mb-1 flex flex-col gap-6">
+            <Typography variant="h4" color="blue-gray" className="text-center">
+              Login
+            </Typography>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
-
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
-
-        <button type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Don`t have an account yet?</p>
-      <Link to={'/signup'}> Sign Up</Link>
+            <Typography variant="h6" color="blue-gray" className="text-left">
+              Your Email
+            </Typography>
+            <Input
+              size="lg"
+              placeholder="name@mail.com"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              labelProps={{
+                className: 'before:content-none after:content-none',
+              }}
+              onChange={handleEmail}
+            />
+            <Typography variant="h6" color="blue-gray" className="text-left">
+              Password
+            </Typography>
+            <Input
+              type="password"
+              size="lg"
+              placeholder="********"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              labelProps={{
+                className: 'before:content-none after:content-none',
+              }}
+              onChange={handlePassword}
+            />
+          </div>
+          <Checkbox
+            label={
+              <Typography
+                variant="small"
+                color="gray"
+                className="flex items-center font-normal"
+              >
+                I agree the
+                <a
+                  href="#"
+                  className="font-medium transition-colors hover:text-gray-900"
+                >
+                  &nbsp;Terms and Conditions
+                </a>
+              </Typography>
+            }
+            containerProps={{ className: '-ml-2.5' }}
+          />
+          <Button className="mt-6" fullWidth>
+            Login
+          </Button>
+          <Typography color="gray" className="mt-4 text-center font-normal">
+            Dont have an account yet? <Link to={'/signup'}> Signup</Link>
+          </Typography>
+        </form>
+      </Card>
     </div>
   )
 }
