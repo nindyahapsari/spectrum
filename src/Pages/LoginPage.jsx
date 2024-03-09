@@ -62,6 +62,9 @@ function LoginPage() {
             </Typography>
             <Input
               size="lg"
+              type="email"
+              name="email"
+              value={email}
               placeholder="name@mail.com"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
@@ -72,9 +75,12 @@ function LoginPage() {
             <Typography variant="h6" color="blue-gray" className="text-left">
               Password
             </Typography>
+
             <Input
               type="password"
               size="lg"
+              name="password"
+              value={password}
               placeholder="********"
               className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
               labelProps={{
@@ -83,25 +89,8 @@ function LoginPage() {
               onChange={handlePassword}
             />
           </div>
-          <Checkbox
-            label={
-              <Typography
-                variant="small"
-                color="gray"
-                className="flex items-center font-normal"
-              >
-                I agree the
-                <a
-                  href="#"
-                  className="font-medium transition-colors hover:text-gray-900"
-                >
-                  &nbsp;Terms and Conditions
-                </a>
-              </Typography>
-            }
-            containerProps={{ className: '-ml-2.5' }}
-          />
-          <Button className="mt-6" fullWidth>
+
+          <Button  className="mt-6 block" type='submit'>
             Login
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">

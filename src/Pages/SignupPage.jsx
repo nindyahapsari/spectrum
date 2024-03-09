@@ -6,12 +6,11 @@ import './SignupPage.css'
 import {
   Card,
   Input,
-  Checkbox,
   Button,
   Typography,
 } from '@material-tailwind/react'
 
-const API_URL = 'http://localhost:3000'
+const API_URL = 'http://localhost:5005'
 
 function SignupPage() {
   const [email, setEmail] = useState('')
@@ -50,13 +49,14 @@ function SignupPage() {
           <Typography variant="h4" color="blue-gray" className="text-center">
             Sign Up
           </Typography>
-
           <Typography variant="h6" color="blue-gray" className="-mb-3">
             Your Name
           </Typography>
           <Input
+            type="text"
+            name="name"
+            value={name}
             size="lg"
-            placeholder="name@mail.com"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
             labelProps={{
               className: 'before:content-none after:content-none',
@@ -67,6 +67,9 @@ function SignupPage() {
             Your Email
           </Typography>
           <Input
+            type="email"
+            name="email"
+            value={email}
             size="lg"
             placeholder="name@mail.com"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -80,6 +83,8 @@ function SignupPage() {
           </Typography>
           <Input
             type="password"
+            name="password"
+            value={password}
             size="lg"
             placeholder="********"
             className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
@@ -89,27 +94,20 @@ function SignupPage() {
             onChange={handlePassword}
           />
         </div>
-        <Checkbox
-          label={
-            <Typography
-              variant="small"
-              color="gray"
-              className="flex items-center font-normal"
-            >
-              I agree the
-              <a
-                href="#"
-                className="font-medium transition-colors hover:text-gray-900"
-              >
-                &nbsp;Terms and Conditions
-              </a>
-            </Typography>
-          }
-          containerProps={{ className: '-ml-2.5' }}
-        />
-        <Button className="mt-6" fullWidth>
+        <div className="mb-4">
+          <label>
+            <input type="checkbox" />
+            I agree to the Terms and Conditions
+          </label>
+        </div>
+        <Button type="submit" className="mt-6 block">
           sign up
         </Button>
+        {errorMessage && (
+          <Typography color="red" className="mt-4 text-center font-normal">
+            {errorMessage}
+          </Typography>
+        )}
         <Typography color="gray" className="mt-4 text-center font-normal">
           Already have an account? <Link to={'/login'}> Login</Link>
         </Typography>
