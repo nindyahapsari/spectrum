@@ -22,13 +22,13 @@ const Cart = () => {
 
   return (
     <div className="main-container-cart">
-      <h3>Ticket Cart</h3>
+      <h3 className='ticket-cart'>Ticket Cart</h3>
 
       <div className="container">
         {cartItems.map((item) => {
           if (item.quantity > 0) {
             return (
-              <div key={item._id}>
+              <div key={item._id} className="cart-item-box">
                 <div>
                   <CartItem flight={item} />
                 </div>
@@ -43,8 +43,8 @@ const Cart = () => {
       <div>
         {totalAmount > 0 ? (
           <div>
-            <p>Subtotal: ${totalAmount}</p>
-            <button onClick={handleCheckout}>Pay</button>
+            <p className='total-amount'>Subtotal: ${totalAmount}</p>
+            <button className='btn-pay' onClick={handleCheckout}>Pay</button>
           </div>
         ) : (
           <h2>Your shopping cart is empty</h2>
