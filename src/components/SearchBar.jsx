@@ -50,12 +50,23 @@ const SearchBar = (props) => {
         </div>
 
         <div className="flex flex-row mx-10">
-          <DatePicker label="Departure" />
-          <DatePicker label="Return" />
+          <DatePicker
+            label="Departure"
+            onChange={() => console.log('date picker 1')}
+          />
+          <DatePicker
+            label="Return"
+            onChange={() => console.log('date picker 2')}
+          />
         </div>
 
         <div className="w-72 ">
-          <Select size="md" label="Passenger" variant="outlined">
+          <Select
+            size="md"
+            label="Passenger"
+            variant="outlined"
+            onChange={() => console.log('option')}
+          >
             <Option>1</Option>
             <Option>2</Option>
             <Option>3</Option>
@@ -66,7 +77,14 @@ const SearchBar = (props) => {
       <div className="flex flex-row justify-between">
         <div className="my-5">
           {labels.map((label, i) => {
-            return <Radio key={i} name="type" label={label} />
+            return (
+              <Radio
+                key={i}
+                name="type"
+                label={label}
+                onChange={() => console.log('checkbox')}
+              />
+            )
           })}
         </div>
         <div>
