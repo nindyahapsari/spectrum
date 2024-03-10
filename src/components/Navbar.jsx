@@ -6,6 +6,8 @@ import './Navbar.css'
 import { AuthContext } from '../context/Auth.context'
 import { useTheme } from './ThemeContext'
 
+import { Avatar, IconButton } from '@material-tailwind/react'
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext)
@@ -23,22 +25,45 @@ const Navbar = () => {
             PlaneWreck
           </Link>
         </div>
-        <button className="switchdark" onClick={toggleDarkMode}>
-          {darkMode ? '☀︎' : '☾'}
-        </button>
+        <div>
+          <IconButton
+            variant="gradient"
+            className="switchdark rounded-full"
+            onClick={toggleDarkMode}
+          >
+            {darkMode ? '☀︎' : '☾'}
+          </IconButton>
+        </div>
         {isLoggedIn && (
           <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
-            <Link to="/">Home</Link>
-            <Link onClick={logOutUser}>Logout</Link>
+            <Link to="/">
+              <div className="p-2">Home</div>
+            </Link>
+            <Link onClick={logOutUser}>
+              <div className="p-2">Logout</div>
+            </Link>
             <Link to="/cart">
-              <span>{user && user.name}</span>
+              <div>
+                <Avatar
+                  size="sm"
+                  alt="avatar"
+                  src="https://docs.material-tailwind.com/img/face-2.jpg"
+                  className="mx-2 border border-green-500 shadow-xl shadow-green-900/20 ring-4 ring-green-500/30"
+                />
+                <span>{user && user.name}</span>
+              </div>
             </Link>
           </div>
         )}
         {!isLoggedIn && (
           <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
-            <Link to="/signup">Signup</Link>
-            <Link to="/login">Login</Link>
+            <Link to="/signup">
+              <div className="p-2">Signup</div>
+            </Link>
+
+            <Link to="/login">
+              <div className="p-2">Login</div>
+            </Link>
           </div>
         )}
 

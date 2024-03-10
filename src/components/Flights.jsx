@@ -77,7 +77,7 @@ const Flights = (props) => {
           <FlightCards key={flight._id} flight={flight} />
         ))}
       </div>
-      <div className="mb-2 rounded-lg border border-blue-gray-100 px-4 ">
+      <div className="mx-20 mb-2 rounded-lg border border-blue-gray-100 px-4 ">
         <Accordion open={openAcc1}>
           <AccordionHeader
             className="text-sm font-bold"
@@ -106,11 +106,13 @@ const Flights = (props) => {
                 return (
                   <div
                     key={i}
-                    className="my-3 flex flex-col justify-start items-start"
+                    className="my-3 flex flex-col justify-start items-"
                   >
-                    <Typography>{dep.type}</Typography>
+                    <Typography className="pr-20">{dep.type}</Typography>
                     <Typography>{dep.time}</Typography>
-                    <Slider size="sm" defaultValue={50} />
+                    <div>
+                      <Slider size="sm" defaultValue={50} />
+                    </div>
                   </div>
                 )
               })}
