@@ -1,9 +1,11 @@
 import React, { useContext } from 'react'
 import { CartContext } from '../context/Cart.context'
-import './CardCheckout.css'
+import './CardCheckoutItem.css'
 
 const CartItem = ({ flight }) => {
   const { removeFromCart } = useContext(CartContext)
+
+  console.log(flight)
 
   return (
     <div className="cart-item">

@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import axios from 'axios'
 import { createContext, useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const fetchingData = async () => {
-  const response = await axios.get(`http://localhost:5005/api/flights/all`)
+  const response = await axios.get(`http://localhost:3000/api/flights/all`)
   const returnedData = response.data
   return returnedData
 }
@@ -13,6 +13,8 @@ const CartContext = createContext(null)
 const CartContextProvider = (props) => {
   const [initData, setInitData] = useState([])
   const [cart, setCart] = useState(getFlightDefaultCart())
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchFlightData = async () => {
@@ -47,6 +49,7 @@ const CartContextProvider = (props) => {
   const getCartItems = () => {
     return Object.keys(cart).map((id) => {
       const item = initData.find((f) => f._id === id)
+      console.log(item)
       return {
         ...item,
         quantity: cart[id],
@@ -62,8 +65,25 @@ const CartContextProvider = (props) => {
     setCart({ ...cart, [id]: (cart[id] || 0) - 1 })
   }
 
-  const checkout = () => {
-    setCart(getFlightDefaultCart())
+  const checkout = async (userId) => {
+    // setCart(getFlightDefaultCart())
+    const cartItems = getCartItems()
+    const ticketInfo = {
+      tickets: cartItems,
+      userId: userId,
+    }
+    console.log(cartItems)
+    try {
+      const res = await axios.post(
+        'http://localhost:3000/api/tickets/purchase',
+        ticketInfo,
+      )
+      if (res.status === 200) {
+        navigate('/confirmation')
+      }
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const contextValue = {

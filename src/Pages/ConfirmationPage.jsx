@@ -1,27 +1,37 @@
-import React from 'react'
+import React, { useState, useContext } from 'react'
 import './ConfirmationPage.css'
-import { Link } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+import { CartContext } from '../context/Cart.context'
+
+import CheckoutCardPayment from '../components/CheckoutCardPayment'
+
+import { Typography, Alert } from '@material-tailwind/react'
 
 const ConfirmationPage = () => {
+  const [isSuccess, setIsSuccess] = useState(false)
+  const { getCartItems } = useContext(CartContext)
+  const cartItems = getCartItems()
+  console.log('cartItems', cartItems)
+
+  const navigate = useNavigate()
+
+  const handlePayment = () => {
+    setIsSuccess(true)
+    setTimeout(() => {
+      setIsSuccess(false)
+
+      navigate('/')
+    }, 3000)
+  }
+
   return (
     <div className="checkout-page">
-      <h2>Checkout confirmation</h2>
       <div>
-        <p>
-          This is a list of ticket confirmation that need to be render later
-        </p>
+        <Typography variant="h2">Checkout confirmation</Typography>
       </div>
-
+      <div>{isSuccess && <Alert color="green">Payment success</Alert>}</div>
       <div>
-        <div>
-          <p>Pay with : </p>
-        </div>
-        <div>
-          <button>Card</button>
-          <Link target="_blank" to="https://www.paypal.com/de/home">
-            <button>Paypal</button>
-          </Link>
-        </div>
+        <CheckoutCardPayment handlePayment={handlePayment} />
       </div>
     </div>
   )

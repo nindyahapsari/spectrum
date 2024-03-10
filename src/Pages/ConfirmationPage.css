@@ -1,8 +1,9 @@
 .checkout-page {
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 400px;
+  padding: 10%;
 }
 
 .checkout-page form {
