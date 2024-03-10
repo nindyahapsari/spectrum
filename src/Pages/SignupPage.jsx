@@ -5,7 +5,7 @@ import './SignupPage.css'
 
 import { Card, Input, Button, Typography } from '@material-tailwind/react'
 
-const API_URL = 'http://localhost:3000'
+import { BASE_URL } from '../utility/endpoints'
 
 function SignupPage() {
   const [email, setEmail] = useState('')
@@ -23,7 +23,7 @@ function SignupPage() {
     e.preventDefault()
     const requestBody = { email, password, name }
     axios
-      .post(`${API_URL}/auth/signup`, requestBody)
+      .post(`${BASE_URL}/auth/signup`, requestBody)
       .then(() => {
         navigate('/login')
       })

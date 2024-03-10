@@ -2,8 +2,10 @@ import axios from 'axios'
 import { createContext, useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { PURCHASE_API, FLIGHTS_ALL_API } from '../utility/endpoints'
+
 const fetchingData = async () => {
-  const response = await axios.get(`http://localhost:3000/api/flights/all`)
+  const response = await axios.get(FLIGHTS_ALL_API)
   const returnedData = response.data
   return returnedData
 }
@@ -66,18 +68,13 @@ const CartContextProvider = (props) => {
   }
 
   const checkout = async (userId) => {
-    // setCart(getFlightDefaultCart())
     const cartItems = getCartItems()
     const ticketInfo = {
       tickets: cartItems,
       userId: userId,
     }
-    console.log(cartItems)
     try {
-      const res = await axios.post(
-        'http://localhost:3000/api/tickets/purchase',
-        ticketInfo,
-      )
+      const res = await axios.post(PURCHASE_API, ticketInfo)
       if (res.status === 200) {
         navigate('/confirmation')
       }

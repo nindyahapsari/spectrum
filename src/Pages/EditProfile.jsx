@@ -14,6 +14,8 @@ import {
 import { useParams } from 'react-router-dom'
 import { AuthContext } from '../context/Auth.context'
 
+import { BASE_URL } from '../utility/endpoints'
+
 const EditProfile = () => {
   const [editUser, setEditUser] = useState({ name: '', email: '' })
   const [isLoading, setIsLoading] = useState(false)
@@ -40,7 +42,7 @@ const EditProfile = () => {
     try {
       setIsLoading(true)
       axios
-        .patch(`http://localhost:3000/api/users/edit/${id}`, editUser)
+        .patch(`${BASE_URL}/api/users/edit/${id}`, editUser)
         .then((response) => {
           if (response.status === 200) {
             console.log(response.data)

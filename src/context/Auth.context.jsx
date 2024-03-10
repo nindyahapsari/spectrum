@@ -3,7 +3,7 @@ import axios from 'axios'
 
 import { useNavigate } from 'react-router-dom'
 
-const URL = 'http://localhost:3000'
+import { BASE_URL } from '../utility/endpoints'
 
 const AuthContext = createContext()
 
@@ -24,7 +24,7 @@ function AuthProviderWrapper({ children }) {
     if (storedToken) {
       console.log('axios is working')
       axios
-        .get(`${URL}/auth/verify`, {
+        .get(`${BASE_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
         })
         .then((response) => {

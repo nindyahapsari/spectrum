@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@material-tailwind/react'
 
-const API_URL = 'http://localhost:3000'
+import { BASE_URL } from '../utility/endpoints'
 
 function LoginPage() {
   const [email, setEmail] = useState('')
@@ -31,7 +31,7 @@ function LoginPage() {
     const requestBody = { email, password }
 
     axios
-      .post(`${API_URL}/auth/login`, requestBody)
+      .post(`${BASE_URL}/auth/login`, requestBody)
       .then((response) => {
         console.log('JWT token', response.data.authToken)
 
