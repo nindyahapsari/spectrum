@@ -3,14 +3,9 @@ import { Link, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import './SignupPage.css'
 
-import {
-  Card,
-  Input,
-  Button,
-  Typography,
-} from '@material-tailwind/react'
+import { Card, Input, Button, Typography } from '@material-tailwind/react'
 
-const API_URL = 'http://localhost:5005'
+const API_URL = 'http://localhost:3000'
 
 function SignupPage() {
   const [email, setEmail] = useState('')
@@ -96,8 +91,7 @@ function SignupPage() {
         </div>
         <div className="mb-4">
           <label>
-            <input type="checkbox" />
-            I agree to the Terms and Conditions
+            <input type="checkbox" />I agree to the Terms and Conditions
           </label>
         </div>
         <Button type="submit" className="mt-6 block">

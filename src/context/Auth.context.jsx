@@ -1,7 +1,9 @@
 import React, { useState, useEffect, createContext } from 'react'
 import axios from 'axios'
-import PropTypes from 'prop-types'
-const URL = 'http://localhost:5005'
+
+import { useNavigate } from 'react-router-dom'
+
+const URL = 'http://localhost:3000'
 
 const AuthContext = createContext()
 
@@ -9,6 +11,8 @@ function AuthProviderWrapper({ children }) {
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState(null)
+
+  const navigate = useNavigate()
 
   const storeToken = (token) => {
     localStorage.setItem('authToken', token)
@@ -50,6 +54,10 @@ function AuthProviderWrapper({ children }) {
     authenticateUser()
   }
 
+  const updateUser = (updatedUser) => {
+    setUser(updatedUser)
+  }
+
   useEffect(() => {
     authenticateUser()
   }, [])
@@ -59,6 +67,7 @@ function AuthProviderWrapper({ children }) {
       value={{
         isLoggedIn,
         isLoading,
+        updateUser,
         user,
         storeToken,
         authenticateUser,
@@ -68,10 +77,6 @@ function AuthProviderWrapper({ children }) {
       {children}
     </AuthContext.Provider>
   )
-}
-
-AuthProviderWrapper.propTypes = {
-  children: PropTypes.node,
 }
 
 export { AuthProviderWrapper, AuthContext }

@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import './Navbar.css'
 
 import { AuthContext } from '../context/Auth.context'
@@ -12,6 +12,8 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext)
   const { darkMode, toggleDarkMode } = useTheme()
+
+  const navigate = useNavigate()
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen)
@@ -39,10 +41,13 @@ const Navbar = () => {
             <Link to="/">
               <div className="p-2">Home</div>
             </Link>
-            <Link onClick={logOutUser}>
+            <Link to="/" onClick={logOutUser}>
               <div className="p-2">Logout</div>
             </Link>
             <Link to="/cart">
+              <div className="p-2">Cart</div>
+            </Link>
+            <Link to="/profile">
               <div>
                 <Avatar
                   size="sm"

@@ -44,7 +44,11 @@ const ProfilePage = () => {
 
       <div className="flex flex-row w-full items-center">
         <div className="m-10">
-          <ProfileCard username={user.name} email={user.email} />
+          <ProfileCard
+            username={user.name}
+            email={user.email}
+            userId={user._id}
+          />
         </div>
 
         <div>

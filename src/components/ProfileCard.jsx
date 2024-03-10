@@ -1,3 +1,4 @@
+import { Link, useNavigate } from 'react-router-dom'
 import {
   Card,
   CardHeader,
@@ -9,15 +10,20 @@ import {
   Button,
 } from '@material-tailwind/react'
 
+import profilepict from '../assets/Avatar-19.png'
+
 const ProfileCard = (props) => {
-  const { username, email } = props
+  const { username, email, userId } = props
+  const navigate = useNavigate()
+
+  const handleEditProfile = () => {
+    navigate(`/edit-profile/${userId}`)
+  }
+
   return (
-    <Card className="w-96">
-      <CardHeader floated={false} className="h-80">
-        <img
-          src="https://docs.material-tailwind.com/img/team-3.jpg"
-          alt="profile-picture"
-        />
+    <Card className="w-96 h-">
+      <CardHeader floated={false} shadow={false} className="h-80">
+        <img src={profilepict} alt="profile-picture" />
       </CardHeader>
       <CardBody className="text-center">
         <Typography variant="h4" color="blue-gray" className="mb-2">
@@ -35,8 +41,10 @@ const ProfileCard = (props) => {
           />
         </div>
       </CardBody>
-      <CardFooter className="flex justify-center gap-7 pt-2">
-        <Button variant="filled">Edit Profile</Button>
+      <CardFooter divider={true} className="flex justify-center gap-7 pt-2">
+        <Button variant="filled" onClick={handleEditProfile}>
+          Edit Profile
+        </Button>
       </CardFooter>
     </Card>
   )

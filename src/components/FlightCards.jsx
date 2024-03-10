@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useState, useContext } from 'react'
 import { CartContext } from '../context/Cart.context'
 import firstIcon from '../assets/airline-icon-first.png'
 import secondIcon from '../assets/airline-icon-second.png'
@@ -6,16 +6,33 @@ import bagsIcon from '../assets/bags.png'
 import separator from '../assets/separator.png'
 import ticketSlider from '../assets/ticket-slider.png'
 
-import { Rating, Progress, Button, Typography } from '@material-tailwind/react'
+import { Rating, Alert, Button, Typography } from '@material-tailwind/react'
 
 import './FlightCards.css'
 import TicketFlightInfo from './TicketFlightInfo'
 
-const FlightCards = ({ flight }) => {
+const FlightCards = ({
+  flight,
+  setIsLoading,
+  setIsSuccess,
+  setErrorMessage,
+}) => {
   const { addToCart } = useContext(CartContext)
 
   const getRandomNumberForRating = () => {
     return Math.random() + 4
+  }
+
+  const handleAddToCart = (id) => {
+    try {
+      setIsLoading(true)
+      addToCart(id)
+      setIsSuccess(true)
+      setTimeout(() => setIsSuccess(false), 3000)
+      setIsLoading(false)
+    } catch (error) {
+      setErrorMessage(error.message)
+    }
   }
 
   return (
@@ -54,7 +71,7 @@ const FlightCards = ({ flight }) => {
             <Button
               size="lg"
               className="button-primary"
-              onClick={() => addToCart(flight._id)}
+              onClick={() => handleAddToCart(flight._id)}
             >
               View Details
             </Button>

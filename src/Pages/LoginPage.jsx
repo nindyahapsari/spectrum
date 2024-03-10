@@ -12,7 +12,7 @@ import {
   Typography,
 } from '@material-tailwind/react'
 
-const API_URL = 'http://localhost:5005'
+const API_URL = 'http://localhost:3000'
 
 function LoginPage() {
   const [email, setEmail] = useState('')
@@ -90,7 +90,7 @@ function LoginPage() {
             />
           </div>
 
-          <Button  className="mt-6 block" type='submit'>
+          <Button className="mt-6 block" type="submit">
             Login
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">

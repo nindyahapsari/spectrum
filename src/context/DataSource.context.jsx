@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from 'react'
 import axios from 'axios'
 
-const uriFlightsAll = `http://localhost:5005/api/flights/all`
+const uriFlightsAll = `http://localhost:3000/api/flights/all`
 
 const fetchAllFlights = async () => {
   const response = await axios.get(uriFlightsAll)
