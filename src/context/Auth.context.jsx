@@ -1,8 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react'
 import axios from 'axios'
 
-import { useNavigate } from 'react-router-dom'
-
 import { BASE_URL } from '../utility/endpoints'
 
 const AuthContext = createContext()
@@ -12,7 +10,7 @@ function AuthProviderWrapper({ children }) {
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState(null)
 
-  const navigate = useNavigate()
+  useEffect(() => {}, [user])
 
   const storeToken = (token) => {
     localStorage.setItem('authToken', token)
@@ -22,7 +20,6 @@ function AuthProviderWrapper({ children }) {
     const storedToken = localStorage.getItem('authToken')
 
     if (storedToken) {
-      console.log('axios is working')
       axios
         .get(`${BASE_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
@@ -55,7 +52,16 @@ function AuthProviderWrapper({ children }) {
   }
 
   const updateUser = (updatedUser) => {
-    setUser(updatedUser)
+    axios
+      .get(`${BASE_URL}/api/users/${updatedUser._id}`)
+      .then((response) => {
+        if (response.status === 200) {
+          setUser(response.data)
+        }
+      })
+      .catch((error) => {
+        console.error(error)
+      })
   }
 
   useEffect(() => {

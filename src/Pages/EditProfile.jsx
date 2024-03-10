@@ -22,15 +22,13 @@ const EditProfile = () => {
   const [isSuccess, setIsSuccess] = useState(false)
   const { id } = useParams()
 
-  console.log(id)
-
   const { user, updateUser } = useContext(AuthContext)
 
   const navigate = useNavigate()
 
   useEffect(() => {
     setEditUser({ name: user.name, email: user.email })
-  }, [id])
+  }, [id, user])
 
   const handleChange = (event) => {
     setEditUser({ ...user, [event.target.name]: event.target.value })
@@ -47,9 +45,16 @@ const EditProfile = () => {
           if (response.status === 200) {
             console.log(response.data)
             updateUser(response.data)
-            setIsSuccess(true)
-            setIsLoading(false)
+            return axios.get(`${BASE_URL}/api/users/${id}`)
           }
+        })
+        .then((response) => {
+          if (response.status === 200) {
+            console.log(response.data)
+            updateUser(response.data)
+          }
+          setIsSuccess(true)
+          setIsLoading(false)
         })
     } catch (err) {
       console.log(err.message)
