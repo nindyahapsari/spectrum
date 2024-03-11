@@ -5,7 +5,7 @@ const FirstStep = () => {
     <div className="boxes">
       <div className="box find-box">
         <h1>01</h1>
-        <h2>FIND</h2>
+        <h2 className="h2">FIND</h2>
         <p>
           Effortlessly discover tailored flights that match your preferences and
           travel needs with our intuitive search feature.
@@ -19,7 +19,7 @@ const FirstStep = () => {
 
       <div className="box compare-box">
         <h1>02</h1>
-        <h2>COMPARE</h2>
+        <h2 className="h2">COMPARE</h2>
         <p>
           Compare ratings, read passenger reviews, and weigh amenities to make
           informed choices.
@@ -33,7 +33,7 @@ const FirstStep = () => {
 
       <div className="box choose-box">
         <h1>03</h1>
-        <h2>CHOOSE</h2>
+        <h2 className="h2">CHOOSE</h2>
         <p>
           Choose the perfect flight from a curated list that meets your
           criteria, prioritizing comfort, in-flight services, or budget

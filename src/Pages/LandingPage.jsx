@@ -31,7 +31,7 @@ const LandingPage = () => {
             Use a chance to compare airline business <br /> services and make
             every flight unforgettable!
           </h2>
-          <Link to="/">
+          <Link to="/signup">
             <button className="button-landing">ELEVATE YOUR JOURNEY</button>
           </Link>
         </section>

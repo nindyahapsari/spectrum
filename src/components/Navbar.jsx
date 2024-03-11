@@ -24,7 +24,7 @@ const Navbar = () => {
       <div className="navbar-container">
         <div className="navbar-logo">
           <Link className="logo" to="/">
-            PlaneWreck
+            Spectrum
           </Link>
         </div>
         <div>

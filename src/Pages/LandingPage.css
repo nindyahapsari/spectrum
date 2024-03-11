@@ -9,6 +9,8 @@
   overflow-y: auto;
   box-sizing: border-box;
   background-color: gray;
+  z-index: 2;
+  bottom: 300px;
 }
 .header {
   display: flex;
@@ -39,7 +41,7 @@
 .links {
   font-family: 'Inter';
   font-style: normal;
-  font-weight: 400;
+  font-weight: /400;
   font-size: 18px;
   line-height: 19px;
   text-align: center;
@@ -48,10 +50,12 @@
 }
 .button-landing {
   position: absolute;
+  display: block;
   color: black;
   background-color: #f8f697;
+  padding: 10px;
   top: 460px;
-  left: 300px;
+  left: 290px;
 }
 .title {
   position: absolute;
@@ -86,7 +90,7 @@
 .boxes-landing {
   display: flex;
   justify-content: space-around;
-  padding-top: 150px;
+
   padding-left: 80px;
 }
 
@@ -129,24 +133,28 @@
 }
 .box1-landing h1 {
   bottom: 17rem;
-  color: #f8f697;
+  color: #000000;
   position: absolute;
   right: 720px;
-  top: 1px;
+  bottom: 340px;
+  left: 70px;
+  font-size: 30px;
 }
 .boxes1-landing {
   display: block;
   justify-content: space-around;
-  padding-top: 150px;
+  padding-top: 200px;
   padding-left: 200px;
+  padding-bottom: 200px;
 }
 #reviews {
-  margin-top: 150px;
+  margin-bottom: 100px;
   padding-top: 10px;
   background-color: rgb(162, 161, 161);
 }
 .review-h1 {
   color: black;
+  font-size: 30px;
   margin-left: 100px;
 }
 .reviews-box {
