@@ -4,7 +4,15 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/Auth.context'
 import './LoginPage.css'
 
-const API_URL = 'http://localhost:5005'
+import {
+  Card,
+  Input,
+  Checkbox,
+  Button,
+  Typography,
+} from '@material-tailwind/react'
+
+import { BASE_URL } from '../utility/endpoints'
 
 function LoginPage() {
   const [email, setEmail] = useState('')
@@ -23,9 +31,8 @@ function LoginPage() {
     const requestBody = { email, password }
 
     axios
-      .post(`${API_URL}/auth/login`, requestBody)
+      .post(`${BASE_URL}/auth/login`, requestBody)
       .then((response) => {
-        console.log('JWT token', response.data.authToken)
 
         storeToken(response.data.authToken)
         authenticateUser()
@@ -39,26 +46,57 @@ function LoginPage() {
 
   return (
     <div className="LoginPage">
-      <h1>Login</h1>
+      <Card color="transparent" className="my-10" shadow={false}>
+        <form
+          onSubmit={handleLoginSubmit}
+          className="mt-8 mb-2 w-80 max-w-screen-lg sm:w-96"
+        >
+          <div className="mb-1 flex flex-col gap-6">
+            <Typography variant="h4" color="blue-gray" className="text-center">
+              Login
+            </Typography>
 
-      <form onSubmit={handleLoginSubmit}>
-        <label>Email:</label>
-        <input type="email" name="email" value={email} onChange={handleEmail} />
+            <Typography variant="h6" color="blue-gray" className="text-left">
+              Your Email
+            </Typography>
+            <Input
+              size="lg"
+              type="email"
+              name="email"
+              value={email}
+              placeholder="name@mail.com"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              labelProps={{
+                className: 'before:content-none after:content-none',
+              }}
+              onChange={handleEmail}
+            />
+            <Typography variant="h6" color="blue-gray" className="text-left">
+              Password
+            </Typography>
 
-        <label>Password:</label>
-        <input
-          type="password"
-          name="password"
-          value={password}
-          onChange={handlePassword}
-        />
+            <Input
+              type="password"
+              size="lg"
+              name="password"
+              value={password}
+              placeholder="********"
+              className=" !border-t-blue-gray-200 focus:!border-t-gray-900"
+              labelProps={{
+                className: 'before:content-none after:content-none',
+              }}
+              onChange={handlePassword}
+            />
+          </div>
 
-        <button type="submit">Login</button>
-      </form>
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p>Don`t have an account yet?</p>
-      <Link to={'/signup'}> Sign Up</Link>
+          <Button className="mt-6 block" type="submit">
+            Login
+          </Button>
+          <Typography color="gray" className="mt-4 text-center font-normal">
+            Dont have an account yet? <Link to={'/signup'}> Signup</Link>
+          </Typography>
+        </form>
+      </Card>
     </div>
   )
 }

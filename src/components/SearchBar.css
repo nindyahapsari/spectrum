@@ -1,17 +1,13 @@
 .search-container {
   display: flex;
   flex-direction: column;
-
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  flex-direction: column;
-  background: rgba(112, 109, 109, 0.8);
+  /* background: rgba(112, 109, 109, 0.6); */
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   padding: 20px;
-  border-radius: 5px;
-  top: 200px;
-  width: 900px;
+  border-radius: 10px;
+  margin: 5% 10em 5% 10em;
+  width: 70vw;
+  height: 15em;
 }
 
 .search-input-container {
@@ -27,7 +23,7 @@
 .search-input {
   padding: 10px;
   border: 1px solid #ccc;
-  border-radius: 3px;
+  border-radius: 5px;
   flex-grow: 1;
   width: 200px;
 }
@@ -38,11 +34,16 @@
   margin-left: 90px;
 }
 
+.react-date-picker .react-date-picker__wrapper {
+  border: none;
+}
+
 .date {
-  padding: 5px;
-  border: 1px solid #f3f3f3;
-  border-radius: 2px;
+  padding: 5px 10px;
+  /* border: 1px solid #f3f3f3; */
+  border-radius: 5px;
   height: 40px;
+  background-color: #fff;
   color: #e1e1e1;
 }
 

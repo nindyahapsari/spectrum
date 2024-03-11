@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from 'react'
 import axios from 'axios'
 
-const uriFlightsAll = `http://localhost:5005/api/flights/all`
+const uriFlightsAll = `http://localhost:3000/api/flights/all`
 
 const fetchAllFlights = async () => {
   const response = await axios.get(uriFlightsAll)
@@ -15,7 +15,12 @@ const DataSourceProvider = (props) => {
   const [initFlightsData, setInitFlightData] = useState([])
 
   useEffect(() => {
-    setInitFlightData(fetchAllFlights())
+    const fetchData = async () => {
+      const data = await fetchAllFlights()
+      setInitFlightData(data)
+    }
+
+    fetchData()
   }, [])
 
   const contextValue = {

@@ -1,112 +1,101 @@
 import { useState } from 'react'
+import { Input, Select, Option, Button, Radio } from '@material-tailwind/react'
 
-import { useNavigate } from 'react-router-dom'
+import DatePicker from './DatePicker'
 
 // import { DataSourceContext } from '../context/DataSource.context'
 
-import './SearchBar.css'
-import DatePicker from 'react-date-picker'
+// import DatePicker from 'react-date-picker'
 import 'react-calendar/dist/Calendar.css'
 import 'react-date-picker/dist/DatePicker.css'
+// import RoundCheckbox from './Checkbox'
 
-const SearchBar = ({ setFilteredResults }) => {
-  const [flights] = useState([])
-  const [selectedCategory, setSelectedCategory] = useState('All')
-  const [destinationInput, setDestinationInput] = useState('')
+const labels = ['Return', 'One way', 'Multi City', 'Direct Flights']
+
+const SearchBar = (props) => {
+  const {
+    setFilteredResults,
+    destinationInput,
+    setDestinationInput,
+    handleSearch,
+  } = props
+
+  const [departureInput, setDepartureInput] = useState('Berlin')
+  const [passenger, setPassenger] = useState('')
   const [date, setDate] = useState(new Date())
-
-  // const { initFlightsData } = useContext(DataSourceContext)
-
-  let navigateTo = useNavigate()
-
-  const handleSearch = () => {
-    navigateTo('/flights')
-    if (flights.length > 0) {
-      const filteredResults = filterData(flights)
-      console.log(filteredResults)
-      setFilteredResults(filteredResults)
-    }
-  }
-
-  const filterData = (apiData) => {
-    try {
-      return apiData.filter((data) =>
-        data.destination
-          .trim()
-          .toLowerCase()
-          .includes(destinationInput.trim().toLowerCase()),
-      )
-    } catch (error) {
-      console.error('Error filtering data:', error)
-      return []
-    }
-  }
 
   const handleDestination = (e) => {
     setDestinationInput(e.target.value)
   }
 
   const handleCategoryChange = (e) => {
-    setSelectedCategory(e.target.value)
+    // setSelectedCategory(e.target.value)
   }
 
   return (
-    <div className="search-container">
-      <div className="search-input-container">
-        <div className="search-input-wrapper">
-          <input
-            type="text"
-            placeholder="From where?"
-            value="Berlin"
-            readOnly
-            className="search-input"
-          />
-          <input
-            type="text"
-            placeholder="Where to?"
-            value={destinationInput}
-            onChange={handleDestination}
-            className="search-input"
-          />
-          <div className="date-picker-container">
-            <DatePicker
-              className="date"
-              selected={date}
-              onChange={(date) => setDate(date)}
-            />
-            <DatePicker
-              className="date"
-              selected={date}
-              onChange={(date) => setDate(date)}
+    <div className="h-56 my-10 py-5 px-20 border border-3 rounded-lg bg-gray-300 backdrop-opacity-50">
+      <div className="flex flex-row justify-between my-5">
+        <div className="flex flex-row justify-between">
+          <div className="mx-2">
+            <Input label="From" size="lg" value={departureInput} />
+          </div>
+          <div>
+            <Input
+              label="Where to"
+              size="lg"
+              value={destinationInput}
+              onChange={handleDestination}
             />
           </div>
         </div>
-      </div>
-      <div className="additional-options">
-        <div className="checkbox-container">
-          <label className="label">
-            One Way
-            <input type="checkbox" />
-          </label>
-          <label className="label">
-            Return
-            <input type="checkbox" />
-          </label>
+
+        <div className="flex flex-row mx-10">
+          <DatePicker
+            label="Departure"
+            onChange={() => console.log('date picker 1')}
+          />
+          <DatePicker
+            label="Return"
+            onChange={() => console.log('date picker 2')}
+          />
         </div>
-        <div className="category-and-button">
-          <select
-            value={selectedCategory}
-            onChange={handleCategoryChange}
-            className="category-dropdown"
+
+        <div className="w-72 ">
+          <Select
+            size="md"
+            label="Passenger"
+            variant="outlined"
+            onChange={() => console.log('option')}
           >
-            <option value="All">All Categories</option>
-          </select>
-          <button
-            onClick={() => console.log('refactoring coming..')}
-            className="search-button"
+            <Option>1 Person</Option>
+            <Option>2 Person</Option>
+            <Option>3 Person</Option>
+          </Select>
+        </div>
+      </div>
+
+      <div className="flex flex-row justify-between">
+        <div className="my-5">
+          {labels.map((label, i) => {
+            return (
+              <Radio
+                key={i}
+                name="type"
+                label={label}
+                onChange={() => console.log('checkbox')}
+              />
+            )
+          })}
+        </div>
+        <div>
+          <Button
+            onClick={handleSearch}
+            className="mt-6 button-primary"
+            size="md"
+            ripple
           >
-            Search
-          </button>
+            Search Flights
+          </Button>
         </div>
       </div>
     </div>

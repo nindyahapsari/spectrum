@@ -3,37 +3,42 @@ import React, { useContext } from 'react'
 import { CartContext } from '../context/Cart.context'
 import { useNavigate } from 'react-router-dom'
 
-import CartItem from '../components/CardCheckout'
+import CardCheckoutItem from '../components/CardCheckoutItem'
+
+import { Button } from '@material-tailwind/react'
 
 import './Cart.css'
+import { AuthContext } from '../context/Auth.context'
 
 const Cart = () => {
-  const { cart, getTotalCartAmount, getCartItems, checkout } =
+  const { initData, getTotalCartAmount, getCartItems, checkout } =
     useContext(CartContext)
   const totalAmount = getTotalCartAmount()
   const cartItems = getCartItems()
 
+  const { user } = useContext(AuthContext)
+
   const navigate = useNavigate()
 
   const handleCheckout = () => {
-    checkout()
+    checkout(user._id)
     navigate('/confirmation')
   }
 
   return (
     <div className="main-container-cart">
-      <h3>Ticket Cart</h3>
+      <h3 className="ticket-cart">Ticket Cart</h3>
 
       <div className="container">
         {cartItems.map((item) => {
           if (item.quantity > 0) {
             return (
-              <div key={item._id}>
+              <div key={item._id} className="cart-item-box">
                 <div>
-                  <CartItem flight={item} />
+                  <CardCheckoutItem flight={item} />
                 </div>
                 <div>
-                  <p>Quantity: {cart[item._id]}</p>
+                  <p>Quantity: {initData[item._id]}</p>
                 </div>
               </div>
             )
@@ -43,8 +48,10 @@ const Cart = () => {
       <div>
         {totalAmount > 0 ? (
           <div>
-            <p>Subtotal: ${totalAmount}</p>
-            <button onClick={handleCheckout}>Pay</button>
+            <p className="total-amount">Subtotal: ${totalAmount}</p>
+            <Button className="btn-pay" onClick={handleCheckout}>
+              Pay
+            </Button>
           </div>
         ) : (
           <h2>Your shopping cart is empty</h2>

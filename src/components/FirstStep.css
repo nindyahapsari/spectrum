@@ -1,27 +1,32 @@
+body {
+}
+
 .boxes {
-  width: 100vw;
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
+  padding-top: 100px;
+  padding-bottom: 100px;
+  width: 100%;
 }
 
 .box {
   position: relative;
   width: 350px;
-  height: 370px;
-  padding: 30px;
-  right: 50px;
-  padding-right: 40px;
+  height: 440px;
+  padding-top: 80px;
+  padding-left: 30px;
+  padding-right: 30px;
+  bottom: 50px;
   background-color: white;
   color: black;
-  margin: 0 20px;
-  border-radius: 15px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
   box-sizing: border-box;
 }
 
 .box h1 {
-  font-size: 4em;
-  bottom: 17rem;
+  font-size: 5em;
+  bottom: 20rem;
   color: #f8f697;
   position: absolute;
   right: 25px;

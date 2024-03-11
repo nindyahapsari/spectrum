@@ -1,6 +1,4 @@
-import React from 'react'
-
-import './FirstStep.css'
+import  "../components/FirstStep.css"
 
 const FirstStep = () => {
   return (
@@ -49,5 +47,4 @@ const FirstStep = () => {
     </div>
   )
 }
-
 export default FirstStep
