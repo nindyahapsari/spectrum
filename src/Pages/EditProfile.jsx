@@ -43,14 +43,12 @@ const EditProfile = () => {
         .patch(`${BASE_URL}/api/users/edit/${id}`, editUser)
         .then((response) => {
           if (response.status === 200) {
-            console.log(response.data)
             updateUser(response.data)
             return axios.get(`${BASE_URL}/api/users/${id}`)
           }
         })
         .then((response) => {
           if (response.status === 200) {
-            console.log(response.data)
             updateUser(response.data)
           }
           setIsSuccess(true)
