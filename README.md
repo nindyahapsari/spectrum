@@ -1,6 +1,6 @@
 https://spectrumflightsapp.netlify.app/
 
-# Frontend side for the application
+# Frontend side for the Spectrum application
 
 Spectrum Airlines Booking System
 
