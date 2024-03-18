@@ -7,7 +7,6 @@ import axios from 'axios'
 import { useTheme } from './components/ThemeContext'
 import ThemeSwitcher from './components/ThemeSwitch'
 
-axios.defaults.baseURL = 'http://localhost:5005'
 axios.defaults.withCredentials = true
 
 const App = () => {

@@ -8,6 +8,7 @@ import Flights from '../components/Flights'
 
 import './HomePage.css'
 
+// searchBar need to get a context to share data between components
 
 const HomePage = () => {
   const [flights, setFlights] = useState([])
@@ -23,6 +24,7 @@ const HomePage = () => {
   const handleSearch = () => {
     if (flights.length > 0) {
       const filteredResults = filterData(flights)
+      // console.log(filteredResults)
       setFilteredResults(filteredResults)
     }
   }
