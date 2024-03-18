@@ -2,8 +2,6 @@ import { useState, useEffect, createContext } from 'react'
 import { FLIGHTS_ALL_API  } from '../utility/endpoints'
 import axios from 'axios'
 
-const uriFlightsAll = `http://localhost:3000/api/flights/all`
-
 const fetchAllFlights = async () => {
   const response = await axios.get(FLIGHTS_ALL_API)
   const returnedData = response.data
