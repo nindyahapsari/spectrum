@@ -1,7 +1,8 @@
-export const TICKETS_API = 'http://localhost:3000/api/tickets'
-export const PURCHASE_API = 'http://localhost:3000/api/tickets/purchase'
+export const BASE_URL = 'https://blackbox.adaptable.app'
 
-export const FLIGHTS_ALL_API = 'http://localhost:3000/api/flights/all'
+export const TICKETS_API = `${BASE_URL}/api/tickets`
+export const PURCHASE_API = `${BASE_URL}/api/tickets/purchase`
 
-export const BASE_URL = 'http://localhost:3000'
+export const FLIGHTS_ALL_API = `${BASE_URL}/api/flights/all`
+
 // Add more endpoints as needed
