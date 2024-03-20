@@ -22,7 +22,7 @@ const EditProfile = () => {
   const [isSuccess, setIsSuccess] = useState(false)
   const { id } = useParams()
 
-  const { user, setUser, updateUser, getToken, storeToken, authenticateUser } = useContext(AuthContext)
+  const { user, getToken, storeToken, authenticateUser } = useContext(AuthContext)
 
   const navigate = useNavigate()
 
@@ -53,16 +53,8 @@ const EditProfile = () => {
             const newToken = response.data
             storeToken(newToken)
             authenticateUser()
-            // return axios.get(`${BASE_URL}/api/users/${id}`);    
           } else {
             throw new Error('Failed to update profile')
-          }
-        })
-        .then((res) => {
-          if(res && res.status === 200){
-            setUser(res.data)
-            setIsSuccess(true)
-
           }
         })
         .catch((err) => {
@@ -80,7 +72,7 @@ const EditProfile = () => {
   const closeModal = () => {
     setIsSuccess(false)
     setIsLoading(false)
-    navigate('/profile') // navigate to the profile page
+    navigate('/profile') 
   }
 
   return (

@@ -33,7 +33,6 @@ function AuthProviderWrapper({ children }) {
         })
         .then((response) => {
           const user = response.data
-          console.log('auth User', user)
           setIsLoggedIn(true)
           setIsLoading(false)
           setUser(user)
@@ -58,11 +57,6 @@ function AuthProviderWrapper({ children }) {
   const logOutUser = () => {
     removeToken()
     authenticateUser()
-  }
-
-
-  if (isLoading){
-    console.log('....loading')
   }
 
   return (
