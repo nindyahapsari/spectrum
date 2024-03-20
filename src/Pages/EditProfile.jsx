@@ -22,7 +22,7 @@ const EditProfile = () => {
   const [isSuccess, setIsSuccess] = useState(false)
   const { id } = useParams()
 
-  const { user, updateUser } = useContext(AuthContext)
+  const { user, updateUser, getToken } = useContext(AuthContext)
 
   const navigate = useNavigate()
 
@@ -37,27 +37,43 @@ const EditProfile = () => {
   const handleSubmit = (event) => {
     event.preventDefault()
 
-    try {
+    const userToken = getToken()
+
       setIsLoading(true)
       axios
-        .patch(`${BASE_URL}/api/users/edit/${id}`, editUser)
-        .then((response) => {
-          if (response.status === 200) {
-            updateUser(response.data)
-            return axios.get(`${BASE_URL}/api/users/${id}`)
-          }
+        .put(`${BASE_URL}/auth/edit/${id}`, editUser, {
+      headers: {
+        Authorization: `Bearer ${userToken}`
+      }
         })
         .then((response) => {
           if (response.status === 200) {
-            updateUser(response.data)
+            const {_id} = response.data
+            return axios.get(`${BASE_URL}/api/users/${_id}`)
+          } else {
+            throw new Error('Failed to update profile')
           }
-          setIsSuccess(true)
+        })
+        .then((res) => {
+          if(res && res.status === 200){
+
+          const {_id} = res.data
+            updateUser(_id)
+            setIsSuccess(true)
+
+          }
+        })
+        .catch((err) => {
+          console.log(err.message)
+        })
+        .finally(() => {
           setIsLoading(false)
+          setTimeout(() => {
+            navigate('/profile')
+          }, 1000)
         })
-    } catch (err) {
-      console.log(err.message)
-    }
-  }
+      }
+
 
   const closeModal = () => {
     setIsSuccess(false)
