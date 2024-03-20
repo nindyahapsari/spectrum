@@ -22,13 +22,15 @@ const EditProfile = () => {
   const [isSuccess, setIsSuccess] = useState(false)
   const { id } = useParams()
 
-  const { user, updateUser, getToken } = useContext(AuthContext)
+  const { user, setUser, updateUser, getToken, storeToken, authenticateUser } = useContext(AuthContext)
 
   const navigate = useNavigate()
 
   useEffect(() => {
+    if(user){
     setEditUser({ name: user.name, email: user.email })
-  }, [id, user])
+    }
+  }, [])
 
   const handleChange = (event) => {
     setEditUser({ ...user, [event.target.name]: event.target.value })
@@ -48,17 +50,17 @@ const EditProfile = () => {
         })
         .then((response) => {
           if (response.status === 200) {
-            const {_id} = response.data
-            return axios.get(`${BASE_URL}/api/users/${_id}`)
+            const newToken = response.data
+            storeToken(newToken)
+            authenticateUser()
+            // return axios.get(`${BASE_URL}/api/users/${id}`);    
           } else {
             throw new Error('Failed to update profile')
           }
         })
         .then((res) => {
           if(res && res.status === 200){
-
-          const {_id} = res.data
-            updateUser(_id)
+            setUser(res.data)
             setIsSuccess(true)
 
           }

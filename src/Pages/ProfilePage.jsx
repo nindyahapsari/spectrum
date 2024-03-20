@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useContext } from 'react'
 import { AuthContext } from '../context/Auth.context'
 import ProfileCard from '../components/ProfileCard'
 import TransactionsTable from '../components/TransactionsTable'
@@ -34,23 +34,39 @@ const TABLE_ROWS = [
 ]
 
 const ProfilePage = () => {
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext)
+  const { authenticateUser, isLoggedIn, user, logOutUser, isLoading } = useContext(AuthContext)
 
-  if (!user) {
+  useEffect(() => {
+    if(!user){
+    authenticateUser()
+    }
+  }, [user, authenticateUser])
+
+  if (isLoading || !user) {
+    console.log(isLoading)
+    console.log(user)
+
     return <Spinner />
   }
+
+  const { name, email, _id } = user
+
   return (
+    <>
+    {
+      !isLoading  ? (
+
     <div className="m-10">
       <div className="m-10">
-        <Typography variant="h3">Welcome back {user.name} !</Typography>
+        <Typography variant="h3">Welcome back {name} !</Typography>
       </div>
 
       <div className="flex flex-row w-full items-center">
         <div className="m-10">
           <ProfileCard
-            username={user.name}
-            email={user.email}
-            userId={user._id}
+            username={name}
+            email={email}
+            userId={_id}
           />
         </div>
 
@@ -61,6 +77,12 @@ const ProfilePage = () => {
         </div>
       </div>
     </div>
+      ) : (
+        <div>Loading.....</div>
+      )
+    }
+
+</>
   )
 }
 
