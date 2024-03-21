@@ -52,7 +52,7 @@ const ProfilePage = () => {
     return (
       <div className='flex flex-col items-center justify-center h-screen overflow-y-auto'>
         <Spinner className='h-12 w-12' />
-        <Typography>Loading your content..</Typography>
+        <Typography>Loading your content</Typography>
       </div>
     )
   }
