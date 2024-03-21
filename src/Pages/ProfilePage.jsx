@@ -1,4 +1,5 @@
 import React, { useEffect, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/Auth.context'
 import ProfileCard from '../components/ProfileCard'
 import TransactionsTable from '../components/TransactionsTable'
@@ -35,26 +36,31 @@ const TABLE_ROWS = [
 
 const ProfilePage = () => {
   const { authenticateUser, isLoggedIn, user, logOutUser, isLoading } = useContext(AuthContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
+    if (!isLoggedIn){
+      navigate('/')
+    }
+
     if(!user){
     authenticateUser()
     }
   }, [user, authenticateUser])
 
   if (isLoading || !user) {
-    console.log(isLoading)
-    console.log(user)
-
-    return <Spinner />
+    return (
+      <div className='flex flex-col items-center justify-center h-screen overflow-y-auto'>
+        <Spinner className='h-12 w-12' />
+        <Typography>Loading your content..</Typography>
+      </div>
+    )
   }
 
   const { name, email, _id } = user
 
   return (
-    <>
-    {
-      !isLoading  ? (
+    <div className='flex items-center justify-center h-screen overflow-y-auto'>
 
     <div className="m-10">
       <div className="m-10">
@@ -77,12 +83,7 @@ const ProfilePage = () => {
         </div>
       </div>
     </div>
-      ) : (
-        <div>Loading.....</div>
-      )
-    }
-
-</>
+</div>
   )
 }
 

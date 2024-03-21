@@ -24,7 +24,6 @@ const HomePage = () => {
   const handleSearch = () => {
     if (flights.length > 0) {
       const filteredResults = filterData(flights)
-      // console.log(filteredResults)
       setFilteredResults(filteredResults)
     }
   }
