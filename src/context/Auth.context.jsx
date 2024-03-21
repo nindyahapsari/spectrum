@@ -10,16 +10,23 @@ function AuthProviderWrapper({ children }) {
   const [isLoading, setIsLoading] = useState(true)
   const [user, setUser] = useState(null)
 
-  useEffect(() => {}, [user])
+  useEffect(() => {
+    authenticateUser()
+  }, [])
 
   const storeToken = (token) => {
     localStorage.setItem('authToken', token)
   }
 
-  const authenticateUser = () => {
+  const getToken = () => {
+    const storedToken = localStorage.getItem('authToken')
+    return storedToken
+  }
+
+  function authenticateUser() {
     const storedToken = localStorage.getItem('authToken')
 
-    if (storedToken) {
+    if (storedToken && !user) {
       axios
         .get(`${BASE_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
@@ -29,6 +36,7 @@ function AuthProviderWrapper({ children }) {
           setIsLoggedIn(true)
           setIsLoading(false)
           setUser(user)
+          
         })
         .catch(() => {
           setIsLoggedIn(false)
@@ -51,31 +59,15 @@ function AuthProviderWrapper({ children }) {
     authenticateUser()
   }
 
-  const updateUser = (updatedUser) => {
-    axios
-      .get(`${BASE_URL}/api/users/${updatedUser._id}`)
-      .then((response) => {
-        if (response.status === 200) {
-          setUser(response.data)
-        }
-      })
-      .catch((error) => {
-        console.error(error)
-      })
-  }
-
-  useEffect(() => {
-    authenticateUser()
-  }, [])
-
   return (
     <AuthContext.Provider
       value={{
         isLoggedIn,
         isLoading,
-        updateUser,
         user,
+        setUser,
         storeToken,
+        getToken,
         authenticateUser,
         logOutUser,
       }}
