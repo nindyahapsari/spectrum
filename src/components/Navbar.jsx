@@ -1,12 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
-import './Navbar.css'
 
 import { AuthContext } from '../context/Auth.context'
 import { useTheme } from './ThemeContext'
 
 import { Avatar, IconButton } from '@material-tailwind/react'
+import logoSmall from '/src/assets/logo-spectrum.png'
+
+import './Navbar.css'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,15 +29,16 @@ const Navbar = () => {
             Spectrum
           </Link>
         </div>
-        <div>
-          <IconButton
-            variant="gradient"
-            className="switchdark rounded-full"
-            onClick={toggleDarkMode}
-          >
-            {darkMode ? '☀︎' : '☾'}
-          </IconButton>
-        </div>
+
+        <IconButton
+          size="sm"
+          variant="gradient"
+          className="switchdark rounded-full"
+          onClick={toggleDarkMode}
+        >
+          {darkMode ? '☀︎' : '☾'}
+        </IconButton>
+
         {isLoggedIn && (
           <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
             <Link to="/">
@@ -48,12 +51,12 @@ const Navbar = () => {
               <div className="p-2">Cart</div>
             </Link>
             <Link to="/profile">
-              <div>
+              <div className="my-1.5 mr-5">
                 <Avatar
-                  size="sm"
+                  size="xs"
                   alt="avatar"
-                  src="https://docs.material-tailwind.com/img/face-2.jpg"
-                  className="mx-2 border border-green-500 shadow-xl shadow-green-900/20 ring-4 ring-green-500/30"
+                  src={logoSmall}
+                  className="p-1"
                 />
                 <span>{user && user.name}</span>
               </div>

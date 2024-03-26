@@ -82,7 +82,7 @@ const SearchBar = (props) => {
                 key={i}
                 name="type"
                 label={label}
-                onChange={() => console.log('checkbox')}
+                onChange={(e) => console.log(`Value: ${e.target.value}, Label: ${label}`)}
               />
             )
           })}
