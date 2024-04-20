@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom'
 import { Typography } from '@material-tailwind/react'
 
 import './Footer.css'

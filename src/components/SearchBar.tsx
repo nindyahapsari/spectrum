@@ -13,23 +13,12 @@ import 'react-date-picker/dist/DatePicker.css'
 const labels = ['Return', 'One way', 'Multi City', 'Direct Flights']
 
 const SearchBar = (props) => {
-  const {
-    setFilteredResults,
-    destinationInput,
-    setDestinationInput,
-    handleSearch,
-  } = props
+  const { destinationInput, setDestinationInput, handleSearch } = props
 
-  const [departureInput, setDepartureInput] = useState('Berlin')
-  const [passenger, setPassenger] = useState('')
-  const [date, setDate] = useState(new Date())
+  const [departureInput] = useState('Berlin')
 
   const handleDestination = (e) => {
     setDestinationInput(e.target.value)
-  }
-
-  const handleCategoryChange = (e) => {
-    // setSelectedCategory(e.target.value)
   }
 
   return (
@@ -82,7 +71,9 @@ const SearchBar = (props) => {
                 key={i}
                 name="type"
                 label={label}
-                onChange={(e) => console.log(`Value: ${e.target.value}, Label: ${label}`)}
+                onChange={(e) =>
+                  console.log(`Value: ${e.target.value}, Label: ${label}`)
+                }
               />
             )
           })}

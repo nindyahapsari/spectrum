@@ -15,11 +15,7 @@ import {
   Select,
   Option,
 } from '@material-tailwind/react'
-import {
-  BanknotesIcon,
-  CreditCardIcon,
-  LockClosedIcon,
-} from '@heroicons/react/24/solid'
+import { CreditCardIcon, LockClosedIcon } from '@heroicons/react/24/solid'
 
 function formatCardNumber(value) {
   const val = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
