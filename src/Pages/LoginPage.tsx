@@ -4,20 +4,14 @@ import { Link, useNavigate } from 'react-router-dom'
 import { AuthContext } from '../context/Auth.context'
 import './LoginPage.css'
 
-import {
-  Card,
-  Input,
-  Checkbox,
-  Button,
-  Typography,
-} from '@material-tailwind/react'
+import { Card, Input, Button, Typography } from '@material-tailwind/react'
 
 import { BASE_URL } from '../utility/endpoints'
 
 function LoginPage() {
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const [setErrorMessage] = useState(undefined)
 
   const navigate = useNavigate()
 
@@ -33,7 +27,6 @@ function LoginPage() {
     axios
       .post(`${BASE_URL}/auth/login`, requestBody)
       .then((response) => {
-
         storeToken(response.data.authToken)
         authenticateUser()
         navigate('/')

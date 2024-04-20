@@ -3,12 +3,12 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 import { BrowserRouter } from 'react-router-dom'
-import { AuthProviderWrapper } from './context/Auth.context.jsx'
-import { CartContextProvider } from './context/Cart.context.jsx'
-import { DataSourceProvider } from './context/DataSource.context.jsx'
-import { ThemeProvider } from './components/ThemeContext.jsx'
+import { AuthProviderWrapper } from './context/Auth.context.js'
+import { CartContextProvider } from './context/Cart.context.js'
+import { DataSourceProvider } from './context/DataSource.context.js'
+import { ThemeProvider } from './context/ThemeContext.js'
 
-ReactDOM.createRoot(document.getElementById('root')).render(
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
     <BrowserRouter>
       <AuthProviderWrapper>

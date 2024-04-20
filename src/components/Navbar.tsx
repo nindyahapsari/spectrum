@@ -1,9 +1,9 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import { AuthContext } from '../context/Auth.context'
-import { useTheme } from './ThemeContext'
+import { useTheme } from '../context/ThemeContext'
 
 import { Avatar, IconButton } from '@material-tailwind/react'
 import logoSmall from '/src/assets/logo-spectrum.png'
@@ -14,8 +14,6 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext)
   const { darkMode, toggleDarkMode } = useTheme()
-
-  const navigate = useNavigate()
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen)

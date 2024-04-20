@@ -1,11 +1,11 @@
 /* eslint-disable no-unused-vars */
-import React, { useState } from 'react'
+import { useState } from 'react'
 import './LandingPage.css'
 import Navbar from '../components/Navbar'
 import { Link } from 'react-router-dom'
 
 const LandingPage = () => {
-  const [showNavbar, setShowNavbar] = useState(false)
+  const [showNavbar] = useState(false)
 
   return (
     <div className="landing-page">

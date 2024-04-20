@@ -4,15 +4,16 @@ import Footer from './components/Footer'
 
 import RoutesRender from './routes'
 import axios from 'axios'
-import { useTheme } from './components/ThemeContext'
+import { useTheme } from './context/ThemeContext'
 import ThemeSwitcher from './components/ThemeSwitch'
 
 axios.defaults.withCredentials = true
 
 const App = () => {
-  const { darkMode } = useTheme()
+  const theme = useTheme()
+  const isDarkMode = theme ? theme.darkMode : false
   return (
-    <div className={darkMode ? 'dark' : 'light' + 'App'}>
+    <div className={isDarkMode ? 'dark' : 'light' + 'App'}>
       <Navbar />
       <ThemeSwitcher>
         <RoutesRender />

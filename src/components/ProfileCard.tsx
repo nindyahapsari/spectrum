@@ -1,11 +1,10 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import {
   Card,
   CardHeader,
   CardBody,
   CardFooter,
   Typography,
-  Tooltip,
   Chip,
   Button,
 } from '@material-tailwind/react'
