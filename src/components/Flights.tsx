@@ -1,4 +1,4 @@
-import { useState, useContext } from 'react'
+import { useState } from 'react'
 import {
   Accordion,
   AccordionHeader,
@@ -9,28 +9,7 @@ import {
   Alert,
 } from '@material-tailwind/react'
 
-import { DataSourceContext } from '../context/DataSource.context'
-import SearchBar from './SearchBar'
 import FlightCards from './FlightCards'
-
-function Icon({ id, open }) {
-  return (
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      fill="none"
-      viewBox="0 0 24 24"
-      strokeWidth={2}
-      stroke="currentColor"
-      className={`${id === open ? 'rotate-180' : ''} h-5 w-5 transition-transform`}
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M19.5 8.25l-7.5 7.5-7.5-7.5"
-      />
-    </svg>
-  )
-}
 
 const STOPS = ['Direct', '1 Stop', '2+ Stops']
 const DepTimes = [
@@ -44,13 +23,6 @@ const RATINGS = [
   'Seat Space',
   'Security Check',
 ]
-const AIRLINES = [
-  'Qatar',
-  'Egyptair',
-  'LOT',
-  'Brussel airline',
-  'Austrian airlines',
-]
 
 const Flights = (props) => {
   const { filteredResults } = props
@@ -63,17 +35,13 @@ const Flights = (props) => {
   const [openAcc2, setOpenAcc2] = useState(true)
   const [openAcc3, setOpenAcc3] = useState(true)
 
-  const [isLoading, setIsLoading] = useState(false)
+  const [setIsLoading] = useState(false)
   const [isSuccess, setIsSuccess] = useState(false)
-  const [errorMessage, setErrorMessage] = useState('')
-
-  const [open, setOpen] = useState(0)
+  const [setErrorMessage] = useState('')
 
   const handleOpenAcc1 = () => setOpenAcc1((cur) => !cur)
   const handleOpenAcc2 = () => setOpenAcc2((cur) => !cur)
   const handleOpenAcc3 = () => setOpenAcc3((cur) => !cur)
-
-  const handleOpen = (value) => setOpen(open === value ? 0 : value)
 
   return (
     <div>

@@ -1,12 +1,11 @@
-import { useState, useContext } from 'react'
+import { useContext } from 'react'
 import { CartContext } from '../context/Cart.context'
 import firstIcon from '../assets/airline-icon-first.png'
 import secondIcon from '../assets/airline-icon-second.png'
 import bagsIcon from '../assets/bags.png'
 import separator from '../assets/separator.png'
-import ticketSlider from '../assets/ticket-slider.png'
 
-import { Rating, Alert, Button, Typography } from '@material-tailwind/react'
+import { Rating, Button, Typography } from '@material-tailwind/react'
 
 import './FlightCards.css'
 import TicketFlightInfo from './TicketFlightInfo'
@@ -18,10 +17,6 @@ const FlightCards = ({
   setErrorMessage,
 }) => {
   const { addToCart } = useContext(CartContext)
-
-  const getRandomNumberForRating = () => {
-    return Math.random() + 4
-  }
 
   const handleAddToCart = (id) => {
     try {

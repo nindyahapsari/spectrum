@@ -27,7 +27,7 @@ const CartContextProvider = (props) => {
   }, [])
 
   function getFlightDefaultCart() {
-    let cartWithId = {}
+    const cartWithId = {}
     for (let i = 0; i < initData.length; i++) {
       cartWithId[initData[i]._id] = 0
     }
@@ -39,7 +39,7 @@ const CartContextProvider = (props) => {
     let totalAmount = 0
     for (const ticket in cart) {
       if (cart[ticket] > 0) {
-        let ticketData = initData.find((t) => t._id === ticket)
+        const ticketData = initData.find((t) => t._id === ticket)
         if (ticketData) {
           totalAmount += ticketData.price * cart[ticket]
         }
