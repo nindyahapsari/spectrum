@@ -1,12 +1,11 @@
-import FlightCards from "../components/FlightCards"
+import FlightCards from '../components/FlightCards';
 
-
-const ResultPage = () => {
-  return (
-    <div>
-      <FlightCards />
-    </div>
-  )
+function ResultPage() {
+    return (
+        <div>
+            <FlightCards />
+        </div>
+    );
 }
 
-export default ResultPage
+export default ResultPage;

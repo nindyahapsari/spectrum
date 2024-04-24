@@ -1,6 +1,7 @@
-import '../components/FirstStep.css'
+import React from 'react';
+import './FirstStep.css';
 
-const FirstStep = () => {
+function FirstStep() {
   return (
     <div className="boxes">
       <div className="box find-box">
@@ -45,6 +46,6 @@ const FirstStep = () => {
         </p>
       </div>
     </div>
-  )
+  );
 }
-export default FirstStep
+export default FirstStep;

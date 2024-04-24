@@ -1,27 +1,27 @@
-import './App.css'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
+import './App.css';
+import axios from 'axios';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
-import RoutesRender from './routes'
-import axios from 'axios'
-import { useTheme } from './context/ThemeContext'
-import ThemeSwitcher from './components/ThemeSwitch'
+import RoutesRender from './routes';
+import { useTheme } from './context/ThemeContext';
+import ThemeSwitcher from './components/ThemeSwitch';
 
-axios.defaults.withCredentials = true
+axios.defaults.withCredentials = true;
 
-const App = () => {
-  const theme = useTheme()
-  const isDarkMode = theme ? theme.darkMode : false
-  return (
-    <div className={isDarkMode ? 'dark' : 'light' + 'App'}>
-      <Navbar />
-      <ThemeSwitcher>
-        <RoutesRender />
-      </ThemeSwitcher>
+function App() {
+    const theme = useTheme();
+    const isDarkMode = theme ? theme.darkMode : false;
+    return (
+        <div className={isDarkMode ? 'dark' : 'light' + 'App'}>
+            <Navbar />
+            <ThemeSwitcher>
+                <RoutesRender />
+            </ThemeSwitcher>
 
-      <Footer />
-    </div>
-  )
+            <Footer />
+        </div>
+    );
 }
 
-export default App
+export default App;

@@ -10,7 +10,7 @@ import './HomePage.css'
 
 // searchBar need to get a context to share data between components
 
-const HomePage = () => {
+function HomePage() {
   const [flights, setFlights] = useState([])
   const [filteredResults, setFilteredResults] = useState([])
   const [destinationInput, setDestinationInput] = useState('')
@@ -60,7 +60,6 @@ const HomePage = () => {
           <FirstStep />
         </div>
       )}
-
     </div>
   )
 }
