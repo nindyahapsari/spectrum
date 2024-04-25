@@ -10,10 +10,6 @@ function AuthProviderWrapper({ children }) {
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
 
-  useEffect(() => {
-    authenticateUser();
-  }, []);
-
   const storeToken = (token) => {
     localStorage.setItem('authToken', token);
   };
@@ -48,6 +44,10 @@ function AuthProviderWrapper({ children }) {
       setUser(null);
     }
   }
+
+  useEffect(() => {
+    authenticateUser();
+  }, [authenticateUser]);
 
   const removeToken = () => {
     localStorage.removeItem('authToken');

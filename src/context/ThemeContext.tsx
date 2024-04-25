@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState } from 'react';
 
 type TDarkMode = boolean;
 
@@ -14,15 +14,15 @@ export const useTheme = () => {
 };
 
 export function ThemeProvider({ children }) {
-    const [darkMode, setDarkMode] = useState<TDarkMode>(false);
+  const [darkMode, setDarkMode] = useState<TDarkMode>(false);
 
-    const toggleDarkMode = () => {
-        setDarkMode((prevMode) => !prevMode);
-    };
+  const toggleDarkMode = () => {
+    setDarkMode((prevMode) => !prevMode);
+  };
 
-    return (
-        <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
-            {children}
-        </ThemeContext.Provider>
-    );
+  return (
+    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+      {children}
+    </ThemeContext.Provider>
+  );
 }
