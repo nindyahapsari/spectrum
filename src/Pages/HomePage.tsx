@@ -1,32 +1,32 @@
-import { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 
-import { DataSourceContext } from '../context/DataSource.context'
+import { DataSourceContext } from '../context/DataSource.context';
 
-import SearchBar from '../components/SearchBar'
-import FirstStep from '../components/FirstStep'
-import Flights from '../components/Flights'
+import SearchBar from '../components/SearchBar';
+import InfoCard from '../components/InfoCard';
+import Flights from '../components/Flights';
 
-import './HomePage.css'
+import './HomePage.css';
 
 // searchBar need to get a context to share data between components
 
 function HomePage() {
-  const [flights, setFlights] = useState([])
-  const [filteredResults, setFilteredResults] = useState([])
-  const [destinationInput, setDestinationInput] = useState('')
+  const [flights, setFlights] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [destinationInput, setDestinationInput] = useState('');
 
-  const { initFlightsData } = useContext(DataSourceContext)
+  const { initFlightsData } = useContext(DataSourceContext);
 
   useEffect(() => {
-    setFlights(initFlightsData)
-  }, [initFlightsData])
+    setFlights(initFlightsData);
+  }, [initFlightsData]);
 
   const handleSearch = () => {
     if (flights.length > 0) {
-      const filteredResults = filterData(flights)
-      setFilteredResults(filteredResults)
+      const filteredResults = filterData(flights);
+      setFilteredResults(filteredResults);
     }
-  }
+  };
 
   const filterData = (apiData) => {
     try {
@@ -34,13 +34,13 @@ function HomePage() {
         data.destination
           .trim()
           .toLowerCase()
-          .includes(destinationInput.trim().toLowerCase()),
-      )
+          .includes(destinationInput.trim().toLowerCase())
+      );
     } catch (error) {
-      console.error('Error filtering data:', error)
-      return []
+      console.error('Error filtering data:', error);
+      return [];
     }
-  }
+  };
 
   return (
     <div className="px-20">
@@ -57,11 +57,12 @@ function HomePage() {
         </div>
       ) : (
         <div className="border-1 border-yellow-900">
-          <FirstStep />
+          {/* TODO write type as TS complain*/}
+          <InfoCard />
         </div>
       )}
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;
