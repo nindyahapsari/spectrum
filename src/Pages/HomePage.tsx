@@ -57,7 +57,7 @@ function HomePage() {
         </div>
       ) : (
         <div className="border-1 border-yellow-900">
-          {/* TODO write type as TS complain*/}
+          {/* TODO write type as TS complaint*/}
           <InfoCard />
         </div>
       )}
