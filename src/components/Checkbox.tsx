@@ -3,14 +3,14 @@ import React from 'react';
 import './Checkbox.css';
 
 function RoundCheckbox({ label, checked, onChange }) {
-    return (
-        <div className="flex items-center">
-            <label className="flex items-center space-x-2">
-                <input type="checkbox" className="checkbox-round" />
-                <span className="text-gray-800">{label}</span>
-            </label>
-        </div>
-    );
+  return (
+    <div className="flex items-center">
+      <label className="flex items-center space-x-2" htmlFor="checkbox-input">
+        <input type="checkbox" className="checkbox-round" id="checkbox-input" />
+        <span className="text-gray-800">{label}</span>
+      </label>
+    </div>
+  );
 }
 
 export default RoundCheckbox;

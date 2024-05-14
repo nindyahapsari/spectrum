@@ -9,6 +9,24 @@ import Flights from '../components/Flights';
 import './HomePage.css';
 
 // searchBar need to get a context to share data between components
+// src/context/DataSource.context.tsx
+interface Flight {
+  id: number;
+  flight_number: string;
+  departure_time: string;
+  arrival_time: string;
+  airline: string;
+  origin: string;
+  destination: string;
+  price: number;
+  currency: string;
+}
+
+type TDataSourceProvider = {
+  children: React.ReactNode;
+};
+
+type TApiData<T> = T[];
 
 function HomePage() {
   const [flights, setFlights] = useState([]);
@@ -21,14 +39,7 @@ function HomePage() {
     setFlights(initFlightsData);
   }, [initFlightsData]);
 
-  const handleSearch = () => {
-    if (flights.length > 0) {
-      const filteredResults = filterData(flights);
-      setFilteredResults(filteredResults);
-    }
-  };
-
-  const filterData = (apiData) => {
+  const filterData = (apiData: TApiData<Flight>) => {
     try {
       return apiData.filter((data) =>
         data.destination
@@ -39,6 +50,13 @@ function HomePage() {
     } catch (error) {
       console.error('Error filtering data:', error);
       return [];
+    }
+  };
+
+  const handleSearch = () => {
+    if (flights.length > 0) {
+      const results = filterData(flights);
+      setFilteredResults(results);
     }
   };
 
@@ -57,7 +75,6 @@ function HomePage() {
         </div>
       ) : (
         <div className="border-1 border-yellow-900">
-          {/* TODO write type as TS complaint*/}
           <InfoCard />
         </div>
       )}
