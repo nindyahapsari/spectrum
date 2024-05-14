@@ -1,12 +1,12 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App'
-import './index.css'
-import { BrowserRouter } from 'react-router-dom'
-import { AuthProviderWrapper } from './context/Auth.context.js'
-import { CartContextProvider } from './context/Cart.context.js'
-import { DataSourceProvider } from './context/DataSource.context.js'
-import { ThemeProvider } from './context/ThemeContext.js'
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './index.css';
+import { AuthProviderWrapper } from './context/Auth.context.js';
+import { CartContextProvider } from './context/Cart.context.js';
+import { DataSourceProvider } from './context/DataSource.context.js';
+import { ThemeProvider } from './context/ThemeContext.js';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -21,5 +21,5 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         </DataSourceProvider>
       </AuthProviderWrapper>
     </BrowserRouter>
-  </React.StrictMode>,
-)
+  </React.StrictMode>
+);

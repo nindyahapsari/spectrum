@@ -1,28 +1,43 @@
-import { createContext, useContext, useState } from 'react'
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useMemo,
+  useCallback,
+} from 'react';
 
-type TDarkMode = boolean
+type TDarkMode = boolean;
 
 type ThemeContextType = {
-  darkMode: TDarkMode
-  toggleDarkMode: () => void
-}
+  darkMode: TDarkMode;
+  toggleDarkMode: () => void;
+};
 
-const ThemeContext = createContext<ThemeContextType | null>(null)
+type ThemeProviderProps = {
+  children: React.ReactNode;
+};
+
+const ThemeContext = createContext<ThemeContextType | null>(null);
 
 export const useTheme = () => {
-  return useContext(ThemeContext)
-}
+  return useContext(ThemeContext);
+};
 
-export const ThemeProvider = ({ children }) => {
-  const [darkMode, setDarkMode] = useState<TDarkMode>(false)
+export function ThemeProvider({ children }: ThemeProviderProps) {
+  const [darkMode, setDarkMode] = useState<TDarkMode>(false);
 
-  const toggleDarkMode = () => {
-    setDarkMode((prevMode) => !prevMode)
-  }
+  const toggleDarkMode = useCallback(() => {
+    setDarkMode((prev) => !prev);
+  }, []);
+
+  const themeProviderValue = useMemo(
+    () => ({ darkMode, toggleDarkMode }),
+    [darkMode, toggleDarkMode]
+  );
 
   return (
-    <ThemeContext.Provider value={{ darkMode, toggleDarkMode }}>
+    <ThemeContext.Provider value={themeProviderValue}>
       {children}
     </ThemeContext.Provider>
-  )
+  );
 }

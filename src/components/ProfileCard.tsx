@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom';
 import {
   Card,
   CardHeader,
@@ -7,17 +7,17 @@ import {
   Typography,
   Chip,
   Button,
-} from '@material-tailwind/react'
+} from '@material-tailwind/react';
 
-import profilepict from '../assets/Avatar-19.png'
+import profilepict from '../assets/Avatar-19.png';
 
-const ProfileCard = (props) => {
-  const { username, email, userId } = props
-  const navigate = useNavigate()
+function ProfileCard(props) {
+  const { username, email, userId } = props;
+  const navigate = useNavigate();
 
   const handleEditProfile = () => {
-    navigate(`/edit-profile/${userId}`)
-  }
+    navigate(`/edit-profile/${userId}`);
+  };
 
   return (
     <Card className="w-96 h-">
@@ -40,13 +40,13 @@ const ProfileCard = (props) => {
           />
         </div>
       </CardBody>
-      <CardFooter divider={true} className="flex justify-center gap-7 pt-2">
+      <CardFooter divider className="flex justify-center gap-7 pt-2">
         <Button variant="filled" onClick={handleEditProfile}>
           Edit Profile
         </Button>
       </CardFooter>
     </Card>
-  )
+  );
 }
 
-export default ProfileCard
+export default ProfileCard;

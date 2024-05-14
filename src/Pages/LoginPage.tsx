@@ -1,41 +1,41 @@
-import React, { useState, useContext } from 'react'
-import axios from 'axios'
-import { Link, useNavigate } from 'react-router-dom'
-import { AuthContext } from '../context/Auth.context'
-import './LoginPage.css'
+import React, { useState, useContext } from 'react';
+import axios from 'axios';
+import { Link, useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/Auth.context';
+import './LoginPage.css';
 
-import { Card, Input, Button, Typography } from '@material-tailwind/react'
+import { Card, Input, Button, Typography } from '@material-tailwind/react';
 
-import { BASE_URL } from '../utility/endpoints'
+import { BASE_URL } from '../utility/endpoints';
 
 function LoginPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [setErrorMessage] = useState(undefined)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [setErrorMessage] = useState(undefined);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext)
+  const { storeToken, authenticateUser } = useContext(AuthContext);
 
-  const handleEmail = (e) => setEmail(e.target.value)
-  const handlePassword = (e) => setPassword(e.target.value)
+  const handleEmail = (e) => setEmail(e.target.value);
+  const handlePassword = (e) => setPassword(e.target.value);
 
   const handleLoginSubmit = (e) => {
-    e.preventDefault()
-    const requestBody = { email, password }
+    e.preventDefault();
+    const requestBody = { email, password };
 
     axios
       .post(`${BASE_URL}/auth/login`, requestBody)
       .then((response) => {
-        storeToken(response.data.authToken)
-        authenticateUser()
-        navigate('/')
+        storeToken(response.data.authToken);
+        authenticateUser();
+        navigate('/');
       })
       .catch((error) => {
-        const errorDescription = error.response.data.message
-        setErrorMessage(errorDescription)
-      })
-  }
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
+  };
 
   return (
     <div className="LoginPage">
@@ -86,12 +86,12 @@ function LoginPage() {
             Login
           </Button>
           <Typography color="gray" className="mt-4 text-center font-normal">
-            Dont have an account yet? <Link to={'/signup'}> Signup</Link>
+            Dont have an account yet? <Link to="/signup"> Signup</Link>
           </Typography>
         </form>
       </Card>
     </div>
-  )
+  );
 }
 
-export default LoginPage
+export default LoginPage;

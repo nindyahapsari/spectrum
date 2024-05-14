@@ -1,38 +1,38 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import axios from 'axios'
-import './SignupPage.css'
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import axios from 'axios';
+import './SignupPage.css';
 
-import { Card, Input, Button, Typography } from '@material-tailwind/react'
+import { Card, Input, Button, Typography } from '@material-tailwind/react';
 
-import { BASE_URL } from '../utility/endpoints'
+import { BASE_URL } from '../utility/endpoints';
 
 function SignupPage() {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [name, setName] = useState('')
-  const [errorMessage, setErrorMessage] = useState(undefined)
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
+  const [errorMessage, setErrorMessage] = useState(undefined);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
-  const handleEmail = (e) => setEmail(e.target.value)
-  const handlePassword = (e) => setPassword(e.target.value)
-  const handleName = (e) => setName(e.target.value)
+  const handleEmail = (e) => setEmail(e.target.value);
+  const handlePassword = (e) => setPassword(e.target.value);
+  const handleName = (e) => setName(e.target.value);
 
   const handleSignupSubmit = (e) => {
-    e.preventDefault()
-    const requestBody = { email, password, name }
+    e.preventDefault();
+    const requestBody = { email, password, name };
     axios
       .post(`${BASE_URL}/auth/signup`, requestBody)
       .then(() => {
-        navigate('/login')
+        navigate('/login');
       })
       .catch((error) => {
-        console.log(error)
-        const errorDescription = error.response.data.message
-        setErrorMessage(errorDescription)
-      })
-  }
+        console.log(error);
+        const errorDescription = error.response.data.message;
+        setErrorMessage(errorDescription);
+      });
+  };
 
   return (
     <Card color="transparent" className="my-10" shadow={false}>
@@ -103,11 +103,11 @@ function SignupPage() {
           </Typography>
         )}
         <Typography color="gray" className="mt-4 text-center font-normal">
-          Already have an account? <Link to={'/login'}> Login</Link>
+          Already have an account? <Link to="/login"> Login</Link>
         </Typography>
       </form>
     </Card>
-  )
+  );
 }
 
-export default SignupPage
+export default SignupPage;

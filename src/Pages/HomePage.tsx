@@ -1,46 +1,64 @@
-import { useState, useContext, useEffect } from 'react'
+import React, { useState, useContext, useEffect } from 'react';
 
-import { DataSourceContext } from '../context/DataSource.context'
+import { DataSourceContext } from '../context/DataSource.context';
 
-import SearchBar from '../components/SearchBar'
-import FirstStep from '../components/FirstStep'
-import Flights from '../components/Flights'
+import SearchBar from '../components/SearchBar';
+import InfoCard from '../components/InfoCard';
+import Flights from '../components/Flights';
 
-import './HomePage.css'
+import './HomePage.css';
 
 // searchBar need to get a context to share data between components
+// src/context/DataSource.context.tsx
+interface Flight {
+  id: number;
+  flight_number: string;
+  departure_time: string;
+  arrival_time: string;
+  airline: string;
+  origin: string;
+  destination: string;
+  price: number;
+  currency: string;
+}
 
-const HomePage = () => {
-  const [flights, setFlights] = useState([])
-  const [filteredResults, setFilteredResults] = useState([])
-  const [destinationInput, setDestinationInput] = useState('')
+type TDataSourceProvider = {
+  children: React.ReactNode;
+};
 
-  const { initFlightsData } = useContext(DataSourceContext)
+type TApiData<T> = T[];
+
+function HomePage() {
+  const [flights, setFlights] = useState([]);
+  const [filteredResults, setFilteredResults] = useState([]);
+  const [destinationInput, setDestinationInput] = useState('');
+
+  const { initFlightsData } = useContext(DataSourceContext);
 
   useEffect(() => {
-    setFlights(initFlightsData)
-  }, [initFlightsData])
+    setFlights(initFlightsData);
+  }, [initFlightsData]);
 
-  const handleSearch = () => {
-    if (flights.length > 0) {
-      const filteredResults = filterData(flights)
-      setFilteredResults(filteredResults)
-    }
-  }
-
-  const filterData = (apiData) => {
+  const filterData = (apiData: TApiData<Flight>) => {
     try {
       return apiData.filter((data) =>
         data.destination
           .trim()
           .toLowerCase()
-          .includes(destinationInput.trim().toLowerCase()),
-      )
+          .includes(destinationInput.trim().toLowerCase())
+      );
     } catch (error) {
-      console.error('Error filtering data:', error)
-      return []
+      console.error('Error filtering data:', error);
+      return [];
     }
-  }
+  };
+
+  const handleSearch = () => {
+    if (flights.length > 0) {
+      const results = filterData(flights);
+      setFilteredResults(results);
+    }
+  };
 
   return (
     <div className="px-20">
@@ -57,12 +75,11 @@ const HomePage = () => {
         </div>
       ) : (
         <div className="border-1 border-yellow-900">
-          <FirstStep />
+          <InfoCard />
         </div>
       )}
-
     </div>
-  )
+  );
 }
 
-export default HomePage
+export default HomePage;

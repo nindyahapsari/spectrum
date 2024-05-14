@@ -1,15 +1,15 @@
-import LandingPage from '../Pages/LandingPage'
-import HomePage from '../Pages/HomePage'
-import ErrorPage from '../Pages/ErrorPage'
-import AboutPage from '../Pages/AboutPage'
-import LoginPage from '../Pages/LoginPage'
-import SignupPage from '../Pages/SignupPage'
-import Cart from '../Pages/Cart'
-import ConfirmationPage from '../Pages/ConfirmationPage'
-import FlightsPage from '../components/Flights'
-import ResultPage from '../Pages/ResultsPage'
-import ProfilePage from '../Pages/ProfilePage'
-import EditProfilePage from '../Pages/EditProfile'
+import LandingPage from '../Pages/LandingPage';
+import HomePage from '../Pages/HomePage';
+import ErrorPage from '../Pages/ErrorPage';
+import AboutPage from '../Pages/AboutPage';
+import LoginPage from '../Pages/LoginPage';
+import SignupPage from '../Pages/SignupPage';
+import Cart from '../Pages/Cart';
+import ConfirmationPage from '../Pages/ConfirmationPage';
+import FlightsPage from '../components/Flights';
+import ResultPage from '../Pages/ResultsPage';
+import ProfilePage from '../Pages/ProfilePage';
+import EditProfilePage from '../Pages/EditProfile';
 
 export const routes = [
   { path: '/landingpage', Element: LandingPage },
@@ -24,6 +24,6 @@ export const routes = [
   { path: '/profile', Element: ProfilePage },
   { path: '/edit-profile/:id', Element: EditProfilePage },
   { path: '*', Element: ErrorPage },
-]
+];
 
-export default routes
+export default routes;
