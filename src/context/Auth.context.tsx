@@ -1,10 +1,4 @@
-import React, {
-  useState,
-  useEffect,
-  createContext,
-  useCallback,
-  useMemo,
-} from 'react';
+import React, { useState, createContext, useCallback, useMemo } from 'react';
 import axios from 'axios';
 
 import { BASE_URL } from '../utility/endpoints';
@@ -20,9 +14,9 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
   const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
 
-  const storeToken = (token: string) => {
+  const storeToken = useCallback((token: string) => {
     localStorage.setItem('authToken', token);
-  };
+  }, []);
 
   const authenticateUser = useCallback(() => {
     const storedToken = localStorage.getItem('authToken');
@@ -50,13 +44,9 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
     }
   }, [currentUser]);
 
-  useEffect(() => {
-    authenticateUser();
-  }, [authenticateUser]);
-
-  const removeToken = () => {
+  const removeToken = useCallback(() => {
     localStorage.removeItem('authToken');
-  };
+  }, []);
 
   const logOutUser = useCallback(() => {
     removeToken();
