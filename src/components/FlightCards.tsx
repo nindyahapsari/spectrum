@@ -1,3 +1,4 @@
+import React from 'react';
 import { useContext } from 'react';
 import { Rating, Button, Typography } from '@material-tailwind/react';
 import { CartContext } from '../context/Cart.context';

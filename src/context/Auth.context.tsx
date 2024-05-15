@@ -7,7 +7,11 @@ interface AuthProviderWrapperProps {
   children: React.ReactNode;
 }
 
-const AuthContext = createContext();
+const AuthContext = createContext({
+  isLoggedIn: false,
+  isLoading: true,
+  currentUser: null,
+});
 
 function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
