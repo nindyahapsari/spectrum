@@ -1,28 +1,33 @@
-import React, { useState, useEffect, createContext } from 'react';
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  useCallback,
+  useMemo,
+} from 'react';
 import axios from 'axios';
 
 import { BASE_URL } from '../utility/endpoints';
 
+interface AuthProviderWrapperProps {
+  children: React.ReactNode;
+}
+
 const AuthContext = createContext();
 
-function AuthProviderWrapper({ children }) {
+function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [user, setUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
 
-  const storeToken = (token) => {
+  const storeToken = (token: string) => {
     localStorage.setItem('authToken', token);
   };
 
-  const getToken = () => {
-    const storedToken = localStorage.getItem('authToken');
-    return storedToken;
-  };
-
-  function authenticateUser() {
+  const authenticateUser = useCallback(() => {
     const storedToken = localStorage.getItem('authToken');
 
-    if (storedToken && !user) {
+    if (storedToken && !currentUser) {
       axios
         .get(`${BASE_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
@@ -31,19 +36,19 @@ function AuthProviderWrapper({ children }) {
           const user = response.data;
           setIsLoggedIn(true);
           setIsLoading(false);
-          setUser(user);
+          setCurrentUser(user);
         })
         .catch(() => {
           setIsLoggedIn(false);
           setIsLoading(false);
-          setUser(null);
+          setCurrentUser(null);
         });
     } else {
       setIsLoggedIn(false);
       setIsLoading(false);
-      setUser(null);
+      setCurrentUser(null);
     }
-  }
+  }, [currentUser]);
 
   useEffect(() => {
     authenticateUser();
@@ -53,24 +58,34 @@ function AuthProviderWrapper({ children }) {
     localStorage.removeItem('authToken');
   };
 
-  const logOutUser = () => {
+  const logOutUser = useCallback(() => {
     removeToken();
     authenticateUser();
-  };
+  }, [removeToken, authenticateUser]);
+
+  const authContextValue = useMemo(
+    () => ({
+      isLoggedIn,
+      isLoading,
+      currentUser,
+      setCurrentUser,
+      storeToken,
+      authenticateUser,
+      logOutUser,
+    }),
+    [
+      isLoggedIn,
+      isLoading,
+      currentUser,
+      setCurrentUser,
+      storeToken,
+      authenticateUser,
+      logOutUser,
+    ]
+  );
 
   return (
-    <AuthContext.Provider
-      value={{
-        isLoggedIn,
-        isLoading,
-        user,
-        setUser,
-        storeToken,
-        getToken,
-        authenticateUser,
-        logOutUser,
-      }}
-    >
+    <AuthContext.Provider value={authContextValue}>
       {children}
     </AuthContext.Provider>
   );

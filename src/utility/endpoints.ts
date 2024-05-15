@@ -1,7 +1,7 @@
 const BASE_URL =
   import.meta.env.MODE === 'production'
-      ? import.meta.env.VITE_BASE_URL_PROD
-      : import.meta.env.VITE_BASE_URL_DEV;
+    ? import.meta.env.VITE_BASE_URL_PROD
+    : import.meta.env.VITE_BASE_URL_DEV;
 export { BASE_URL };
 
 export const TICKETS_API = `${BASE_URL}/api/tickets`;

@@ -7,6 +7,6 @@ export default function RoutesRender() {
       {routes.map(({ path, Element }, index) => (
         <Route key={path + index} path={path} element={<Element />} />
       ))}
-        </Routes>
+    </Routes>
   );
 }

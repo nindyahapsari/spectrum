@@ -22,11 +22,11 @@ interface Flight {
   currency: string;
 }
 
-type TDataSourceProvider = {
+type DataSourceProvider = {
   children: React.ReactNode;
 };
 
-type TApiData<T> = T[];
+type ApiData<T> = T[];
 
 function HomePage() {
   const [flights, setFlights] = useState([]);
@@ -39,7 +39,7 @@ function HomePage() {
     setFlights(initFlightsData);
   }, [initFlightsData]);
 
-  const filterData = (apiData: TApiData<Flight>) => {
+  const filterData = (apiData: ApiData<Flight>) => {
     try {
       return apiData.filter((data) =>
         data.destination

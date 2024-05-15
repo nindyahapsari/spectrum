@@ -71,7 +71,7 @@ function CartContextProvider(props) {
     const cartItems = getCartItems();
     const ticketInfo = {
       tickets: cartItems,
-      userId: userId,
+      userId,
     };
     try {
       const res = await axios.post(PURCHASE_API, ticketInfo);
