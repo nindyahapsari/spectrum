@@ -9,7 +9,11 @@ import { format } from 'date-fns';
 import { DayPicker } from 'react-day-picker';
 import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
 
-export default function DatePicker(props) {
+interface DatePickerProps {
+  label: string;
+}
+
+export default function DatePicker(props: DatePickerProps) {
   const { label } = props;
   const [date, setDate] = React.useState();
 

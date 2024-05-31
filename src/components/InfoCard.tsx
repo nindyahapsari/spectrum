@@ -31,7 +31,7 @@ const context = [
 function InfoCard() {
   context.map(({ number, title, description, advertisementText }) => {
     return (
-      <div className="boxes">
+      <div key={`${number}-${title}`} className="boxes">
         <div className="box">
           <h1>{number}</h1>
           <h2 className="h2">{title}</h2>

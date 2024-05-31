@@ -1,3 +1,4 @@
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
   Card,
@@ -11,8 +12,13 @@ import {
 
 import profilepict from '../assets/Avatar-19.png';
 
-function ProfileCard(props) {
-  const { username, email, userId } = props;
+type ProfileCardProps = {
+  username: string;
+  email: string;
+  userId: string;
+};
+
+function ProfileCard({ username, email, userId }: ProfileCardProps) {
   const navigate = useNavigate();
 
   const handleEditProfile = () => {

@@ -1,6 +1,8 @@
-import React, { useState, useContext, useEffect } from 'react';
+import React, { useState } from 'react';
 
-import { DataSourceContext } from '../context/DataSource.context';
+// import { DataSourceContext } from '../context/DataSource.context';
+
+import { Flight } from '../types';
 
 import SearchBar from '../components/SearchBar';
 import InfoCard from '../components/InfoCard';
@@ -10,36 +12,21 @@ import './HomePage.css';
 
 // searchBar need to get a context to share data between components
 // src/context/DataSource.context.tsx
-interface Flight {
-  id: number;
-  flight_number: string;
-  departure_time: string;
-  arrival_time: string;
-  airline: string;
-  origin: string;
-  destination: string;
-  price: number;
-  currency: string;
-}
 
-type TDataSourceProvider = {
-  children: React.ReactNode;
-};
-
-type TApiData<T> = T[];
+type ApiData<T> = T[];
 
 function HomePage() {
-  const [flights, setFlights] = useState([]);
+  const [flights] = useState([]);
   const [filteredResults, setFilteredResults] = useState([]);
   const [destinationInput, setDestinationInput] = useState('');
 
-  const { initFlightsData } = useContext(DataSourceContext);
+  // const { initFlightsData } = useContext(DataSourceContext);
 
-  useEffect(() => {
-    setFlights(initFlightsData);
-  }, [initFlightsData]);
+  // useEffect(() => {
+  //   setFlights(initFlightsData);
+  // }, [initFlightsData]);
 
-  const filterData = (apiData: TApiData<Flight>) => {
+  const filterData = (apiData: ApiData<Flight>) => {
     try {
       return apiData.filter((data) =>
         data.destination

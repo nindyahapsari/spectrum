@@ -1,3 +1,4 @@
+import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { routes } from './routes-data';
 
@@ -7,6 +8,6 @@ export default function RoutesRender() {
       {routes.map(({ path, Element }, index) => (
         <Route key={path + index} path={path} element={<Element />} />
       ))}
-        </Routes>
+    </Routes>
   );
 }

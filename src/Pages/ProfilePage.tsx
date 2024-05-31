@@ -34,55 +34,55 @@ const TABLE_ROWS = [
 ];
 
 function ProfilePage() {
-    const { authenticateUser, isLoggedIn, user, isLoading } =
+  const { authenticateUser, isLoggedIn, user, isLoading } =
     useContext(AuthContext);
-    const navigate = useNavigate();
+  const navigate = useNavigate();
 
-    useEffect(() => {
-        if (!isLoggedIn) {
-            navigate('/');
-        }
-
-        if (!user) {
-            authenticateUser();
-        }
-    }, [user, authenticateUser]);
-
-    if (isLoading || !user) {
-        return (
-            <div className="flex flex-col items-center justify-center h-screen overflow-y-auto">
-                <Spinner className="h-12 w-12" />
-                <Typography>Loading your content</Typography>
-            </div>
-        );
+  useEffect(() => {
+    if (!isLoggedIn) {
+      navigate('/');
     }
 
-    const { name, email, _id } = user;
+    if (!user) {
+      authenticateUser();
+    }
+  }, [user, authenticateUser]);
 
+  if (isLoading || !user) {
     return (
-        <div className="flex items-center justify-center h-screen overflow-y-auto">
-            <div className="m-10">
-                <div className="m-10">
-                    <Typography variant="h3">Welcome back {name} !</Typography>
-                </div>
-
-                <div className="flex flex-row w-full items-center">
-                    <div className="m-10">
-                        <ProfileCard username={name} email={email} userId={_id} />
-                    </div>
-
-                    <div>
-                        <div>
-                            <TransactionsTable
-                                tableHead={TABLE_HEAD}
-                                tableRows={TABLE_ROWS}
-                            />
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+      <div className="flex flex-col items-center justify-center h-screen overflow-y-auto">
+        <Spinner className="h-12 w-12" />
+        <Typography>Loading your content</Typography>
+      </div>
     );
+  }
+
+  const { name, email, _id } = user;
+
+  return (
+    <div className="flex items-center justify-center h-screen overflow-y-auto">
+      <div className="m-10">
+        <div className="m-10">
+          <Typography variant="h3">Welcome back {name} !</Typography>
+        </div>
+
+        <div className="flex flex-row w-full items-center">
+          <div className="m-10">
+            <ProfileCard username={name} email={email} userId={_id} />
+          </div>
+
+          <div>
+            <div>
+              <TransactionsTable
+                tableHead={TABLE_HEAD}
+                tableRows={TABLE_ROWS}
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default ProfilePage;
