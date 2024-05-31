@@ -1,5 +1,4 @@
-import React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { Rating, Button, Typography } from '@material-tailwind/react';
 import { CartContext } from '../context/Cart.context';
 import firstIcon from '../assets/airline-icon-first.png';
@@ -9,8 +8,21 @@ import separator from '../assets/separator.png';
 
 import './FlightCards.css';
 import TicketFlightInfo from './TicketFlightInfo';
+import { Flight } from '../types';
 
-function FlightCards({ flight, setIsLoading, setIsSuccess, setErrorMessage }) {
+interface FlightCardsProps {
+  flight: Flight[];
+  setIsLoading: boolean;
+  setIsSuccess: boolean;
+  setErrorMessage: string;
+}
+
+function FlightCards({
+  flight,
+  setIsLoading,
+  setIsSuccess,
+  setErrorMessage,
+}: FlightCardsProps) {
   const { addToCart } = useContext(CartContext);
 
   const handleAddToCart = (id) => {

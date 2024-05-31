@@ -3,7 +3,15 @@ import Time from '../utility/time';
 
 import ticketSlider from '../assets/ticket-slider.png';
 
-function TicketFlightInfo(props) {
+interface TicketFlightInfoProps {
+  icon: string;
+  depTimestamp: string;
+  arrivalTimestamp: string;
+  depCity: string;
+  destination: string;
+}
+
+function TicketFlightInfo(props: TicketFlightInfoProps) {
   const { icon, depTimestamp, arrivalTimestamp, depCity, destination } = props;
 
   const depTime = Time.getTime(depTimestamp);

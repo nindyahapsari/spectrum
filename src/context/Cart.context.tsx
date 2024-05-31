@@ -12,9 +12,13 @@ const fetchingData = async () => {
 
 const CartContext = createContext(null);
 
-function CartContextProvider(props) {
+type CartContextProviderProps = {
+  children: React.ReactNode;
+};
+
+function CartContextProvider(props: CartContextProviderProps) {
   const [initData, setInitData] = useState([]);
-  const [cart, setCart] = useState(getFlightDefaultCart());
+  const [cart, setCart] = useState([]);
 
   const navigate = useNavigate();
 
@@ -26,14 +30,14 @@ function CartContextProvider(props) {
     fetchFlightData();
   }, []);
 
-  function getFlightDefaultCart() {
-    const cartWithId = {};
-    for (let i = 0; i < initData.length; i++) {
-      cartWithId[initData[i]._id] = 0;
-    }
+  // function getFlightDefaultCart() {
+  //   const cartWithId = {};
+  //   for (let i = 0; i < initData.length; i++) {
+  //     cartWithId[initData[i]._id] = 0;
+  //   }
 
-    return cartWithId;
-  }
+  //   return cartWithId;
+  // }
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;

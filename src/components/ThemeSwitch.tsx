@@ -1,4 +1,10 @@
-function ThemeSwitcher(props) {
+import React from 'react';
+
+type ThemeSwitcherProps = {
+  children: React.ReactNode;
+};
+
+function ThemeSwitcher(props: ThemeSwitcherProps) {
   return (
     <div>
       <div>

@@ -1,5 +1,4 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   Accordion,
   AccordionHeader,
@@ -11,6 +10,7 @@ import {
 } from '@material-tailwind/react';
 
 import FlightCards from './FlightCards';
+import { Flight } from '../types';
 
 const STOPS = ['Direct', '1 Stop', '2+ Stops'];
 const DepTimes = [
@@ -25,7 +25,11 @@ const RATINGS = [
   'Security Check',
 ];
 
-function Flights(props) {
+type FlightsProps = {
+  filteredResults: Flight[];
+};
+
+function Flights(props: FlightsProps) {
   const { filteredResults } = props;
 
   // const [open, setOpen] = useState(0)

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Input, Select, Option, Button, Radio } from '@material-tailwind/react';
 
 import DatePicker from './DatePicker';
@@ -12,7 +12,13 @@ import 'react-date-picker/dist/DatePicker.css';
 
 const labels = ['Return', 'One way', 'Multi City', 'Direct Flights'];
 
-function SearchBar(props) {
+interface SearchBarProps {
+  destinationInput: string;
+  setDestinationInput: (value: string) => void;
+  handleSearch: () => void;
+}
+
+function SearchBar(props: SearchBarProps) {
   const { destinationInput, setDestinationInput, handleSearch } = props;
 
   const [departureInput] = useState('Berlin');

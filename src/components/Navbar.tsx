@@ -6,7 +6,7 @@ import { Avatar, IconButton } from '@material-tailwind/react';
 import { AuthContext } from '../context/Auth.context';
 import { useTheme } from '../context/ThemeContext';
 
-import logoSmall from '../../../../../../../src/assets/logo-spectrum.png';
+// import logoSmall from '../../../../../../../src/assets/logo-spectrum.png';
 
 import './Navbar.css';
 
