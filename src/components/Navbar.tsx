@@ -2,25 +2,24 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { Avatar, IconButton } from '@material-tailwind/react';
 import { AuthContext } from '../context/Auth.context';
-import { useTheme } from '../context/ThemeContext';
+import GuestMenu from './GuestMenu';
+import UserMenu from './UserMenu';
 
-// import logoSmall from '../../../../../../../src/assets/logo-spectrum.png';
+import logoSmall from '../assets/logo-spectrum.png';
 
 import './Navbar.css';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
-  const { darkMode, toggleDarkMode } = useTheme();
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
   };
 
   return (
-    <nav className={`navbar ${darkMode ? 'dark' : 'light'}`}>
+    <nav className="w-full navbar">
       <div className="navbar-container">
         <div className="navbar-logo">
           <Link className="logo" to="/">
@@ -28,50 +27,15 @@ function Navbar() {
           </Link>
         </div>
 
-        <IconButton
-          size="sm"
-          variant="gradient"
-          className="switchdark rounded-full"
-          onClick={toggleDarkMode}
-        >
-          {darkMode ? '☀︎' : '☾'}
-        </IconButton>
-
         {isLoggedIn && (
-          <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
-            <Link to="/">
-              <div className="p-2">Home</div>
-            </Link>
-            <Link to="/" onClick={logOutUser}>
-              <div className="p-2">Logout</div>
-            </Link>
-            <Link to="/cart">
-              <div className="p-2">Cart</div>
-            </Link>
-            <Link to="/profile">
-              <div className="my-1.5 mr-5">
-                <Avatar
-                  size="xs"
-                  alt="avatar"
-                  src={logoSmall}
-                  className="p-1"
-                />
-                <span>{user && user.name}</span>
-              </div>
-            </Link>
-          </div>
+          <UserMenu
+            user={user}
+            logOutUser={logOutUser}
+            logoSmall={logoSmall}
+            isOpen={isOpen}
+          />
         )}
-        {!isLoggedIn && (
-          <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
-            <Link to="/signup">
-              <div className="p-2">Signup</div>
-            </Link>
-
-            <Link to="/login">
-              <div className="p-2">Login</div>
-            </Link>
-          </div>
-        )}
+        {!isLoggedIn && <GuestMenu isOpen={isOpen} />}
 
         <div className="navbar-toggle" onClick={toggleNavbar}>
           <span />
