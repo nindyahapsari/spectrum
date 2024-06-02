@@ -34,6 +34,11 @@
   margin-left: 90px;
 }
 
+.date-picker-input {
+  /* border: 1px solid red; */
+  margin: 0 2px;
+}
+
 .react-date-picker .react-date-picker__wrapper {
   border: none;
 }
