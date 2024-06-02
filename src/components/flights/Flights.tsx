@@ -10,7 +10,7 @@ import {
 } from '@material-tailwind/react';
 
 import FlightCards from './FlightCards';
-import { Flight } from '../types';
+import { Flight } from '../../types';
 
 const STOPS = ['Direct', '1 Stop', '2+ Stops'];
 const DepTimes = [

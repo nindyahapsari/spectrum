@@ -1,6 +1,6 @@
 import React, { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
-import { FLIGHTS_ALL_API } from '../utility/endpoints';
+import { FLIGHTS_ALL_API } from '../utils/endpoints';
 
 interface Flight {
   id: number;

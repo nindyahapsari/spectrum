@@ -1,7 +1,7 @@
 import React from 'react';
-import Time from '../utility/time';
+import Time from '../../utils/time';
 
-import ticketSlider from '../assets/ticket-slider.png';
+import ticketSlider from '../../assets/ticket-slider.png';
 
 interface TicketFlightInfoProps {
   icon: string;

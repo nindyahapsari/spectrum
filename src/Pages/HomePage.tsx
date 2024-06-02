@@ -4,9 +4,9 @@ import React, { useState, useCallback } from 'react';
 
 import { Flight } from '../types';
 
-import SearchBar from '../components/SearchBar';
-import InfoCard from '../components/InfoCard';
-import Flights from '../components/Flights';
+import SearchBar from '../components/common/SearchBar/SearchBar';
+import InfoCard from '../components/cards/InfoCard';
+import Flights from '../components/flights/Flights';
 
 import './HomePage.css';
 

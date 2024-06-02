@@ -2,11 +2,11 @@
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { AuthContext } from '../context/Auth.context';
+import { AuthContext } from '../../../context/Auth.context';
 import GuestMenu from './GuestMenu';
 import UserMenu from './UserMenu';
 
-import logoSmall from '../assets/logo-spectrum.png';
+import logoSmall from '../../../assets/logo-spectrum.png';
 
 import './Navbar.css';
 
