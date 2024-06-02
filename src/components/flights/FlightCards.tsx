@@ -1,5 +1,4 @@
 import React, { useContext } from 'react';
-import { Rating, Button, Typography } from '@material-tailwind/react';
 import { CartContext } from '../../context/Cart.context';
 import firstIcon from '../../assets/airline-icon-first.png';
 import secondIcon from '../../assets/airline-icon-second.png';
@@ -61,8 +60,7 @@ function FlightCards({
       </div>
       <div className="flex flex-col w-1/3 ">
         <div className="mb-2 flex flex-row justify-between items-center gap-4">
-          <Typography className="text-xl font-thin">Rating</Typography>
-          <Rating value={5} readonly />
+          <div className="text-xl font-thin">Rating</div>
         </div>
         <div className="my-8 flex justify-center">
           <img src={bagsIcon} alt="bags" />
@@ -70,13 +68,12 @@ function FlightCards({
         <div className="flex flex-row justify-between items-end ">
           <div className="text-3xl font-semibold ">${flight.price}</div>
           <div className="">
-            <Button
-              size="lg"
+            <button
               className="button-primary"
               onClick={() => handleAddToCart(flight._id)}
             >
               View Details
-            </Button>
+            </button>
           </div>
         </div>
       </div>
