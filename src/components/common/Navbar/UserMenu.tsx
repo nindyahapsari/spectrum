@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import NavbarLink from './NavbarLinks';
 
 type UserMenuProps = {
-  user: { name: string }; // adjust this type to match your user object
   logOutUser: () => void;
   isOpen: boolean;
 };
@@ -15,7 +14,7 @@ const links = [
   { to: '/cart', label: 'Cart' },
 ];
 
-function UserMenu({ user, logOutUser, isOpen }: UserMenuProps) {
+function UserMenu({ logOutUser, isOpen }: UserMenuProps) {
   return (
     <div className={`navbar-links ${isOpen ? 'active' : ''}`}>
       {links.map((link) => (
@@ -23,9 +22,7 @@ function UserMenu({ user, logOutUser, isOpen }: UserMenuProps) {
       ))}
 
       <Link to="/profile">
-        <div className="my-1.5 mr-5">
-          <span>{user && user.name}</span>
-        </div>
+        <div> My Account</div>
       </Link>
 
       <Link to="/" onClick={logOutUser}>
