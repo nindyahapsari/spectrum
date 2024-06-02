@@ -1,25 +1,18 @@
 import React from 'react';
 import './App.css';
 import axios from 'axios';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
+import Navbar from './components/common/Navbar/Navbar';
+import Footer from './components/common/Footer';
 
 import RoutesRender from './routes';
-import { useTheme } from './context/ThemeContext';
-import ThemeSwitcher from './components/ThemeSwitch';
 
 axios.defaults.withCredentials = true;
 
 function App() {
-  const theme = useTheme();
-  const isDarkMode = theme ? theme.darkMode : false;
   return (
-    <div className={isDarkMode ? 'dark' : 'light' + 'App'}>
+    <div>
       <Navbar />
-      <ThemeSwitcher>
-        <RoutesRender />
-      </ThemeSwitcher>
-
+      <RoutesRender />
       <Footer />
     </div>
   );

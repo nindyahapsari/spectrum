@@ -1,7 +1,7 @@
 import React, { useState, createContext, useCallback, useMemo } from 'react';
 import axios from 'axios';
 
-import { BASE_URL } from '../utility/endpoints';
+import { BASE_URL } from '../utils/endpoints';
 
 interface AuthProviderWrapperProps {
   children: React.ReactNode;

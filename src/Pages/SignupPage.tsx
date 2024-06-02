@@ -5,7 +5,7 @@ import './SignupPage.css';
 
 import { Card, Input, Button, Typography } from '@material-tailwind/react';
 
-import { BASE_URL } from '../utility/endpoints';
+import { BASE_URL } from '../utils/endpoints';
 
 function SignupPage() {
   const [email, setEmail] = useState('');

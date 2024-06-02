@@ -29,17 +29,19 @@ const context = [
 ];
 
 function InfoCard() {
-  context.map(({ number, title, description, advertisementText }) => {
-    return (
-      <div key={`${number}-${title}`} className="boxes">
-        <div className="box">
-          <h1>{number}</h1>
-          <h2 className="h2">{title}</h2>
-          <p className="small-text"> {description}</p>
-          <p className="small-text">{advertisementText} </p>
+  return (
+    <div className="flex flex-row ">
+      {context.map(({ number, title, description, advertisementText }) => (
+        <div key={`${number}-${title}`} className="boxes">
+          <div className="box">
+            <h1>{number}</h1>
+            <h2 className="h2">{title}</h2>
+            <p className="text-lg"> {description}</p>
+            <p className="text-lg">{advertisementText} </p>
+          </div>
         </div>
-      </div>
-    );
-  });
+      ))}
+    </div>
+  );
 }
 export default InfoCard;

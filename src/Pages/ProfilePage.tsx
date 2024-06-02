@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { Typography, Spinner } from '@material-tailwind/react';
 import { AuthContext } from '../context/Auth.context';
 import ProfileCard from '../components/ProfileCard';
-import TransactionsTable from '../components/TransactionsTable';
+import TransactionsTable from '../components/utilities/TransactionsTable';
 
 import firstIcon from '../assets/airline-icon-first.png';
 import secondIcon from '../assets/airline-icon-second.png';

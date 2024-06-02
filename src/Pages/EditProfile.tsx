@@ -13,7 +13,7 @@ import {
 
 import { AuthContext } from '../context/Auth.context';
 
-import { BASE_URL } from '../utility/endpoints';
+import { BASE_URL } from '../utils/endpoints';
 
 function EditProfile() {
   const [editUser, setEditUser] = useState({ name: '', email: '' });

@@ -1,4 +1,4 @@
-import FlightCards from '../components/FlightCards';
+import FlightCards from '../components/flights/FlightCards';
 
 function ResultPage() {
   return (
