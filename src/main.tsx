@@ -14,9 +14,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
       <AuthProviderWrapper>
         <DataSourceProvider>
           <CartContextProvider>
-            <ThemeProvider>
-              <App />
-            </ThemeProvider>
+            <App />
           </CartContextProvider>
         </DataSourceProvider>
       </AuthProviderWrapper>
