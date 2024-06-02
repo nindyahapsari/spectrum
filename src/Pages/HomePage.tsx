@@ -8,8 +8,6 @@ import SearchBar from '../components/common/SearchBar/SearchBar';
 import InfoCard from '../components/cards/InfoCard';
 import Flights from '../components/flights/Flights';
 
-import './HomePage.css';
-
 type ApiData<T> = T[];
 
 function HomePage() {
