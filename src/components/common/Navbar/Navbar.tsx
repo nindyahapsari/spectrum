@@ -6,13 +6,11 @@ import { AuthContext } from '../../../context/Auth.context';
 import GuestMenu from './GuestMenu';
 import UserMenu from './UserMenu';
 
-import logoSmall from '../../../assets/logo-spectrum.png';
-
 import './Navbar.css';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const { isLoggedIn, user, logOutUser } = useContext(AuthContext);
+  const { isLoggedIn, logOutUser } = useContext(AuthContext);
 
   const toggleNavbar = () => {
     setIsOpen(!isOpen);
@@ -27,14 +25,7 @@ function Navbar() {
           </Link>
         </div>
 
-        {isLoggedIn && (
-          <UserMenu
-            user={user}
-            logOutUser={logOutUser}
-            logoSmall={logoSmall}
-            isOpen={isOpen}
-          />
-        )}
+        {isLoggedIn && <UserMenu logOutUser={logOutUser} isOpen={isOpen} />}
         {!isLoggedIn && <GuestMenu isOpen={isOpen} />}
 
         <div className="navbar-toggle" onClick={toggleNavbar}>
