@@ -10,7 +10,6 @@ type UserMenuProps = {
 
 const links = [
   { to: '/', label: 'Home' },
-  { to: '/logout', label: 'Logout' },
   { to: '/cart', label: 'Cart' },
 ];
 
@@ -21,11 +20,11 @@ function UserMenu({ logOutUser, isOpen }: UserMenuProps) {
         <NavbarLink key={link.to} to={link.to} label={link.label} />
       ))}
 
-      <Link to="/profile">
+      <Link className="hover:text-gray-500" to="/profile">
         <div> My Account</div>
       </Link>
 
-      <Link to="/" onClick={logOutUser}>
+      <Link className="hover:text-gray-500" to="/" onClick={logOutUser}>
         <div className="p-2">Logout</div>
       </Link>
     </div>
