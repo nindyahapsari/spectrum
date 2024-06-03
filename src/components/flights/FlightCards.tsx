@@ -5,6 +5,7 @@ import secondIcon from '../../assets/airline-icon-second.png';
 import bagsIcon from '../../assets/bags.png';
 import separator from '../../assets/separator.png';
 
+import { Button } from 'react-daisyui';
 import './FlightCards.css';
 import TicketFlightInfo from './TicketFlightInfo';
 import { Flight } from '../../types';
@@ -68,12 +69,12 @@ function FlightCards({
         <div className="flex flex-row justify-between items-end ">
           <div className="text-3xl font-semibold ">${flight.price}</div>
           <div className="">
-            <button
-              className="button-primary"
+            <Button
+              className="button-primary py-2 px-4 rounded-lg"
               onClick={() => handleAddToCart(flight._id)}
             >
               View Details
-            </button>
+            </Button>
           </div>
         </div>
       </div>

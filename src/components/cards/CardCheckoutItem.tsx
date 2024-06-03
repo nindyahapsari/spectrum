@@ -1,15 +1,16 @@
-import React, { useContext } from 'react';
-import { CartContext } from '../context/Cart.context';
+// import React, { useContext } from 'react';
+// import { CartContext } from '../context/Cart.context';
 import './CardCheckoutItem.css';
 
 function CartItem({ flight }) {
-  const { removeFromCart } = useContext(CartContext);
+  // const { removeFromCart } = useContext(CartContext);
 
   console.log(flight);
 
   return (
     <div className="cart-item">
-      <h2>{flight.airline}</h2>
+      <div>temporary card checkout item</div>
+      {/* <h2>{flight.airline}</h2>
       <p>Flight Number: {flight.flightNumber}</p>
       <p>Departure: {new Date(flight.departureTime).toLocaleString()}</p>
       <p>Destination: {flight.destination}</p>
@@ -18,7 +19,7 @@ function CartItem({ flight }) {
       <p>Price: ${flight.price}</p>
       <button onClick={() => removeFromCart(flight._id)}>
         Remove from cart
-      </button>
+      </button> */}
     </div>
   );
 }
