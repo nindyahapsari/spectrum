@@ -10,11 +10,10 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  daisyui: {
+    styled: false,
+    base: false,
+    themes: ['light'],
+  },
+  plugins: [require('daisyui')],
 };
-
-/*
-
-import { ChevronRightIcon, ChevronLeftIcon } from '@heroicons/react/24/outline';
-
-*/
