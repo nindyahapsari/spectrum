@@ -6,10 +6,10 @@ import LoginPage from '../Pages/LoginPage';
 import SignupPage from '../Pages/SignupPage';
 // import Cart from '../Pages/Cart';
 // import ConfirmationPage from '../Pages/ConfirmationPage';
-// import FlightsPage from '../components/Flights';
+import FlightsPage from '../components/flights/Flights';
 // import ResultPage from '../Pages/ResultsPage';
-// import ProfilePage from '../Pages/ProfilePage';
-// import EditProfilePage from '../Pages/EditProfile';
+import ProfilePage from '../Pages/ProfilePage';
+import EditProfilePage from '../Pages/EditProfile';
 
 export const routes = [
   { path: '/landingpage', Element: LandingPage },
@@ -19,10 +19,10 @@ export const routes = [
   { path: '/login', Element: LoginPage },
   // { path: '/cart', Element: Cart },
   // { path: '/confirmation', Element: ConfirmationPage },
-  // { path: '/flights', Element: FlightsPage },
+  { path: '/flights', Element: FlightsPage },
   // { path: '/resultpage', Element: ResultPage },
-  // { path: '/profile', Element: ProfilePage },
-  // { path: '/edit-profile/:id', Element: EditProfilePage },
+  { path: '/profile', Element: ProfilePage },
+  { path: '/edit-profile/:id', Element: EditProfilePage },
   { path: '*', Element: ErrorPage },
 ];
 
