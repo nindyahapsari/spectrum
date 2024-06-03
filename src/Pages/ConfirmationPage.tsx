@@ -1,7 +1,6 @@
 import React, { useState, useContext } from 'react';
 import './ConfirmationPage.css';
 import { useNavigate } from 'react-router-dom';
-import { Typography, Alert } from '@material-tailwind/react';
 import { CartContext } from '../context/Cart.context';
 
 import CheckoutCardPayment from '../components/CheckoutCardPayment';
@@ -26,9 +25,9 @@ function ConfirmationPage() {
   return (
     <div className="checkout-page">
       <div>
-        <Typography variant="h2">Checkout confirmation</Typography>
+        <h2>Checkout Confirmation</h2>
       </div>
-      <div>{isSuccess && <Alert color="green">Payment success</Alert>}</div>
+      {/* <div>{isSuccess && <Alert color="green">Payment success</Alert>}</div> */}
       <div>
         <CheckoutCardPayment handlePayment={handlePayment} />
       </div>
