@@ -13,7 +13,6 @@ function FlightTypeRadioGroup({
   labels,
   name,
   control,
-  errors,
 }: FlightTypeRadioGroupProps) {
   return (
     <div className="my-5">
@@ -36,9 +35,9 @@ function FlightTypeRadioGroup({
           )}
         />
       ))}
-      {errors && errors[name] && (
-        <p className="text-red-500">{errors[name].message}</p>
-      )}
+      {/*  {errors && errors[name] && (
+        <p className="text-red-500 text-sm py-1">{errors[name].message}</p>
+      )} */}
     </div>
   );
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { UseFormRegister, FieldErrors } from 'react-hook-form';
+import { UseFormRegister } from 'react-hook-form';
 
 import { FormInputs } from '../../../types';
 
@@ -10,7 +10,6 @@ interface InputFieldProps {
   name: string;
   readOnly?: boolean;
   value?: string;
-  errors?: FieldErrors;
 }
 
 function InputField({
@@ -20,22 +19,20 @@ function InputField({
   name,
   readOnly,
   value,
-  errors,
 }: InputFieldProps) {
   return (
     <div className="mx-2">
-      <label htmlFor={name}>{label}</label>
-      <input
-        type="text"
-        className="form-input mt-1 block w-full"
-        placeholder={placeholder}
-        {...register(name)}
-        readOnly={readOnly}
-        defaultValue={value}
-      />
-      {errors && errors[name] && (
-        <p className="text-red-500">{errors[name].message}</p>
-      )}
+      <label htmlFor={name}>
+        {label}
+        <input
+          type="text"
+          className="form-input mt-1 block w-full h-10 border rounded px-4  bg-gray-50"
+          placeholder={placeholder}
+          {...register(name)}
+          readOnly={readOnly}
+          defaultValue={value}
+        />
+      </label>
     </div>
   );
 }

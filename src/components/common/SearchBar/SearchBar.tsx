@@ -6,6 +6,7 @@ import InputField from './InputField';
 import PassengerSelect from './PassengerSelect';
 import DatePickerField from './DatePickerField';
 import FlightTypeRadioGroup from './FlightTypeRadioGroup';
+import SearchBarErrorMessage from './SearchBarErrorMessage';
 
 import { FormInputs } from '../../../types';
 
@@ -23,7 +24,12 @@ const schema = yup.object({
   flightType: yup.string().required('Flight type is required'),
 });
 
-function SearchBar() {
+interface SearchBarProps {
+  setDestinationInput: (value: string) => void;
+  handleSearch: () => void;
+}
+
+function SearchBar({ setDestinationInput, handleSearch }: SearchBarProps) {
   const {
     register,
     handleSubmit,
@@ -33,14 +39,18 @@ function SearchBar() {
     resolver: yupResolver(schema),
   });
 
+  console.log('errors', errors);
+
   const onSubmit = (data: FormInputs) => {
-    console.log(data);
+    console.log('data', data);
+    setDestinationInput(data.destination);
+    handleSearch();
   };
 
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="mx-32 h-56 my-10 py-5 px-20 border-2 rounded-lg bg-gray-300 backdrop-opacity-50"
+      className=" h-60 my-10 py-3 px-20 border-2 rounded-lg bg-gray-300 backdrop-opacity-50"
     >
       <div className="flex flex-row justify-between items-center my-5">
         <InputField
@@ -56,19 +66,16 @@ function SearchBar() {
           placeholder="Where to"
           name="destination"
           register={register}
-          errors={errors}
         />
         <DatePickerField
           label="Departure Date"
           name="departureDate"
           control={control}
-          errors={errors}
         />
         <DatePickerField
           label="Return Date"
           name="returnDate"
           control={control}
-          errors={errors}
         />
         <PassengerSelect name="passengers" control={control} errors={errors} />
       </div>
@@ -78,15 +85,16 @@ function SearchBar() {
           labels={labels}
           name="flightType"
           control={control}
-          errors={errors}
         />
         <button
           type="submit"
-          className="mt-6 px-4 py-2 bg-blue-500 text-white rounded-md"
+          className="mt-6 px-4 py-2 bg-spectrum-primary text-black rounded-md"
         >
           Search Flights
         </button>
       </div>
+
+      <SearchBarErrorMessage errors={errors} />
     </form>
   );
 }
