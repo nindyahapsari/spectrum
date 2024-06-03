@@ -17,16 +17,18 @@ function Navbar() {
   };
 
   return (
-    <nav className="w-full navbar">
-      <div className="navbar-container">
+    <nav className="w-full navbar flex items-start">
+      <div className="w-screen my-5 mx-20 justify-between">
         <div className="navbar-logo">
           <Link className="logo" to="/">
             Spectrum
           </Link>
         </div>
 
-        {isLoggedIn && <UserMenu logOutUser={logOutUser} isOpen={isOpen} />}
-        {!isLoggedIn && <GuestMenu isOpen={isOpen} />}
+        <div>
+          {isLoggedIn && <UserMenu logOutUser={logOutUser} isOpen={isOpen} />}
+          {!isLoggedIn && <GuestMenu isOpen={isOpen} />}
+        </div>
 
         <div className="navbar-toggle" onClick={toggleNavbar}>
           <span />
