@@ -2,7 +2,7 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import Navbar from './components/common/Navbar/Navbar';
-// import Footer from './components/common/Footer';
+import Footer from './components/common/Footer';
 
 import RoutesRender from './routes';
 
@@ -12,8 +12,10 @@ function App() {
   return (
     <div>
       <Navbar />
-      <RoutesRender />
-      {/* <Footer /> */}
+      <div className="min-h-screen">
+        <RoutesRender />
+      </div>
+      <Footer />
     </div>
   );
 }
