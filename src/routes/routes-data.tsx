@@ -1,18 +1,16 @@
-import LandingPage from '../Pages/LandingPage';
-import HomePage from '../Pages/HomePage';
-import ErrorPage from '../Pages/ErrorPage';
+import HomePage from '../pages/HomePage';
+import ErrorPage from '../pages/ErrorPage';
 // import AboutPage from '../Pages/AboutPage';
-import LoginPage from '../Pages/LoginPage';
-import SignupPage from '../Pages/SignupPage';
+import LoginPage from '../pages/LoginPage';
+import SignupPage from '../pages/SignupPage';
 // import Cart from '../Pages/Cart';
 // import ConfirmationPage from '../Pages/ConfirmationPage';
 import FlightsPage from '../components/flights/Flights';
 // import ResultPage from '../Pages/ResultsPage';
-import ProfilePage from '../Pages/ProfilePage';
-import EditProfilePage from '../Pages/EditProfile';
+import ProfilePage from '../pages/ProfilePage';
+import EditProfilePage from '../pages/EditProfile';
 
 export const routes = [
-  { path: '/landingpage', Element: LandingPage },
   { path: '/', Element: HomePage },
   // { path: '/about', Element: AboutPage },
   { path: '/signup', Element: SignupPage },
