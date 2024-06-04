@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
-import { Rating, Button, Typography } from '@material-tailwind/react';
 import { CartContext } from '../../context/Cart.context';
 import firstIcon from '../../assets/airline-icon-first.png';
 import secondIcon from '../../assets/airline-icon-second.png';
 import bagsIcon from '../../assets/bags.png';
 import separator from '../../assets/separator.png';
 
+import { Button } from 'react-daisyui';
 import './FlightCards.css';
 import TicketFlightInfo from './TicketFlightInfo';
 import { Flight } from '../../types';
@@ -61,8 +61,7 @@ function FlightCards({
       </div>
       <div className="flex flex-col w-1/3 ">
         <div className="mb-2 flex flex-row justify-between items-center gap-4">
-          <Typography className="text-xl font-thin">Rating</Typography>
-          <Rating value={5} readonly />
+          <div className="text-xl font-thin">Rating</div>
         </div>
         <div className="my-8 flex justify-center">
           <img src={bagsIcon} alt="bags" />
@@ -71,8 +70,7 @@ function FlightCards({
           <div className="text-3xl font-semibold ">${flight.price}</div>
           <div className="">
             <Button
-              size="lg"
-              className="button-primary"
+              className="button-primary py-2 px-4 rounded-lg"
               onClick={() => handleAddToCart(flight._id)}
             >
               View Details

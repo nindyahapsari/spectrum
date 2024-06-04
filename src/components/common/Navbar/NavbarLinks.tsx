@@ -8,7 +8,7 @@ type NavbarLinkProps = {
 
 function NavbarLink({ to, label }: NavbarLinkProps) {
   return (
-    <Link to={to}>
+    <Link className="hover:text-gray-500" to={to}>
       <div className="p-2">{label}</div>
     </Link>
   );

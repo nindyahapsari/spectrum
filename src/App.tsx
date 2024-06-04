@@ -12,7 +12,9 @@ function App() {
   return (
     <div>
       <Navbar />
-      <RoutesRender />
+      <div className="min-h-screen">
+        <RoutesRender />
+      </div>
       <Footer />
     </div>
   );

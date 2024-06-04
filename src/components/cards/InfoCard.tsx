@@ -30,7 +30,7 @@ const context = [
 
 function InfoCard() {
   return (
-    <div className="flex flex-row ">
+    <div className="flex flex-row justify-center px-20">
       {context.map(({ number, title, description, advertisementText }) => (
         <div key={`${number}-${title}`} className="boxes">
           <div className="box">

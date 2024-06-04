@@ -1,25 +1,25 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 
-// import { DataSourceContext } from '../context/DataSource.context';
+import { DataSourceContext } from '../context/DataSource.context';
 
 import { Flight } from '../types';
 
-import SearchBar from '../components/common/SearchBar/SearchBar';
 import InfoCard from '../components/cards/InfoCard';
+import SearchBar from '../components/common/SearchBar/SearchBar';
 import Flights from '../components/flights/Flights';
 
 type ApiData<T> = T[];
 
 function HomePage() {
-  const [flights] = useState([]);
+  const [flights, setFlights] = useState<ApiData<Flight>>([]);
   const [filteredResults, setFilteredResults] = useState<Flight[]>([]);
   const [destinationInput, setDestinationInput] = useState<string>('');
 
-  // const { initFlightsData } = useContext(DataSourceContext);
+  const initFlightsData = useContext(DataSourceContext);
 
-  // useEffect(() => {
-  //   setFlights(initFlightsData);
-  // }, [initFlightsData]);
+  useEffect(() => {
+    setFlights(initFlightsData);
+  }, [initFlightsData]);
 
   const filterData = useCallback(function (
     apiData: ApiData<Flight>,
@@ -50,7 +50,6 @@ function HomePage() {
   return (
     <div className="px-20">
       <SearchBar
-        destinationInput={destinationInput}
         setDestinationInput={setDestinationInput}
         handleSearch={handleSearch}
       />
