@@ -7,9 +7,6 @@ module.exports = {
     'eslint:recommended',
     'plugin:@typescript-eslint/recommended',
     'plugin:react/recommended',
-    'airbnb',
-    'airbnb-typescript',
-    'airbnb/hooks',
     'plugin:prettier/recommended',
   ],
   overrides: [
@@ -31,9 +28,9 @@ module.exports = {
   },
   plugins: ['@typescript-eslint', 'react'],
   rules: {
-    indent: ['error', 4],
+    indent: ['error', 2],
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
   },
-}
+};

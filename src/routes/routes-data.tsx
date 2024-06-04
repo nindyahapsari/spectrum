@@ -1,29 +1,27 @@
-import LandingPage from '../Pages/LandingPage'
-import HomePage from '../Pages/HomePage'
-import ErrorPage from '../Pages/ErrorPage'
-import AboutPage from '../Pages/AboutPage'
-import LoginPage from '../Pages/LoginPage'
-import SignupPage from '../Pages/SignupPage'
-import Cart from '../Pages/Cart'
-import ConfirmationPage from '../Pages/ConfirmationPage'
-import FlightsPage from '../components/Flights'
-import ResultPage from '../Pages/ResultsPage'
-import ProfilePage from '../Pages/ProfilePage'
-import EditProfilePage from '../Pages/EditProfile'
+import HomePage from '../pages/HomePage';
+import ErrorPage from '../pages/ErrorPage';
+// import AboutPage from '../Pages/AboutPage';
+import LoginPage from '../pages/LoginPage';
+import SignupPage from '../pages/SignupPage';
+// import Cart from '../Pages/Cart';
+// import ConfirmationPage from '../Pages/ConfirmationPage';
+import FlightsPage from '../components/flights/Flights';
+// import ResultPage from '../Pages/ResultsPage';
+import ProfilePage from '../pages/ProfilePage';
+import EditProfilePage from '../pages/EditProfile';
 
 export const routes = [
-  { path: '/landingpage', Element: LandingPage },
   { path: '/', Element: HomePage },
-  { path: '/about', Element: AboutPage },
+  // { path: '/about', Element: AboutPage },
   { path: '/signup', Element: SignupPage },
   { path: '/login', Element: LoginPage },
-  { path: '/cart', Element: Cart },
-  { path: '/confirmation', Element: ConfirmationPage },
+  // { path: '/cart', Element: Cart },
+  // { path: '/confirmation', Element: ConfirmationPage },
   { path: '/flights', Element: FlightsPage },
-  { path: '/resultpage', Element: ResultPage },
+  // { path: '/resultpage', Element: ResultPage },
   { path: '/profile', Element: ProfilePage },
   { path: '/edit-profile/:id', Element: EditProfilePage },
   { path: '*', Element: ErrorPage },
-]
+];
 
-export default routes
+export default routes;
