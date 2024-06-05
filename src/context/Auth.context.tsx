@@ -22,8 +22,8 @@ const AuthContext = createContext({
 function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  const [currentUser, setCurrentUser] = useState({});
 
   const storeToken = useCallback((token: string) => {
     localStorage.setItem('authToken', token);
@@ -76,7 +76,6 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
       isLoading,
       errorMessages,
       currentUser,
-      setCurrentUser,
       storeToken,
       authenticateUser,
       logOutUser,
@@ -86,7 +85,6 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
       isLoading,
       errorMessages,
       currentUser,
-      setCurrentUser,
       storeToken,
       authenticateUser,
       logOutUser,
