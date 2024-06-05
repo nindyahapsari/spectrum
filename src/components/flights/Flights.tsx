@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import FlightCards from './FlightCards';
 import { Flight } from '../../types';
 
@@ -26,22 +26,12 @@ function Flights(props: FlightsProps) {
 
   // const handleOpen = (value) => setOpen(open === value ? 0 : value)
 
-  const [setIsLoading] = useState(false);
-  const [setIsSuccess] = useState(false);
-  const [setErrorMessage] = useState('');
-
   return (
     <div>
       <div className="flex flex-row justify-between my-10 ">
         <div>
           {filteredResults.map((flight) => (
-            <FlightCards
-              key={flight._id}
-              flight={flight}
-              setIsLoading={setIsLoading}
-              setIsSuccess={setIsSuccess}
-              setErrorMessage={setErrorMessage}
-            />
+            <FlightCards key={flight._id} flight={flight} />
           ))}
         </div>
         <div className="mx-20 mb-2 rounded-lg border border-blue-gray-100 px-4 ">

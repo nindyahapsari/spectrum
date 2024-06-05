@@ -11,29 +11,22 @@ import TicketFlightInfo from './TicketFlightInfo';
 import { Flight } from '../../types';
 
 interface FlightCardsProps {
-  flight: Flight[];
-  setIsLoading: boolean;
-  setIsSuccess: boolean;
-  setErrorMessage: string;
+  flight: Flight;
+  // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  // setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  // setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function FlightCards({
-  flight,
-  setIsLoading,
-  setIsSuccess,
-  setErrorMessage,
-}: FlightCardsProps) {
+function FlightCards({ flight }: FlightCardsProps) {
   const { addToCart } = useContext(CartContext);
 
   const handleAddToCart = (id) => {
     try {
-      setIsLoading(true);
+      console.log('id', id);
       addToCart(id);
-      setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 3000);
-      setIsLoading(false);
+      // setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
-      setErrorMessage(error.message);
+      console.log(error.message);
     }
   };
 
