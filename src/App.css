@@ -1,17 +1,9 @@
-.dark {
-  background-color: #242222;
-  color: #fff;
-}
-.light {
-  background-color: #fff;
-  color: #242222;
-}
 body {
   font-family: 'Nunito', sans-serif;
   margin: 0px 0px;
 }
 
 .button-primary {
-  background-color:#F8F697 !important;
+  background-color: #f8f697 !important;
   color: #222222 !important;
 }

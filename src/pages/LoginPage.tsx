@@ -5,13 +5,13 @@ import { AuthContext } from '../context/Auth.context';
 
 import { BASE_URL } from '../utils/endpoints';
 
-import { Card } from 'react-daisyui';
+import { Card, Toast, Alert } from 'react-daisyui';
 import MainButton from '../components/common/MainButton';
 import FormInput from '../components/common/FormInput';
 
 function LoginPage() {
   const [loginUser, setLoginUser] = useState({ email: '', password: '' });
-
+  const [errorMessage, setErrorMessage] = useState('');
   const navigate = useNavigate();
 
   const { storeToken, authenticateUser } = useContext(AuthContext);
@@ -32,12 +32,29 @@ function LoginPage() {
       password: loginUser.password,
     };
 
-    axios.post(`${BASE_URL}/auth/login`, requestBody).then((response) => {
-      storeToken(response.data.authToken);
-      authenticateUser();
-      navigate('/');
-    });
+    axios
+      .post(`${BASE_URL}/auth/login`, requestBody)
+      .then((response) => {
+        storeToken(response.data.authToken);
+        authenticateUser();
+        navigate('/');
+      })
+      .catch((error) => {
+        setErrorMessage(error.message);
+      });
   };
+
+  function renderErrorToast() {
+    if (errorMessage) {
+      return (
+        <Toast vertical="bottom" horizontal="end">
+          <Alert status="error" className="bg-red-300 p-5 rounded-full">
+            Login failed. User is not registered
+          </Alert>
+        </Toast>
+      );
+    }
+  }
 
   return (
     <div className="h-screen flex flex-col justify-center items-center">
@@ -74,6 +91,7 @@ function LoginPage() {
       <div className="my-5">
         <Link to="/signup">Dont have an account? Sign up</Link>
       </div>
+      {renderErrorToast()}
     </div>
   );
 }

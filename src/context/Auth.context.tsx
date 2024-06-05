@@ -1,4 +1,10 @@
-import React, { useState, createContext, useCallback, useMemo } from 'react';
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  useCallback,
+  useMemo,
+} from 'react';
 import axios from 'axios';
 
 import { BASE_URL } from '../utils/endpoints';
@@ -17,6 +23,7 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [currentUser, setCurrentUser] = useState(null);
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
 
   const storeToken = useCallback((token: string) => {
     localStorage.setItem('authToken', token);
@@ -25,7 +32,11 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
   const authenticateUser = useCallback(() => {
     const storedToken = localStorage.getItem('authToken');
 
-    if (storedToken && !currentUser) {
+    if (!storedToken) {
+      setIsLoading(false);
+    }
+
+    if (storedToken) {
       axios
         .get(`${BASE_URL}/auth/verify`, {
           headers: { Authorization: `Bearer ${storedToken}` },
@@ -33,18 +44,16 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
         .then((response) => {
           const user = response.data;
           setIsLoggedIn(true);
-          setIsLoading(false);
+
           setCurrentUser(user);
         })
-        .catch(() => {
-          setIsLoggedIn(false);
+        .catch((error) => {
+          console.log('axios error', error);
+          setErrorMessages(error);
+        })
+        .finally(() => {
           setIsLoading(false);
-          setCurrentUser(null);
         });
-    } else {
-      setIsLoggedIn(false);
-      setIsLoading(false);
-      setCurrentUser(null);
     }
   }, [currentUser]);
 
@@ -57,10 +66,15 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
     authenticateUser();
   }, [removeToken, authenticateUser]);
 
+  useEffect(() => {
+    authenticateUser();
+  }, [authenticateUser]);
+
   const authContextValue = useMemo(
     () => ({
       isLoggedIn,
       isLoading,
+      errorMessages,
       currentUser,
       setCurrentUser,
       storeToken,
@@ -70,6 +84,7 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
     [
       isLoggedIn,
       isLoading,
+      errorMessages,
       currentUser,
       setCurrentUser,
       storeToken,

@@ -8,8 +8,6 @@ function ProfilePage() {
   const { authenticateUser, isLoggedIn, isLoading } = useContext(AuthContext);
   const navigate = useNavigate();
 
-  console.log('authenticaedUser', authenticateUser);
-
   useEffect(() => {
     if (!isLoggedIn) {
       navigate('/');
