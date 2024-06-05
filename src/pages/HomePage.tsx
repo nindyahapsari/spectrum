@@ -14,6 +14,7 @@ function HomePage() {
   const [flights, setFlights] = useState<ApiData<Flight>>([]);
   const [filteredResults, setFilteredResults] = useState<Flight[]>([]);
   const [destinationInput, setDestinationInput] = useState<string>('');
+  console.log('results', filteredResults);
 
   const initFlightsData = useContext(DataSourceContext);
 
@@ -35,6 +36,7 @@ function HomePage() {
       if (flights.length === 0) return;
       const query = destinationInput.trim().toLowerCase();
       const results = filterData(flights, query);
+
       setFilteredResults(results);
     },
     [flights, destinationInput, filterData]
