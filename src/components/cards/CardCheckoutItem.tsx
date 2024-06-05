@@ -1,27 +1,45 @@
-// import React, { useContext } from 'react';
-// import { CartContext } from '../context/Cart.context';
-import './CardCheckoutItem.css';
+import React, { useContext } from 'react';
+import { CartContext } from '../../context/Cart.context';
+// import './CardCheckoutItem.css';
+import { Card } from 'react-daisyui';
 
-function CartItem({ flight }) {
-  // const { removeFromCart } = useContext(CartContext);
+import { Flight } from '../types';
 
-  console.log(flight);
+function CardCheckoutItem({ flight }: Flight) {
+  const { removeFromCart } = useContext(CartContext);
 
   return (
-    <div className="cart-item">
-      <div>temporary card checkout item</div>
-      {/* <h2>{flight.airline}</h2>
-      <p>Flight Number: {flight.flightNumber}</p>
-      <p>Departure: {new Date(flight.departureTime).toLocaleString()}</p>
-      <p>Destination: {flight.destination}</p>
-      <p>Arrival: {new Date(flight.arrivalTime).toLocaleString()}</p>
-      <p>Quantity: {flight.quantity}</p>
-      <p>Price: ${flight.price}</p>
-      <button onClick={() => removeFromCart(flight._id)}>
-        Remove from cart
-      </button> */}
+    <div className="card bg-base-100 shadow-xl mb-4 p-4 rounded-lg">
+      <Card className="flex justify-between items-center ">
+        <Card.Title className="text-3xl font-bold my-5">
+          {flight.airline}
+        </Card.Title>
+        <div className="w-full flex flex-row justify-between">
+          <Card.Body>
+            <p className="text-2xl my-3">
+              Flight Number: {flight.flightNumber}
+            </p>
+            <p className="text-2xl my-3">
+              Departure: {new Date(flight.departureTime).toLocaleString()}
+            </p>
+            <p className="text-2xl my-3">Destination: {flight.destination}</p>
+            <p className="text-2xl my-3">
+              Arrival: {new Date(flight.arrivalTime).toLocaleString()}
+            </p>
+          </Card.Body>
+          <div className="flex flex-col justify-center items-center">
+            <p className="px-5 text-lg font-semibold">Price: ${flight.price}</p>
+            <button
+              className="btn btn-error"
+              onClick={() => removeFromCart(flight._id)}
+            >
+              Remove
+            </button>
+          </div>
+        </div>
+      </Card>
     </div>
   );
 }
 
-export default CartItem;
+export default CardCheckoutItem;

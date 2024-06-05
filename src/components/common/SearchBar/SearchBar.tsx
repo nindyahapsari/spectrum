@@ -39,8 +39,6 @@ function SearchBar({ setDestinationInput, handleSearch }: SearchBarProps) {
     resolver: yupResolver(schema),
   });
 
-  console.log('errors', errors);
-
   const onSubmit = (data: FormInputs) => {
     console.log('data', data);
     setDestinationInput(data.destination);

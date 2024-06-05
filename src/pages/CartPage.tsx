@@ -1,62 +1,53 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/Cart.context';
-
-// import CardCheckoutItem from '../components/cards/CardCheckoutItem';
-
 import { AuthContext } from '../context/Auth.context';
 
+import CardCheckoutItem from '../components/cards/CardCheckoutItem';
+
+import { Button } from 'react-daisyui';
+
 function Cart() {
-  const { initData, getTotalCartAmount, getCartItems, checkout } =
-    useContext(CartContext);
+  const { getTotalCartAmount, getCartItems } = useContext(CartContext);
+  const { currentUser } = useContext(AuthContext);
+
   const totalAmount = getTotalCartAmount();
   const cartItems = getCartItems();
-
-  const { user } = useContext(AuthContext);
 
   const navigate = useNavigate();
 
   const handleCheckout = () => {
-    checkout(user._id);
+    checkout(currentUser._id);
     navigate('/confirmation');
   };
 
   if (cartItems.length === 0) {
     return (
-      <div className="text-2xl text-center my-5">
-        Your shopping cart is empty
-      </div>
+      <div className="text-2xl text-center my-5">Your ticket cart is empty</div>
     );
   }
 
   return (
-    <div className="main-container-cart">
-      <h3 className="ticket-cart">Ticket Cart</h3>
-
-      <div className="container">
-        {cartItems.map((item) => {
-          if (item.quantity > 0) {
-            return (
-              <div key={item._id} className="cart-item-box">
-                <div>{/* <CardCheckoutItem flight={item} /> */}</div>
-                <div>
-                  <p>Quantity: {initData[item._id]}</p>
-                </div>
-              </div>
-            );
-          }
-        })}
-      </div>
-      <div>
-        {totalAmount > 0 && (
-          <div>
-            <p className="total-amount">Subtotal: ${totalAmount}</p>
-            <button className="btn-pay" onClick={handleCheckout}>
-              Pay
-            </button>
+    <div className="container mx-auto p-6">
+      <h1 className="text-3xl font-bold mb-8">Ticket Cart</h1>
+      <div className="flex justify-between">
+        <div className="w-3/4">
+          {cartItems.map((flight) => (
+            <CardCheckoutItem key={flight._id} flight={flight} />
+          ))}
+        </div>
+        <div className="w-1/4 mx-5 p-4 flex flex-col justify-start items-center bg-white shadow-lg rounded-lg">
+          <h2 className="text-xl text-center font-bold mb-4">
+            Booking Details
+          </h2>
+          <div className="mb-4 px-auto text-xl">
+            Total Amount: ${totalAmount}
           </div>
-        )}
+          <Button variant="link" className="w-full" onClick={handleCheckout}>
+            Continue Booking
+          </Button>
+        </div>
       </div>
     </div>
   );
