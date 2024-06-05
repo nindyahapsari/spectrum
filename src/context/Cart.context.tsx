@@ -68,7 +68,17 @@ function CartContextProvider(props: CartContextProviderProps) {
   };
 
   const removeFromCart = (id) => {
-    setCart({ ...cart, [id]: (cart[id] || 0) - 1 });
+    setCart((prevCart) => {
+      const updatedCart = { ...prevCart };
+
+      if (updatedCart[id] === 1) {
+        delete updatedCart[id];
+        return updatedCart;
+      }
+
+      updatedCart[id] -= 1;
+      return updatedCart;
+    });
   };
 
   const checkout = async (userId) => {
