@@ -53,9 +53,7 @@ function FlightCards({ flight }: FlightCardsProps) {
         <img src={separator} alt="separator" />
       </div>
       <div className="flex flex-col w-1/3 ">
-        <div className="mb-2 flex flex-row justify-between items-center gap-4">
-          <div className="text-xl font-thin">Rating</div>
-        </div>
+        <div className="mb-2 flex flex-row justify-between items-center gap-4"></div>
         <div className="my-8 flex justify-center">
           <img src={bagsIcon} alt="bags" />
         </div>

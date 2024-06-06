@@ -14,7 +14,6 @@ function HomePage() {
   const [flights, setFlights] = useState<ApiData<Flight>>([]);
   const [filteredResults, setFilteredResults] = useState<Flight[]>([]);
   const [destinationInput, setDestinationInput] = useState<string>('');
-  console.log('results', filteredResults);
 
   const initFlightsData = useContext(DataSourceContext);
 
@@ -31,30 +30,41 @@ function HomePage() {
     );
   }, []);
 
-  const handleSearch = useCallback(
-    function () {
-      if (flights.length === 0) return;
-      const query = destinationInput.trim().toLowerCase();
-      const results = filterData(flights, query);
+  // const handleSearch = useCallback(
+  //   function () {
+  //     const query = destinationInput.trim().toLowerCase();
+  //     const results = filterData(flights, query);
 
-      setFilteredResults(results);
-    },
-    [flights, destinationInput, filterData]
-  );
+  //     console.log('result filtered', results);
+  //     console.log('query', query);
+
+  //     setFilteredResults(results);
+  //   },
+  //   [flights, destinationInput, filterData]
+  // );
+
+  useEffect(() => {
+    const query = destinationInput.trim().toLowerCase();
+    const results = filterData(flights, query);
+
+    setFilteredResults(results);
+  }, [flights, destinationInput, filterData]);
 
   function renderContent() {
-    if (filteredResults.length > 0) {
+    if (destinationInput !== '' && filteredResults.length > 0) {
       return <Flights filteredResults={filteredResults} />;
     }
+
+    if (destinationInput.trim() !== '') {
+      return <p>No flights found for the specified destination</p>;
+    }
+
     return <InfoCard />;
   }
 
   return (
     <div className="px-20">
-      <SearchBar
-        setDestinationInput={setDestinationInput}
-        handleSearch={handleSearch}
-      />
+      <SearchBar setDestinationInput={setDestinationInput} />
 
       {renderContent()}
     </div>
