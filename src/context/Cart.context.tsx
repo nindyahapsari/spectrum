@@ -55,7 +55,6 @@ function CartContextProvider(props: CartContextProviderProps) {
   const getCartItems = () => {
     return Object.keys(cart).map((id) => {
       const item = initData.find((f) => f._id === id);
-      console.log(item);
       return {
         ...item,
         quantity: cart[id],
@@ -68,7 +67,17 @@ function CartContextProvider(props: CartContextProviderProps) {
   };
 
   const removeFromCart = (id) => {
-    setCart({ ...cart, [id]: (cart[id] || 0) - 1 });
+    setCart((prevCart) => {
+      const updatedCart = { ...prevCart };
+
+      if (updatedCart[id] === 1) {
+        delete updatedCart[id];
+        return updatedCart;
+      }
+
+      updatedCart[id] -= 1;
+      return updatedCart;
+    });
   };
 
   const checkout = async (userId) => {

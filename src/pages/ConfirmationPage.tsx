@@ -9,7 +9,6 @@ function ConfirmationPage() {
   const [isSuccess, setIsSuccess] = useState(false);
   const { getCartItems } = useContext(CartContext);
   const cartItems = getCartItems();
-  console.log('cartItems', cartItems);
 
   const navigate = useNavigate();
 

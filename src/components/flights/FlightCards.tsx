@@ -11,29 +11,22 @@ import TicketFlightInfo from './TicketFlightInfo';
 import { Flight } from '../../types';
 
 interface FlightCardsProps {
-  flight: Flight[];
-  setIsLoading: boolean;
-  setIsSuccess: boolean;
-  setErrorMessage: string;
+  flight: Flight;
+  // setIsLoading: React.Dispatch<React.SetStateAction<boolean>>;
+  // setIsSuccess: React.Dispatch<React.SetStateAction<boolean>>;
+  // setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
 }
 
-function FlightCards({
-  flight,
-  setIsLoading,
-  setIsSuccess,
-  setErrorMessage,
-}: FlightCardsProps) {
+function FlightCards({ flight }: FlightCardsProps) {
   const { addToCart } = useContext(CartContext);
 
   const handleAddToCart = (id) => {
     try {
-      setIsLoading(true);
       addToCart(id);
-      setIsSuccess(true);
-      setTimeout(() => setIsSuccess(false), 3000);
-      setIsLoading(false);
+      // setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
-      setErrorMessage(error.message);
+      // need to set error message
+      console.log(error.message);
     }
   };
 
@@ -60,9 +53,7 @@ function FlightCards({
         <img src={separator} alt="separator" />
       </div>
       <div className="flex flex-col w-1/3 ">
-        <div className="mb-2 flex flex-row justify-between items-center gap-4">
-          <div className="text-xl font-thin">Rating</div>
-        </div>
+        <div className="mb-2 flex flex-row justify-between items-center gap-4"></div>
         <div className="my-8 flex justify-center">
           <img src={bagsIcon} alt="bags" />
         </div>

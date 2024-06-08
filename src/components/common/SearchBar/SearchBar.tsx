@@ -26,10 +26,9 @@ const schema = yup.object({
 
 interface SearchBarProps {
   setDestinationInput: (value: string) => void;
-  handleSearch: () => void;
 }
 
-function SearchBar({ setDestinationInput, handleSearch }: SearchBarProps) {
+function SearchBar({ setDestinationInput }: SearchBarProps) {
   const {
     register,
     handleSubmit,
@@ -39,12 +38,8 @@ function SearchBar({ setDestinationInput, handleSearch }: SearchBarProps) {
     resolver: yupResolver(schema),
   });
 
-  console.log('errors', errors);
-
   const onSubmit = (data: FormInputs) => {
-    console.log('data', data);
     setDestinationInput(data.destination);
-    handleSearch();
   };
 
   return (

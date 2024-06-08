@@ -1,4 +1,10 @@
-import React, { useState, createContext, useCallback, useMemo } from 'react';
+import React, {
+  useState,
+  useEffect,
+  createContext,
+  useCallback,
+  useMemo,
+} from 'react';
 import axios from 'axios';
 
 import { BASE_URL } from '../utils/endpoints';
@@ -16,7 +22,8 @@ const AuthContext = createContext({
 function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [currentUser, setCurrentUser] = useState(null);
+  const [errorMessages, setErrorMessages] = useState<string[]>([]);
+  const [currentUser, setCurrentUser] = useState({});
 
   const storeToken = useCallback((token: string) => {
     localStorage.setItem('authToken', token);
@@ -25,28 +32,27 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
   const authenticateUser = useCallback(() => {
     const storedToken = localStorage.getItem('authToken');
 
-    if (storedToken && !currentUser) {
-      axios
-        .get(`${BASE_URL}/auth/verify`, {
-          headers: { Authorization: `Bearer ${storedToken}` },
-        })
-        .then((response) => {
-          const user = response.data;
-          setIsLoggedIn(true);
-          setIsLoading(false);
-          setCurrentUser(user);
-        })
-        .catch(() => {
-          setIsLoggedIn(false);
-          setIsLoading(false);
-          setCurrentUser(null);
-        });
-    } else {
-      setIsLoggedIn(false);
+    if (!storedToken) {
       setIsLoading(false);
-      setCurrentUser(null);
     }
-  }, [currentUser]);
+
+    axios
+      .get(`${BASE_URL}/auth/verify`, {
+        headers: { Authorization: `Bearer ${storedToken}` },
+      })
+      .then((response) => {
+        const user = response.data;
+        setIsLoggedIn(true);
+
+        setCurrentUser(user);
+      })
+      .catch((error) => {
+        setErrorMessages(error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, []);
 
   const removeToken = useCallback(() => {
     localStorage.removeItem('authToken');
@@ -54,15 +60,20 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
 
   const logOutUser = useCallback(() => {
     removeToken();
+    setIsLoggedIn(false);
+    setCurrentUser({});
+  }, [removeToken]);
+
+  useEffect(() => {
     authenticateUser();
-  }, [removeToken, authenticateUser]);
+  }, [authenticateUser]);
 
   const authContextValue = useMemo(
     () => ({
       isLoggedIn,
       isLoading,
+      errorMessages,
       currentUser,
-      setCurrentUser,
       storeToken,
       authenticateUser,
       logOutUser,
@@ -70,8 +81,8 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
     [
       isLoggedIn,
       isLoading,
+      errorMessages,
       currentUser,
-      setCurrentUser,
       storeToken,
       authenticateUser,
       logOutUser,

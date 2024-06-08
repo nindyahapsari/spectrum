@@ -1,4 +1,3 @@
-https://spectrumflightsapp.netlify.app/
 
 # Frontend side for the Spectrum application
 
