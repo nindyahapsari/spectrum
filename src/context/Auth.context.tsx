@@ -36,23 +36,25 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
       setIsLoading(false);
     }
 
-    axios
-      .get(`${BASE_URL}/auth/verify`, {
-        headers: { Authorization: `Bearer ${storedToken}` },
-      })
-      .then((response) => {
-        const user = response.data;
-        setIsLoggedIn(true);
+    if (storedToken) {
+      axios
+        .get(`${BASE_URL}/auth/verify`, {
+          headers: { Authorization: `Bearer ${storedToken}` },
+        })
+        .then((response) => {
+          const user = response.data;
+          setIsLoggedIn(true);
 
-        setCurrentUser(user);
-      })
-      .catch((error) => {
-        setErrorMessages(error);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+          setCurrentUser(user);
+        })
+        .catch((error) => {
+          setErrorMessages(error);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }
+  }, [currentUser]);
 
   const removeToken = useCallback(() => {
     localStorage.removeItem('authToken');
@@ -61,7 +63,7 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
   const logOutUser = useCallback(() => {
     removeToken();
     setIsLoggedIn(false);
-    setCurrentUser({});
+    // setCurrentUser({});
   }, [removeToken]);
 
   useEffect(() => {
