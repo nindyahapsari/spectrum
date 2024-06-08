@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
 import './SearchBar.css';
 
-function SearchBar({ onSearch }) {
+interface SearchBarProps {
+  onSearch: (input: string, selectedCategory: string) => void;
+}
+
+function SearchBar({ onSearch }: SearchBarProps) {
   const [input, setInput] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('All');
 
@@ -9,7 +13,7 @@ function SearchBar({ onSearch }) {
     onSearch(input, selectedCategory);
   };
 
-  const handleCategoryChange = (e) => {
+  const handleCategoryChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedCategory(e.target.value);
   };
 

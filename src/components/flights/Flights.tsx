@@ -26,10 +26,19 @@ type FlightsProps = {
 
 function Flights({ filteredResults }: FlightsProps) {
   const [isTicketAdded, setIsTicketAdded] = useState(false);
-  const { findFlightById } = useContext(CompareTicketsContext);
+  const compareTicketContext = useContext(CompareTicketsContext);
 
-  const handleTicketComparison = (ticketId: string) => {
-    findFlightById(ticketId);
+  if (!compareTicketContext) {
+    throw new Error(
+      'CompareTicketsContext must be used within a CompareTicketsProvider'
+    );
+  }
+
+  const { findFlightById } = compareTicketContext;
+
+  const handleTicketComparison = (ticketId: number) => {
+    const id = ticketId.toString();
+    findFlightById(id);
 
     setIsTicketAdded(true);
     setTimeout(() => {
