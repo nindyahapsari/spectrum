@@ -46,8 +46,8 @@ function LoginPage() {
     if (errorMessage) {
       return (
         <Toast vertical="bottom" horizontal="end">
-          <Alert status="error" className="bg-red-300 p-5 rounded-full">
-            Login failed. User is not registered
+          <Alert status="error" className="bg-red-300 p-5 rounded-md">
+            {errorMessage}
           </Alert>
         </Toast>
       );
