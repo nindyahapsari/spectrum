@@ -55,7 +55,6 @@ function CartContextProvider(props: CartContextProviderProps) {
   const getCartItems = () => {
     return Object.keys(cart).map((id) => {
       const item = initData.find((f) => f._id === id);
-      console.log(item);
       return {
         ...item,
         quantity: cart[id],

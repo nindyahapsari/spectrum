@@ -11,13 +11,12 @@ import FormInput from '../components/common/FormInput';
 
 function LoginPage() {
   const [loginUser, setLoginUser] = useState({ email: '', password: '' });
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const navigate = useNavigate();
 
   const { storeToken, authenticateUser } = useContext(AuthContext);
 
   function handleUserLogin(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.target.name, e.target.value);
     setLoginUser((prevState) => ({
       ...prevState,
       [e.target.name]: e.target.value,
@@ -26,7 +25,6 @@ function LoginPage() {
 
   const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(loginUser);
     const requestBody = {
       email: loginUser.email,
       password: loginUser.password,

@@ -48,7 +48,6 @@ function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
           setCurrentUser(user);
         })
         .catch((error) => {
-          console.log('axios error', error);
           setErrorMessages(error);
         })
         .finally(() => {

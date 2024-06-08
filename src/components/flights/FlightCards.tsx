@@ -22,10 +22,10 @@ function FlightCards({ flight }: FlightCardsProps) {
 
   const handleAddToCart = (id) => {
     try {
-      console.log('id', id);
       addToCart(id);
       // setTimeout(() => setIsSuccess(false), 3000);
     } catch (error) {
+      // need to set error message
       console.log(error.message);
     }
   };

@@ -39,7 +39,6 @@ function SearchBar({ setDestinationInput }: SearchBarProps) {
   });
 
   const onSubmit = (data: FormInputs) => {
-    console.log('data', data);
     setDestinationInput(data.destination);
   };
 
