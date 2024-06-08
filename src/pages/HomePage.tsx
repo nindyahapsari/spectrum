@@ -26,10 +26,12 @@ function HomePage() {
     apiData: ApiData<Flight>,
     query: string
   ) {
-    if (!apiData) return;
-    return apiData.filter((data) =>
-      data.destination?.toLowerCase().includes(query)
-    );
+    console.log(apiData);
+    console.log(query);
+    // if (!apiData) return;
+    // return apiData.filter((data) =>
+    //   data.destination?.toLowerCase().includes(query)
+    // );
   }, []);
 
   useEffect(() => {
