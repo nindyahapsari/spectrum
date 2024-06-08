@@ -9,5 +9,5 @@ export const PURCHASE_API = `${BASE_URL}/api/tickets/purchase`;
 
 export const FLIGHTS_ALL_API = `${BASE_URL}/api/flights/all`;
 
-// console.log('Current NODE_ENV:', process.env.NODE_ENV);
-// console.log('Current BASE_URL:', BASE_URL);
+console.log('Current NODE_ENV:', process.env.NODE_ENV);
+console.log('Current BASE_URL:', BASE_URL);

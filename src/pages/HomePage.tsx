@@ -30,19 +30,6 @@ function HomePage() {
     );
   }, []);
 
-  // const handleSearch = useCallback(
-  //   function () {
-  //     const query = destinationInput.trim().toLowerCase();
-  //     const results = filterData(flights, query);
-
-  //     console.log('result filtered', results);
-  //     console.log('query', query);
-
-  //     setFilteredResults(results);
-  //   },
-  //   [flights, destinationInput, filterData]
-  // );
-
   useEffect(() => {
     const query = destinationInput.trim().toLowerCase();
     const results = filterData(flights, query);

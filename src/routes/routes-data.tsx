@@ -8,6 +8,7 @@ import FlightsPage from '../components/flights/Flights';
 // import ResultPage from '../Pages/ResultsPage';
 import ProfilePage from '../pages/ProfilePage';
 import EditProfilePage from '../pages/EditProfile';
+import ComparisonPage from '../pages/ComparisonPage';
 
 export const routes = [
   { path: '/', Element: HomePage },
@@ -19,6 +20,7 @@ export const routes = [
   { path: '/flights', Element: FlightsPage },
   // { path: '/resultpage', Element: ResultPage },
   { path: '/profile', Element: ProfilePage },
+  { path: '/comparison', Element: ComparisonPage },
   { path: '/edit-profile/:id', Element: EditProfilePage },
 ];
 

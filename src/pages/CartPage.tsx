@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React, { useContext } from 'react';
-// import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/Cart.context';
 import { AuthContext } from '../context/Auth.context';
 
@@ -31,6 +31,7 @@ function Cart() {
   return (
     <div className="container mx-auto p-6">
       <h1 className="text-3xl font-bold mb-8">Ticket Cart</h1>
+
       <div className="flex justify-between">
         <div className="w-3/4">
           {cartItems.map((flight) => (
