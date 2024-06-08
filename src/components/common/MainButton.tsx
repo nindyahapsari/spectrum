@@ -3,7 +3,7 @@ import { Button } from 'react-daisyui';
 
 interface MainButtonProps {
   buttonText: string;
-  type: 'submit';
+  type?: 'submit';
   customClass?: string;
 }
 
