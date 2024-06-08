@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import FlightCards from './FlightCards';
 import { Flight } from '../../types';
 
-import { Button } from 'react-daisyui';
+import { Button, Toast, Alert } from 'react-daisyui';
 
 // const STOPS = ['Direct', '1 Stop', '2+ Stops'];
 // const DepTimes = [
@@ -25,6 +25,7 @@ function Flights(props: FlightsProps) {
   const { filteredResults } = props;
 
   // const [open, setOpen] = useState(0)
+  const [compare] = useState(3);
 
   // const handleOpen = (value) => setOpen(open === value ? 0 : value)
 
@@ -45,6 +46,16 @@ function Flights(props: FlightsProps) {
           <div>Filter functions</div>
         </div>
       </div>
+      <Toast
+        className={`${compare === 3 ? 'block' : 'hidden'}`}
+        vertical="bottom"
+        horizontal="end"
+      >
+        <Alert className="bg-blue-300 p-5">
+          Go To Comparison{'  '}
+          <span>Link to go to comparison page</span>
+        </Alert>
+      </Toast>
     </div>
   );
 }
