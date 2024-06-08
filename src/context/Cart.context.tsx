@@ -1,24 +1,38 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { Flight } from '../types';
 
 import { PURCHASE_API, FLIGHTS_ALL_API } from '../utils/endpoints';
 
-const fetchingData = async () => {
-  const response = await axios.get(FLIGHTS_ALL_API);
-  const returnedData = response.data;
-  return returnedData;
-};
-
-const CartContext = createContext(null);
+interface CartItem extends Flight {
+  quantity: number;
+}
+interface CartContextType {
+  initData: Flight[];
+  cart: { [key: string]: number };
+  getCartItems: () => CartItem[];
+  getTotalCartAmount: () => number;
+  addToCart: (id: string) => void;
+  removeFromCart: (id: string) => void;
+  checkout: (userId: string) => Promise<void>;
+}
 
 type CartContextProviderProps = {
   children: React.ReactNode;
 };
 
+const fetchingData = async (): Promise<Flight[]> => {
+  const response = await axios.get(FLIGHTS_ALL_API);
+  const returnedData = response.data;
+  return returnedData;
+};
+
+const CartContext = createContext<CartContextType | null>(null);
+
 function CartContextProvider(props: CartContextProviderProps) {
-  const [initData, setInitData] = useState([]);
-  const [cart, setCart] = useState([]);
+  const [initData, setInitData] = useState<Flight[]>([]);
+  const [cart, setCart] = useState<{ [key: string]: number }>({});
 
   const navigate = useNavigate();
 
@@ -43,7 +57,7 @@ function CartContextProvider(props: CartContextProviderProps) {
     let totalAmount = 0;
     for (const ticket in cart) {
       if (cart[ticket] > 0) {
-        const ticketData = initData.find((t) => t._id === ticket);
+        const ticketData = initData.find((t) => t._id.toString() === ticket);
         if (ticketData) {
           totalAmount += ticketData.price * cart[ticket];
         }
@@ -53,20 +67,24 @@ function CartContextProvider(props: CartContextProviderProps) {
   };
 
   const getCartItems = () => {
-    return Object.keys(cart).map((id) => {
-      const item = initData.find((f) => f._id === id);
-      return {
-        ...item,
-        quantity: cart[id],
-      };
-    });
+    return Object.keys(cart)
+      .map((id) => {
+        const item = initData.find((f) => f._id.toString() === id);
+        if (!item) return null;
+
+        return {
+          ...item,
+          quantity: cart[id],
+        };
+      })
+      .filter((item): item is CartItem => item !== null);
   };
 
-  const addToCart = (id) => {
+  const addToCart = (id: string) => {
     setCart({ ...cart, [id]: (cart[id] || 0) + 1 });
   };
 
-  const removeFromCart = (id) => {
+  const removeFromCart = (id: string) => {
     setCart((prevCart) => {
       const updatedCart = { ...prevCart };
 
@@ -80,7 +98,7 @@ function CartContextProvider(props: CartContextProviderProps) {
     });
   };
 
-  const checkout = async (userId) => {
+  const checkout = async (userId: string) => {
     const cartItems = getCartItems();
     const ticketInfo = {
       tickets: cartItems,
@@ -96,7 +114,7 @@ function CartContextProvider(props: CartContextProviderProps) {
     }
   };
 
-  const contextValue = {
+  const contextValue: CartContextType = {
     initData,
     cart,
     getCartItems,
