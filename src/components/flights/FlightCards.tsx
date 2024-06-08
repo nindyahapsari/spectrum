@@ -20,7 +20,7 @@ interface FlightCardsProps {
 function FlightCards({ flight }: FlightCardsProps) {
   const { addToCart } = useContext(CartContext);
 
-  const handleAddToCart = (id) => {
+  const handleAddToCart = (id: string) => {
     try {
       addToCart(id);
       // setTimeout(() => setIsSuccess(false), 3000);
@@ -57,14 +57,14 @@ function FlightCards({ flight }: FlightCardsProps) {
         <div className="my-8 flex justify-center">
           <img src={bagsIcon} alt="bags" />
         </div>
-        <div className="flex flex-row justify-between items-end ">
+        <div className="flex flex-row justify-between items-end">
           <div className="text-3xl font-semibold ">${flight.price}</div>
           <div className="">
             <Button
               className="button-primary py-2 px-4 rounded-lg"
               onClick={() => handleAddToCart(flight._id)}
             >
-              View Details
+              Book Flight
             </Button>
           </div>
         </div>

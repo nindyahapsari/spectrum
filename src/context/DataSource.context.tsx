@@ -12,7 +12,6 @@ function fetchAllFlights(): Promise<Flight[]> {
     .get(FLIGHTS_ALL_API)
     .then((response) => {
       const returnedData = response.data;
-      console.log('returnedData', returnedData);
       return returnedData;
     })
     .catch((error) => {
@@ -29,7 +28,6 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
   useEffect(() => {
     function fetchData() {
       fetchAllFlights().then((data) => {
-        console.log('data', data);
         setInitFlightData(data);
       });
     }

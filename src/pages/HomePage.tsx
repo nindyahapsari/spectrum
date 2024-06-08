@@ -16,7 +16,6 @@ function HomePage() {
   const [destinationInput, setDestinationInput] = useState<string>('');
 
   const initFlightsData = useContext(DataSourceContext);
-  console.log('initFlightData', initFlightsData);
 
   useEffect(() => {
     setFlights(initFlightsData);
@@ -26,12 +25,9 @@ function HomePage() {
     apiData: ApiData<Flight>,
     query: string
   ) {
-    console.log(apiData);
-    console.log(query);
-    // if (!apiData) return;
-    // return apiData.filter((data) =>
-    //   data.destination?.toLowerCase().includes(query)
-    // );
+    return apiData.filter((data) =>
+      data.destination?.toLowerCase().includes(query)
+    );
   }, []);
 
   useEffect(() => {

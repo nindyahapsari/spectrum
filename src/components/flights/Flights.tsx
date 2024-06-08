@@ -1,8 +1,11 @@
-import React, { useState } from 'react';
-import FlightCards from './FlightCards';
+import React, { useState, useContext } from 'react';
+
 import { Flight } from '../../types';
+import { CompareTicketsContext } from '../../context/CompareTickets.context';
 
 import { Button, Toast, Alert } from 'react-daisyui';
+
+import FlightCards from './FlightCards';
 
 // const STOPS = ['Direct', '1 Stop', '2+ Stops'];
 // const DepTimes = [
@@ -21,22 +24,41 @@ type FlightsProps = {
   filteredResults: Flight[];
 };
 
-function Flights(props: FlightsProps) {
-  const { filteredResults } = props;
+function Flights({ filteredResults }: FlightsProps) {
+  const [isTicketAdded, setIsTicketAdded] = useState(false);
+  const { findFlightById } = useContext(CompareTicketsContext);
 
-  // const [open, setOpen] = useState(0)
-  const [compare] = useState(3);
+  const handleTicketComparison = (ticketId: string) => {
+    findFlightById(ticketId);
 
-  // const handleOpen = (value) => setOpen(open === value ? 0 : value)
+    setIsTicketAdded(true);
+    setTimeout(() => {
+      setIsTicketAdded(false);
+    }, 3000);
+  };
 
   return (
     <div>
       <div className="flex flex-row justify-between my-10 ">
         <div>
+          {isTicketAdded && (
+            <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
+              <Toast>
+                <Alert status="info" className="bg-blue-300 p-5 rounded-md">
+                  <div>Ticket added to comparison</div>
+                </Alert>
+              </Toast>
+            </div>
+          )}
+          <div></div>
           {filteredResults.map((flight) => (
             <div key={flight._id} className="flex flex-row items-center">
               <FlightCards flight={flight} />
-              <Button className="mx-3 h-2 w-4 text-4xl" variant="outline">
+              <Button
+                onClick={() => handleTicketComparison(flight._id)}
+                className="mx-3 h-2 w-4 text-4xl"
+                variant="outline"
+              >
                 +
               </Button>
             </div>
@@ -46,16 +68,6 @@ function Flights(props: FlightsProps) {
           <div>Filter functions</div>
         </div>
       </div>
-      <Toast
-        className={`${compare === 3 ? 'block' : 'hidden'}`}
-        vertical="bottom"
-        horizontal="end"
-      >
-        <Alert className="bg-blue-300 p-5">
-          Go To Comparison{'  '}
-          <span>Link to go to comparison page</span>
-        </Alert>
-      </Toast>
     </div>
   );
 }
