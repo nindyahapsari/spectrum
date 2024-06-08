@@ -9,21 +9,40 @@ import axios from 'axios';
 
 import { BASE_URL } from '../utils/endpoints';
 
+interface CurrentUserProps {
+  id?: string;
+  username?: string;
+  email?: string;
+}
 interface AuthProviderWrapperProps {
   children: React.ReactNode;
 }
 
-const AuthContext = createContext({
+interface AuthContextProps {
+  isLoggedIn: boolean;
+  isLoading: boolean;
+  currentUser: CurrentUserProps | null;
+  errorMessages: string[];
+  storeToken: (token: string) => void;
+  authenticateUser: () => void;
+  logOutUser: () => void;
+}
+
+const AuthContext = createContext<AuthContextProps>({
   isLoggedIn: false,
   isLoading: true,
   currentUser: null,
+  errorMessages: [],
+  storeToken: () => {},
+  authenticateUser: () => {},
+  logOutUser: () => {},
 });
 
 function AuthProviderWrapper({ children }: AuthProviderWrapperProps) {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const [errorMessages, setErrorMessages] = useState<string[]>([]);
-  const [currentUser, setCurrentUser] = useState({});
+  const [currentUser, setCurrentUser] = useState<CurrentUserProps>({});
 
   const storeToken = useCallback((token: string) => {
     localStorage.setItem('authToken', token);
