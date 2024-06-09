@@ -9,6 +9,6 @@ export interface CartContextType {
   getCartItems: () => CartItem[];
   getTotalCartAmount: () => number;
   addToCart: (id: string) => void;
-  removeFromCart: (id: string) => void;
+  removeFromCart: (id: number) => void;
   checkout: (userId: string) => Promise<void>;
 }

@@ -1,7 +1,7 @@
-export interface FormInputs {
+export interface FormInput {
   destination: string;
-  departureDate: Date | null;
-  returnDate: Date | null;
+  departureDate: Date;
+  returnDate: Date;
   passengers: string;
   flightType: string;
 }
