@@ -1,6 +1,7 @@
 import { useState, useContext } from 'react';
 
 import { Flight } from '../../@types/flight';
+import { CompareTicketsContextType } from '../../@types/compareTicketContext';
 import { CompareTicketsContext } from '../../context/CompareTickets.context';
 
 import { Button, Toast, Alert } from 'react-daisyui';
@@ -26,15 +27,9 @@ type FlightsProps = {
 
 function Flights({ filteredResults }: FlightsProps) {
   const [isTicketAdded, setIsTicketAdded] = useState(false);
-  const compareTicketContext = useContext(CompareTicketsContext);
-
-  if (!compareTicketContext) {
-    throw new Error(
-      'CompareTicketsContext must be used within a CompareTicketsProvider'
-    );
-  }
-
-  const { findFlightById } = compareTicketContext;
+  const { findFlightById } = useContext(
+    CompareTicketsContext
+  ) as CompareTicketsContextType;
 
   const handleTicketComparison = (ticketId: number) => {
     const id = ticketId.toString();

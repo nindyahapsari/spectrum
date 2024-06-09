@@ -7,7 +7,7 @@ import { CompareTicketsContextType } from '../../@types/compareTicketContext';
 import { Card, Button } from 'react-daisyui';
 
 interface CompareTicketCardProps {
-  id: string;
+  id: number;
   airline: string;
   destination: string;
   seatAvailability?: number;
@@ -26,12 +26,14 @@ function CompareTicketCard({
     CompareTicketsContext
   ) as CompareTicketsContextType;
 
-  const handleAddToCart = (id: string) => {
-    addToCart(id);
+  const handleAddToCart = (id: number) => {
+    const ticketId = id.toString();
+    addToCart(ticketId);
   };
 
-  const handleRemoveCard = (id: string) => {
-    removeTicketFromCompare(id);
+  const handleRemoveCard = (id: number) => {
+    const ticketId = id.toString();
+    removeTicketFromCompare(ticketId);
   };
 
   return (
