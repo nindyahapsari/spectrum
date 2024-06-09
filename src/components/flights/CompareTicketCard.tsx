@@ -1,6 +1,8 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../../context/Cart.context';
 import { CompareTicketsContext } from '../../context/CompareTickets.context';
+import { CartContextType } from '../../@types/cartContext';
+import { CompareTicketsContextType } from '../../@types/compareTicketContext';
 
 import { Card, Button } from 'react-daisyui';
 
@@ -19,23 +21,17 @@ function CompareTicketCard({
   seatAvailability,
   price,
 }: CompareTicketCardProps) {
-  const { addToCart } = useContext(CartContext);
-  const { removeTicketFromCompare } = useContext(CompareTicketsContext);
+  const { addToCart } = useContext(CartContext) as CartContextType;
+  const { removeTicketFromCompare } = useContext(
+    CompareTicketsContext
+  ) as CompareTicketsContextType;
 
   const handleAddToCart = (id: string) => {
-    try {
-      addToCart(id);
-    } catch (error) {
-      console.log(error.message);
-    }
+    addToCart(id);
   };
 
   const handleRemoveCard = (id: string) => {
-    try {
-      removeTicketFromCompare(id);
-    } catch (error) {
-      console.log(error.message);
-    }
+    removeTicketFromCompare(id);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../../context/Cart.context';
 import firstIcon from '../../assets/airline-icon-first.png';
 import secondIcon from '../../assets/airline-icon-second.png';
@@ -8,7 +8,7 @@ import separator from '../../assets/separator.png';
 import { Button } from 'react-daisyui';
 import './FlightCards.css';
 import TicketFlightInfo from './TicketFlightInfo';
-import { Flight } from '../../types';
+import { Flight } from '../../@types/flight';
 
 interface FlightCardsProps {
   flight: Flight;
@@ -18,13 +18,13 @@ interface FlightCardsProps {
 }
 
 function FlightCards({ flight }: FlightCardsProps) {
-  const context = useContext(CartContext);
+  const cartContext = useContext(CartContext);
 
-  if (!context) {
+  if (!cartContext) {
     throw new Error('CartContext must be used within a CartContextProvider');
   }
 
-  const { addToCart } = context;
+  const { addToCart } = cartContext;
 
   const handleAddToCart = (id: number) => {
     const flightId = id.toString();
