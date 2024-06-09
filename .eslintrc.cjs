@@ -32,5 +32,12 @@ module.exports = {
     'linebreak-style': ['error', 'unix'],
     quotes: ['error', 'single'],
     semi: ['error', 'always'],
+    'react/react-in-jsx-scope': 'off', // Disable the rule for React in JSX scope
+    'prettier/prettier': 'error', // Ensure Prettier errors are shown as ESLint errors
+  },
+  settings: {
+    react: {
+      version: 'detect', // Automatically detect the React version
+    },
   },
 };
