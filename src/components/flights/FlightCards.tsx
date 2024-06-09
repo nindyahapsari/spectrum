@@ -18,16 +18,17 @@ interface FlightCardsProps {
 }
 
 function FlightCards({ flight }: FlightCardsProps) {
-  const { addToCart } = useContext(CartContext);
+  const context = useContext(CartContext);
 
-  const handleAddToCart = (id: string) => {
-    try {
-      addToCart(id);
-      // setTimeout(() => setIsSuccess(false), 3000);
-    } catch (error) {
-      // need to set error message
-      console.log(error.message);
-    }
+  if (!context) {
+    throw new Error('CartContext must be used within a CartContextProvider');
+  }
+
+  const { addToCart } = context;
+
+  const handleAddToCart = (id: number) => {
+    const flightId = id.toString();
+    addToCart(flightId);
   };
 
   return (
