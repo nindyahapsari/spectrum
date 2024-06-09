@@ -1,26 +1,19 @@
 /* eslint-disable no-unused-vars */
 import { useContext } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { CartContext } from '../context/Cart.context';
-import { AuthContext } from '../context/Auth.context';
 
 import CardCheckoutItem from '../components/cards/CardCheckoutItem';
+import { CartContextType } from '../@types/cartContext';
 
 import { Button } from 'react-daisyui';
 
 function Cart() {
-  const { getTotalCartAmount, getCartItems } = useContext(CartContext);
-  const { currentUser } = useContext(AuthContext);
+  const { getTotalCartAmount, getCartItems } = useContext(
+    CartContext
+  ) as CartContextType;
 
   const totalAmount = getTotalCartAmount();
   const cartItems = getCartItems();
-
-  const navigate = useNavigate();
-
-  const handleCheckout = () => {
-    checkout(currentUser._id);
-    navigate('/confirmation');
-  };
 
   if (cartItems.length === 0) {
     return (
@@ -35,7 +28,9 @@ function Cart() {
       <div className="flex justify-between">
         <div className="w-3/4">
           {cartItems.map((flight) => (
-            <CardCheckoutItem key={flight._id} flight={flight} />
+            <div key={flight._id}>
+              <CardCheckoutItem flight={flight} />
+            </div>
           ))}
         </div>
         <div className="w-1/4 mx-5 p-4 flex flex-col justify-start items-center bg-white shadow-lg rounded-lg">
@@ -45,7 +40,7 @@ function Cart() {
           <div className="mb-4 px-auto text-xl">
             Total Amount: ${totalAmount}
           </div>
-          <Button variant="link" className="w-full" onClick={handleCheckout}>
+          <Button variant="link" className="w-full">
             Continue Booking
           </Button>
         </div>
