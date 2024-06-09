@@ -62,16 +62,17 @@ function CartContextProvider(props: CartContextProviderProps) {
     setCart({ ...cart, [id]: (cart[id] || 0) + 1 });
   };
 
-  const removeFromCart = (id: string) => {
+  const removeFromCart = (id: number) => {
+    const ticketId = id.toString();
     setCart((prevCart) => {
       const updatedCart = { ...prevCart };
 
-      if (updatedCart[id] === 1) {
-        delete updatedCart[id];
+      if (updatedCart[ticketId] === 1) {
+        delete updatedCart[ticketId];
         return updatedCart;
       }
 
-      updatedCart[id] -= 1;
+      updatedCart[ticketId] -= 1;
       return updatedCart;
     });
   };
