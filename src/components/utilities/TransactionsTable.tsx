@@ -1,4 +1,3 @@
-import React from 'react';
 import { Table } from 'react-daisyui';
 import firstIcon from '../../assets/airline-icon-first.png';
 import secondIcon from '../../assets/airline-icon-second.png';

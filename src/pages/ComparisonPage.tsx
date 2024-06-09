@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { CompareTicketsContext } from '../context/CompareTickets.context';
 
 import CompareTicketCard from '../components/flights/CompareTicketCard';

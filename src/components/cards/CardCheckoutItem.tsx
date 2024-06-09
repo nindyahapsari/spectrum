@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../../context/Cart.context';
-// import './CardCheckoutItem.css';
 import { Card } from 'react-daisyui';
 
-import { Flight } from '../types';
+import { Flight } from '../../@types/flight';
+import { CartContextType } from '../../@types/cartContext';
 
 function CardCheckoutItem({ flight }: Flight) {
-  const { removeFromCart } = useContext(CartContext);
-
+  const { removeFromCart } = useContext(CartContext) as CartContextType;
   return (
     <div className="card bg-base-100 shadow-xl mb-4 p-4 rounded-lg">
       <Card className="flex justify-between items-center ">
