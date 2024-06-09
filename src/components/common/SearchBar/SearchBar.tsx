@@ -9,8 +9,6 @@ import SearchBarErrorMessage from './SearchBarErrorMessage';
 
 import { FormInput } from '../../../@types/formInput';
 
-import 'react-calendar/dist/Calendar.css';
-import 'react-date-picker/dist/DatePicker.css';
 import './SearchBar.css';
 
 const labels = ['Return', 'One way', 'Multi City', 'Direct Flights'];
