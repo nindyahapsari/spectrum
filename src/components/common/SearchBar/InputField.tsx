@@ -1,12 +1,12 @@
 import { UseFormRegister } from 'react-hook-form';
 
-import { FormInputs } from '../../../@types/formInput';
+import { FormInput } from '../../../@types/formInput';
 
 interface InputFieldProps {
   label: string;
   placeholder: string;
-  register: UseFormRegister<FormInputs>;
-  name: string;
+  register: UseFormRegister<FormInput>;
+  name: keyof FormInput;
   readOnly?: boolean;
   value?: string;
 }

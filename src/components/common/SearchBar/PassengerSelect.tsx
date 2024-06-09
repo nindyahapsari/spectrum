@@ -1,9 +1,9 @@
 import { Controller, Control, FieldErrors } from 'react-hook-form';
-import { FormInputs } from '../../../@types/formInput';
+import { FormInput } from '../../../@types/formInput';
 
 interface PassengerSelectProps {
   name: 'passengers';
-  control: Control<FormInputs>;
+  control: Control<FormInput>;
   errors?: FieldErrors;
 }
 
@@ -25,9 +25,6 @@ function PassengerSelect({ name, control }: PassengerSelectProps) {
           </select>
         )}
       />
-      {/*  {errors && errors[name] && (
-        <p className="text-red-500 text-sm">{errors[name].message}</p>
-      )} */}
     </div>
   );
 }

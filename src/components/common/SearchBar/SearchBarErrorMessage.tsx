@@ -1,4 +1,4 @@
-import FormInput from '../../../@types/flight';
+import { FormInput } from '../../../@types/formInput';
 import { FieldErrors } from 'react-hook-form';
 
 interface SearchBarErrorMessageProps {
