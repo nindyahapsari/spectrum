@@ -8,7 +8,7 @@ import DatePickerField from './DatePickerField';
 import FlightTypeRadioGroup from './FlightTypeRadioGroup';
 import SearchBarErrorMessage from './SearchBarErrorMessage';
 
-import { FormInputs } from '../../../types';
+import { FormInputs } from '../../../@types/formInput';
 
 import 'react-calendar/dist/Calendar.css';
 import 'react-date-picker/dist/DatePicker.css';

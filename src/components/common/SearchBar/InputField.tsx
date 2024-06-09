@@ -1,7 +1,7 @@
 import React from 'react';
 import { UseFormRegister } from 'react-hook-form';
 
-import { FormInputs } from '../../../types';
+import { FormInputs } from '../../../@types/formInput';
 
 interface InputFieldProps {
   label: string;

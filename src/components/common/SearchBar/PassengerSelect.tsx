@@ -1,6 +1,6 @@
 import React from 'react';
 import { Controller, Control, FieldErrors } from 'react-hook-form';
-import { FormInputs } from '../../../types';
+import { FormInputs } from '../../../@types/formInput';
 
 interface PassengerSelectProps {
   name: 'passengers';
