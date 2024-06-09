@@ -1,20 +1,14 @@
-import React, { createContext, useContext, useState, ReactNode } from 'react';
-import { Flight } from '../types';
+import { createContext, useContext, useState, ReactNode } from 'react';
+import { Flight } from '../@types/flight';
 import { DataSourceContext } from './DataSource.context';
-
-interface CompareTicketsContextProps {
-  ticketsToCompare: Flight[] | null;
-  setTicketsToCompare: React.Dispatch<React.SetStateAction<Flight[]>>;
-  findFlightById: (selectedTicketId: string) => void;
-  removeTicketFromCompare: (selectedTicketId: string) => void;
-}
+import { CompareTicketsContextType } from '../@types/compareTicketContext';
 
 interface CompareTicketsProviderProps {
   children: ReactNode;
 }
 
 const CompareTicketsContext = createContext<
-  CompareTicketsContextProps | undefined
+  CompareTicketsContextType | undefined
 >(undefined);
 
 const CompareTicketsProvider = ({ children }: CompareTicketsProviderProps) => {

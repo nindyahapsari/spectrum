@@ -1,22 +1,9 @@
 import React, { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { Flight } from '../types';
-
 import { PURCHASE_API, FLIGHTS_ALL_API } from '../utils/endpoints';
-
-interface CartItem extends Flight {
-  quantity: number;
-}
-interface CartContextType {
-  initData: Flight[];
-  cart: { [key: string]: number };
-  getCartItems: () => CartItem[];
-  getTotalCartAmount: () => number;
-  addToCart: (id: string) => void;
-  removeFromCart: (id: string) => void;
-  checkout: (userId: string) => Promise<void>;
-}
+import { Flight } from '../@types/flight';
+import { CartContextType, CartItem } from '../@types/cartContext';
 
 type CartContextProviderProps = {
   children: React.ReactNode;
@@ -43,15 +30,6 @@ function CartContextProvider(props: CartContextProviderProps) {
     };
     fetchFlightData();
   }, []);
-
-  // function getFlightDefaultCart() {
-  //   const cartWithId = {};
-  //   for (let i = 0; i < initData.length; i++) {
-  //     cartWithId[initData[i]._id] = 0;
-  //   }
-
-  //   return cartWithId;
-  // }
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
