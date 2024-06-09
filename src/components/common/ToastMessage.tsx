@@ -1,4 +1,3 @@
-import React from 'react';
 import { Toast, Alert } from 'react-daisyui';
 
 interface ToastMessageProps {

@@ -1,4 +1,3 @@
-import React from 'react';
 import FormInput from '../../../@types/flight';
 import { FieldErrors } from 'react-hook-form';
 

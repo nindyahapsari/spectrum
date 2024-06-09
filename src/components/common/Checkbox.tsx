@@ -1,5 +1,3 @@
-import React from 'react';
-
 function RoundCheckbox({ label, checked, onChange }) {
   return (
     <div className="flex items-center">

@@ -1,4 +1,3 @@
-import React from 'react';
 import NavbarLink from './NavbarLinks';
 
 type GuestMenuProps = {
