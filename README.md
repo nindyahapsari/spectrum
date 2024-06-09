@@ -1,6 +1,8 @@
 
 # Frontend side for the Spectrum application
 
+check the live demo: https://bookflight-spectrum.netlify.app/
+
 Spectrum Airlines Booking System
 
 Spectrum Airlines Booking System is a web application designed to help users easily find and book flights based on their preferences and travel needs. This system provides a user-friendly interface for searching flights, comparing options, and making bookings.
