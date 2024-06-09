@@ -5,7 +5,11 @@ import { Card } from 'react-daisyui';
 import { Flight } from '../../@types/flight';
 import { CartContextType } from '../../@types/cartContext';
 
-function CardCheckoutItem({ flight }: Flight) {
+interface CardCheckoutItemProps {
+  flight: Flight;
+}
+
+function CardCheckoutItem({ flight }: CardCheckoutItemProps) {
   const { removeFromCart } = useContext(CartContext) as CartContextType;
   return (
     <div className="card bg-base-100 shadow-xl mb-4 p-4 rounded-lg">
