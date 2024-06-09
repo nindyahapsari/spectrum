@@ -1,4 +1,3 @@
-import React from 'react';
 import { Toast, Alert } from 'react-daisyui';
 
 interface ToastMessageProps {
@@ -12,7 +11,7 @@ function ToastMessage({ message }: ToastMessageProps) {
       vertical="bottom"
       horizontal="end"
     >
-      <Alert className="bg-blue-300 p-5">{messsage}</Alert>
+      <Alert className="bg-blue-300 p-5">{message}</Alert>
     </Toast>
   );
 }

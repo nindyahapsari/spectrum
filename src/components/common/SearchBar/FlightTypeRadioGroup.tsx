@@ -1,11 +1,10 @@
-import React from 'react';
 import { Controller, Control, FieldErrors } from 'react-hook-form';
-import { FormInputs } from '../../../types';
+import { FormInput } from '../../../@types/formInput';
 
 interface FlightTypeRadioGroupProps {
   labels: string[];
   name: 'flightType';
-  control: Control<FormInputs>;
+  control: Control<FormInput>;
   errors?: FieldErrors;
 }
 

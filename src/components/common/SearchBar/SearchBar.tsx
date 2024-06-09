@@ -1,4 +1,3 @@
-import React from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
@@ -8,10 +7,8 @@ import DatePickerField from './DatePickerField';
 import FlightTypeRadioGroup from './FlightTypeRadioGroup';
 import SearchBarErrorMessage from './SearchBarErrorMessage';
 
-import { FormInputs } from '../../../types';
+import { FormInput } from '../../../@types/formInput';
 
-import 'react-calendar/dist/Calendar.css';
-import 'react-date-picker/dist/DatePicker.css';
 import './SearchBar.css';
 
 const labels = ['Return', 'One way', 'Multi City', 'Direct Flights'];
@@ -19,7 +16,7 @@ const labels = ['Return', 'One way', 'Multi City', 'Direct Flights'];
 const schema = yup.object({
   destination: yup.string().required('Destination is required'),
   departureDate: yup.date().required('Departure date is required'),
-  returnDate: yup.date().nullable(),
+  returnDate: yup.date().required('Return date is required'),
   passengers: yup.string().required('Passengers is required'),
   flightType: yup.string().required('Flight type is required'),
 });
@@ -34,11 +31,11 @@ function SearchBar({ setDestinationInput }: SearchBarProps) {
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<FormInputs>({
+  } = useForm<FormInput>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: FormInputs) => {
+  const onSubmit = (data: FormInput) => {
     setDestinationInput(data.destination);
   };
 
@@ -51,7 +48,7 @@ function SearchBar({ setDestinationInput }: SearchBarProps) {
         <InputField
           label="Departure"
           placeholder="From"
-          name="departure"
+          name="departureDate"
           register={register}
           value="Berlin"
           readOnly

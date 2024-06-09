@@ -1,4 +1,3 @@
-import React from 'react';
 import { Card, Button } from 'react-daisyui';
 // import { useNavigate } from 'react-router-dom';
 

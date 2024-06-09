@@ -1,4 +1,3 @@
-import React from 'react';
 import Time from '../../utils/time';
 
 import ticketSlider from '../../assets/ticket-slider.png';

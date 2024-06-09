@@ -1,11 +1,13 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { CartContext } from '../../context/Cart.context';
 import { CompareTicketsContext } from '../../context/CompareTickets.context';
+import { CartContextType } from '../../@types/cartContext';
+import { CompareTicketsContextType } from '../../@types/compareTicketContext';
 
 import { Card, Button } from 'react-daisyui';
 
 interface CompareTicketCardProps {
-  id: string;
+  id: number;
   airline: string;
   destination: string;
   seatAvailability?: number;
@@ -19,23 +21,19 @@ function CompareTicketCard({
   seatAvailability,
   price,
 }: CompareTicketCardProps) {
-  const { addToCart } = useContext(CartContext);
-  const { removeTicketFromCompare } = useContext(CompareTicketsContext);
+  const { addToCart } = useContext(CartContext) as CartContextType;
+  const { removeTicketFromCompare } = useContext(
+    CompareTicketsContext
+  ) as CompareTicketsContextType;
 
-  const handleAddToCart = (id: string) => {
-    try {
-      addToCart(id);
-    } catch (error) {
-      console.log(error.message);
-    }
+  const handleAddToCart = (id: number) => {
+    const ticketId = id.toString();
+    addToCart(ticketId);
   };
 
-  const handleRemoveCard = (id: string) => {
-    try {
-      removeTicketFromCompare(id);
-    } catch (error) {
-      console.log(error.message);
-    }
+  const handleRemoveCard = (id: number) => {
+    const ticketId = id.toString();
+    removeTicketFromCompare(ticketId);
   };
 
   return (

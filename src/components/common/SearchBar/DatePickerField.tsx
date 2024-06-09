@@ -1,12 +1,11 @@
-import React from 'react';
 import { Controller, Control, FieldErrors } from 'react-hook-form';
 import DatePicker from 'react-datepicker';
-import { FormInputs } from '../../../types';
+import { FormInput } from '../../../@types/formInput';
 
 interface DatePickerFieldProps {
   label: string;
   name: 'departureDate' | 'returnDate';
-  control: Control<FormInputs>;
+  control: Control<FormInput>;
   errors?: FieldErrors;
 }
 

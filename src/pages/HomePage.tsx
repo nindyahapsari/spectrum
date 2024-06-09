@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useEffect, useCallback, useContext } from 'react';
 
 import { DataSourceContext } from '../context/DataSource.context';
 
-import { Flight } from '../types';
+import { Flight } from '../@types/flight';
 
 import InfoCard from '../components/cards/InfoCard';
 import SearchBar from '../components/common/SearchBar/SearchBar';
