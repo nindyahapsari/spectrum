@@ -34,9 +34,6 @@ function FlightTypeRadioGroup({
           )}
         />
       ))}
-      {/*  {errors && errors[name] && (
-        <p className="text-red-500 text-sm py-1">{errors[name].message}</p>
-      )} */}
     </div>
   );
 }
