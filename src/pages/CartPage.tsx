@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
 import { useContext } from 'react';
 import { CartContext } from '../context/Cart.context';
+import { Link } from 'react-router-dom';
 
 import CardCheckoutItem from '../components/cards/CardCheckoutItem';
 import { CartContextType } from '../@types/cartContext';
@@ -41,7 +41,7 @@ function Cart() {
             Total Amount: ${totalAmount}
           </div>
           <Button variant="link" className="w-full">
-            Continue Booking
+            <Link to="/checkout">Checkout</Link>
           </Button>
         </div>
       </div>
