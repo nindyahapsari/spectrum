@@ -3,7 +3,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { PURCHASE_API, FLIGHTS_ALL_API } from '../utils/endpoints';
 import { Flight } from '../@types/flight';
-import { CartContextType, CartItem } from '../@types/cartContext';
+import {
+  CartContextType,
+  CartItem,
+  CheckoutInfoType,
+} from '../@types/cartContext';
 
 type CartContextProviderProps = {
   children: React.ReactNode;
@@ -20,6 +24,10 @@ const CartContext = createContext<CartContextType | null>(null);
 function CartContextProvider(props: CartContextProviderProps) {
   const [initData, setInitData] = useState<Flight[]>([]);
   const [cart, setCart] = useState<{ [key: string]: number }>({});
+  const [checkoutInfo, setCheckoutInfo] = useState({
+    bill: {},
+    payment: {},
+  });
 
   const navigate = useNavigate();
 
@@ -93,6 +101,26 @@ function CartContextProvider(props: CartContextProviderProps) {
     }
   };
 
+  const addCheckoutInfo = (checkoutData: Partial<CheckoutInfoType>) => {
+    const billKeys = ['firstName', 'lastName', 'email', 'userName'];
+    const paymentKeys = ['cardNumber', 'expiryDate', 'cvv'];
+
+    const userBill = billKeys.reduce(
+      (obj, key) => ({ ...obj, [key]: checkoutData[key] }),
+      {}
+    );
+    const userPayment = paymentKeys.reduce(
+      (obj, key) => ({ ...obj, [key]: checkoutData[key] }),
+      {}
+    );
+
+    setCheckoutInfo((prevCheckoutInfo) => ({
+      ...prevCheckoutInfo,
+      bill: userBill,
+      payment: userPayment,
+    }));
+  };
+
   const contextValue: CartContextType = {
     initData,
     cart,
@@ -101,6 +129,8 @@ function CartContextProvider(props: CartContextProviderProps) {
     addToCart,
     removeFromCart,
     checkout,
+    checkoutInfo,
+    addCheckoutInfo,
   };
 
   return (
