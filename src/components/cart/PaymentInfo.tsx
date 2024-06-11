@@ -1,49 +1,47 @@
 import { UseFormReturn } from 'react-hook-form';
+import InputField from '../common/InputField';
+import { CardPaymentInfo } from '../../@types/checkout';
 
 interface PaymentInfoProps {
   formMethods: UseFormReturn;
 }
 
 function PaymentInfo({ formMethods }: PaymentInfoProps) {
-  const { register } = formMethods;
+  const {
+    register,
+    formState: { errors },
+  } = formMethods;
 
   const creditCardForm = () => {
     return (
       <div className="w-full py-10 text-black">
-        <div className="flex flex-col justify-center items-start">
-          <label className=" my-3" htmlFor="fullName">
-            Full Name
-          </label>
-          <input
-            className="w-full input input-bordered rounded-md my-3 "
-            {...register('fullName')}
+        <div className="w-full flex flex-col justify-center items-start">
+          <InputField<CardPaymentInfo>
+            label="Full Name"
+            name="fullName"
+            register={register}
+            error={errors.fullName}
           />
-        </div>
-        <div className="flex flex-col justify-center items-start">
-          <label className=" my-3" htmlFor="cardNumber">
-            Card Number
-          </label>
-          <input
-            className="w-full input input-bordered rounded-md flex items-center gap-2 "
-            {...register('cardNumber')}
+
+          <InputField<CardPaymentInfo>
+            label="Card Number"
+            name="cardNumber"
+            register={register}
+            error={errors.cardNumber}
           />
-        </div>
-        <div className="flex flex-col justify-center items-start">
-          <label className=" my-3" htmlFor="expiryDate">
-            Expiry Date
-          </label>
-          <input
-            className="w-full input input-bordered rounded-md flex items-center gap-2 "
-            {...register('expiryDate')}
+
+          <InputField<CardPaymentInfo>
+            label="Expiry Date"
+            name="expiryDate"
+            register={register}
+            error={errors.expiryDate}
           />
-        </div>
-        <div className="flex flex-col justify-center items-start">
-          <label className=" my-3" htmlFor="cvv">
-            CVV
-          </label>
-          <input
-            className="w-full input input-bordered rounded-md flex items-center gap-2 "
-            {...register('cvv')}
+
+          <InputField<CardPaymentInfo>
+            label="CVV"
+            name="cvv"
+            register={register}
+            error={errors.cvv}
           />
         </div>
       </div>
@@ -64,6 +62,7 @@ function PaymentInfo({ formMethods }: PaymentInfoProps) {
               role="tab"
               className="tab font-semibold"
               aria-label="Credit Card"
+              readOnly
               checked
             />
             <div

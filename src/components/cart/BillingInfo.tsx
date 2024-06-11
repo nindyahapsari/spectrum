@@ -1,11 +1,16 @@
 import { UseFormReturn } from 'react-hook-form';
+import InputField from '../common/InputField';
+import { UserBillInfo } from '../../@types/checkout';
 
 interface BillingInfoProps {
   formMethods: UseFormReturn;
 }
 
 function BillingInfo({ formMethods }: BillingInfoProps) {
-  const { register } = formMethods;
+  const {
+    register,
+    formState: { errors },
+  } = formMethods;
 
   return (
     <div className="flex flex-col justify-center items-center w-screen">
@@ -15,42 +20,30 @@ function BillingInfo({ formMethods }: BillingInfoProps) {
             Billing Info
           </h2>
           <div className="w-full py-10">
-            <div className="flex flex-col justify-center items-start">
-              <label className=" my-3" htmlFor="firstName">
-                First Name
-              </label>
-              <input
-                className="w-full  input input-bordered rounded-md my-3 "
-                {...register('firstName')}
-              />
-            </div>
-            <div className="flex flex-col justify-center items-start">
-              <label className="my-3" htmlFor="lastName">
-                Last Name
-              </label>
-              <input
-                className="w-full input input-bordered rounded-md flex items-center gap-2 "
-                {...register('lastName')}
-              />
-            </div>
-            <div className="flex flex-col justify-center items-start">
-              <label className="my-3" htmlFor="email">
-                Email
-              </label>
-              <input
-                className="w-full input input-bordered rounded-md flex items-center gap-2 "
-                {...register('email')}
-              />
-            </div>
-            <div className="flex flex-col justify-center items-start">
-              <label className="my-3" htmlFor="userName">
-                User Name
-              </label>
-              <input
-                className="w-full input input-bordered rounded-md flex items-center gap-2 "
-                {...register('userName')}
-              />
-            </div>
+            <InputField<UserBillInfo>
+              label="First Name"
+              name="firstName"
+              register={register}
+              error={errors.firstName}
+            />
+            <InputField<UserBillInfo>
+              label="Last Name"
+              name="lastName"
+              register={register}
+              error={errors.lastName}
+            />
+            <InputField<UserBillInfo>
+              label="Email"
+              name="email"
+              register={register}
+              error={errors.email}
+            />
+            <InputField<UserBillInfo>
+              label="User Name"
+              name="userName"
+              register={register}
+              error={errors.userName}
+            />
           </div>
         </div>
       </div>
