@@ -1,45 +1,36 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import useSignup from '../hooks/useSignup';
 
-import { BASE_URL } from '../utils/endpoints';
-
-import { Card } from 'react-daisyui';
-import MainButton from '../components/common/MainButton';
-import FormInput from '../components/common/FormInput';
+interface SignupUser {
+  email: string;
+  password: string;
+  name: string;
+}
 
 function SignupPage() {
-  const [signupUser, setSignupUser] = useState({
-    email: '',
-    password: '',
-    name: '',
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const { register, handleSubmit } = useForm({
+    defaultValues: { name: '', email: '', password: '' },
   });
+  const { signup } = useSignup();
 
-  const navigate = useNavigate();
-
-  function handleUserSignup(e: React.ChangeEvent<HTMLInputElement>) {
-    setSignupUser((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  }
-
-  const handleSignupSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const requestBody = {
-      email: signupUser.email,
-      password: signupUser.password,
-      name: signupUser.name,
-    };
-    axios
-      .post(`${BASE_URL}/auth/signup`, requestBody)
-      .then(() => {
-        navigate('/login');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+  const handleSignupSubmit = (data: SignupUser) => {
+    signup(data).catch((error) => {
+      setErrorMessage(error.message);
+    });
   };
+
+  function renderErrorToast() {
+    if (errorMessage) {
+      return (
+        <div>
+          <div className="bg-red-300 p-5 rounded-md">{errorMessage}</div>
+        </div>
+      );
+    }
+  }
 
   return (
     <div className="h-screen flex flex-col justify-center items-center">
@@ -47,42 +38,54 @@ function SignupPage() {
         <div className="text-2xl">Welcome back to Spectrum! </div>
         <div className="text-xl">Please signup to continue </div>
       </div>
-      <Card className="w-5/6 my-5 mx-20">
-        <Card.Body className="flex justify-center">
-          <form className="flex flex-col w-1/3" onSubmit={handleSignupSubmit}>
-            <FormInput
-              label="Name"
-              type="text"
-              value={signupUser.name}
-              name="name"
-              onChange={(e) => handleUserSignup(e)}
-            />
-            <FormInput
-              label="Email"
-              type="email"
-              value={signupUser.email}
-              name="email"
-              onChange={handleUserSignup}
-            />
-            <FormInput
-              label="Password"
-              type="password"
-              value={signupUser.password}
-              name="password"
-              onChange={handleUserSignup}
-            />
+      <div className="w-5/6 my-5 mx-20">
+        <div className="flex justify-center">
+          <form
+            className="flex flex-col w-1/3"
+            onSubmit={handleSubmit(handleSignupSubmit)}
+          >
+            <div className="flex flex-col justify-center items-start">
+              <label className=" my-3" htmlFor="name">
+                Email
+              </label>
+              <input
+                className="w-full input input-bordered rounded-md flex items-center gap-2 "
+                {...register('name')}
+              />
+            </div>
+            <div className="flex flex-col justify-center items-start">
+              <label className=" my-3" htmlFor="email">
+                Email
+              </label>
+              <input
+                className="w-full input input-bordered rounded-md flex items-center gap-2 "
+                {...register('email')}
+              />
+            </div>
+            <div className="flex flex-col justify-center items-start">
+              <label className=" my-3" htmlFor="password">
+                Email
+              </label>
+              <input
+                type="password"
+                className="w-full input input-bordered rounded-md flex items-center gap-2 "
+                {...register('password')}
+              />
+            </div>
 
-            <MainButton
-              customClass="flex items-center justify-center h-12 px-6 w-full bg-spectrum-primary mt-8 rounded font-semibold text-sm  hover:bg-spectrum-primary"
+            <button
+              className="flex items-center justify-center h-12 px-6 w-full bg-spectrum-primary mt-8 rounded font-semibold text-sm  hover:bg-spectrum-primary"
               type="submit"
-              buttonText="Signup"
-            />
+            >
+              Signup
+            </button>
           </form>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
       <div className="my-5">
         <Link to="/login">Already have an account? Login</Link>
       </div>
+      {renderErrorToast()}
     </div>
   );
 }

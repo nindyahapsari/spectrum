@@ -1,55 +1,32 @@
-import { useState, useContext } from 'react';
-import axios from 'axios';
-import { Link, useNavigate } from 'react-router-dom';
-import { AuthContext } from '../context/Auth.context';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useForm } from 'react-hook-form';
+import useLogin from '../hooks/useLogin';
 
-import { BASE_URL } from '../utils/endpoints';
-
-import { Card, Toast, Alert } from 'react-daisyui';
-import MainButton from '../components/common/MainButton';
-import FormInput from '../components/common/FormInput';
+interface LoginUser {
+  email: string;
+  password: string;
+}
 
 function LoginPage() {
-  const [loginUser, setLoginUser] = useState({ email: '', password: '' });
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const navigate = useNavigate();
+  const { register, handleSubmit } = useForm({
+    defaultValues: { email: '', password: '' },
+  });
+  const { login } = useLogin();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
-
-  function handleUserLogin(e: React.ChangeEvent<HTMLInputElement>) {
-    setLoginUser((prevState) => ({
-      ...prevState,
-      [e.target.name]: e.target.value,
-    }));
-  }
-
-  const handleLoginSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const requestBody = {
-      email: loginUser.email,
-      password: loginUser.password,
-    };
-
-    axios
-      .post(`${BASE_URL}/auth/login`, requestBody)
-      .then((response) => {
-        storeToken(response.data.authToken);
-        authenticateUser();
-        navigate('/');
-      })
-      .catch((error) => {
-        setErrorMessage(error.message);
-      });
+  const handleLoginSubmit = (data: LoginUser) => {
+    login(data).catch((error) => {
+      setErrorMessage(error.message);
+    });
   };
 
   function renderErrorToast() {
     if (errorMessage) {
       return (
-        <Toast vertical="bottom" horizontal="end">
-          <Alert status="error" className="bg-red-300 p-5 rounded-md">
-            {errorMessage}
-          </Alert>
-        </Toast>
+        <div>
+          <div className="bg-red-300 p-5 rounded-md">{errorMessage}</div>
+        </div>
       );
     }
   }
@@ -60,32 +37,41 @@ function LoginPage() {
         <div className="text-2xl">Welcome back to Spectrum! </div>
         <div className="text-xl">Please login to continue </div>
       </div>
-      <Card className="w-5/6 my-5">
-        <Card.Body className="flex justify-center">
-          <form className="flex flex-col w-1/3" onSubmit={handleLoginSubmit}>
-            <FormInput
-              label="Email"
-              type="email"
-              value={loginUser.email}
-              name="email"
-              onChange={handleUserLogin}
-            />
-            <FormInput
-              label="Password"
-              type="password"
-              value={loginUser.password}
-              name="password"
-              onChange={handleUserLogin}
-            />
+      <div className="w-5/6 my-5">
+        <div className="flex justify-center">
+          <form
+            className="flex flex-col w-1/3"
+            onSubmit={handleSubmit(handleLoginSubmit)}
+          >
+            <div className="flex flex-col justify-center items-start">
+              <label className=" my-3" htmlFor="email">
+                Email
+              </label>
+              <input
+                className="w-full input input-bordered rounded-md flex items-center gap-2 "
+                {...register('email')}
+              />
+            </div>
+            <div className="flex flex-col justify-center items-start">
+              <label className=" my-3" htmlFor="password">
+                Password
+              </label>
+              <input
+                type="password"
+                className="w-full input input-bordered rounded-md flex items-center gap-2 "
+                {...register('password')}
+              />
+            </div>
 
-            <MainButton
-              customClass="flex items-center justify-center h-12 px-6 w-full bg-spectrum-primary mt-8 rounded font-semibold text-sm  hover:bg-spectrum-primary"
+            <button
+              className="flex items-center justify-center h-12 px-6 w-full bg-spectrum-primary mt-8 rounded font-semibold text-sm  hover:bg-spectrum-primary"
               type="submit"
-              buttonText="Login"
-            />
+            >
+              Login
+            </button>
           </form>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
       <div className="my-5">
         <Link to="/signup">Dont have an account? Sign up</Link>
       </div>

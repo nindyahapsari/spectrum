@@ -1,6 +1,6 @@
-/* eslint-disable no-unused-vars */
 import { useContext } from 'react';
 import { CartContext } from '../context/Cart.context';
+import { useNavigate } from 'react-router-dom';
 
 import CardCheckoutItem from '../components/cards/CardCheckoutItem';
 import { CartContextType } from '../@types/cartContext';
@@ -14,6 +14,12 @@ function Cart() {
 
   const totalAmount = getTotalCartAmount();
   const cartItems = getCartItems();
+
+  const navigate = useNavigate();
+
+  const handleCheckout = () => {
+    navigate('/checkout');
+  };
 
   if (cartItems.length === 0) {
     return (
@@ -40,8 +46,8 @@ function Cart() {
           <div className="mb-4 px-auto text-xl">
             Total Amount: ${totalAmount}
           </div>
-          <Button variant="link" className="w-full">
-            Continue Booking
+          <Button variant="link" className="w-full" onClick={handleCheckout}>
+            Checkout
           </Button>
         </div>
       </div>

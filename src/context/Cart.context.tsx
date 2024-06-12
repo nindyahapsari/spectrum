@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { PURCHASE_API, FLIGHTS_ALL_API } from '../utils/endpoints';
 import { Flight } from '../@types/flight';
 import { CartContextType, CartItem } from '../@types/cartContext';
+import { CheckoutInfo } from '../@types/checkout';
 
 type CartContextProviderProps = {
   children: React.ReactNode;
@@ -17,9 +18,22 @@ const fetchingData = async (): Promise<Flight[]> => {
 
 const CartContext = createContext<CartContextType | null>(null);
 
+const initialCheckoutInfo: CheckoutInfo = {
+  firstName: '',
+  lastName: '',
+  email: '',
+  userName: '',
+  fullName: '',
+  cardNumber: '',
+  expiryDate: '',
+  cvv: '',
+};
+
 function CartContextProvider(props: CartContextProviderProps) {
   const [initData, setInitData] = useState<Flight[]>([]);
   const [cart, setCart] = useState<{ [key: string]: number }>({});
+  const [checkoutInfo, setCheckoutInfo] =
+    useState<CheckoutInfo>(initialCheckoutInfo);
 
   const navigate = useNavigate();
 
@@ -93,6 +107,19 @@ function CartContextProvider(props: CartContextProviderProps) {
     }
   };
 
+  const addCheckoutInfo = (checkoutData: Partial<CheckoutInfo>) => {
+    console.log('checkoutData', checkoutData);
+    setCheckoutInfo((prevInfo) => ({
+      ...prevInfo,
+      ...checkoutData,
+    }));
+  };
+
+  const clearCart = () => {
+    setCart({});
+    setCheckoutInfo(initialCheckoutInfo);
+  };
+
   const contextValue: CartContextType = {
     initData,
     cart,
@@ -101,6 +128,9 @@ function CartContextProvider(props: CartContextProviderProps) {
     addToCart,
     removeFromCart,
     checkout,
+    checkoutInfo,
+    addCheckoutInfo,
+    clearCart,
   };
 
   return (
