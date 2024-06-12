@@ -3,7 +3,7 @@ import InputField from '../common/InputField';
 import { UserBillInfo } from '../../@types/checkout';
 
 interface BillingInfoProps {
-  formMethods: UseFormReturn;
+  formMethods: UseFormReturn<UserBillInfo>;
 }
 
 function BillingInfo({ formMethods }: BillingInfoProps) {
@@ -24,25 +24,25 @@ function BillingInfo({ formMethods }: BillingInfoProps) {
               label="First Name"
               name="firstName"
               register={register}
-              error={errors.firstName}
+              error={errors.firstName?.message}
             />
             <InputField<UserBillInfo>
               label="Last Name"
               name="lastName"
               register={register}
-              error={errors.lastName}
+              error={errors.lastName?.message}
             />
             <InputField<UserBillInfo>
               label="Email"
               name="email"
               register={register}
-              error={errors.email}
+              error={errors.email?.message}
             />
             <InputField<UserBillInfo>
               label="User Name"
               name="userName"
               register={register}
-              error={errors.userName}
+              error={errors.userName?.message}
             />
           </div>
         </div>

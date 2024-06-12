@@ -1,33 +1,29 @@
 import { useContext } from 'react';
-import { UseFormReturn } from 'react-hook-form';
+
 import { CartContext } from '../../context/Cart.context';
 import { CartContextType } from '../../@types/cartContext';
 import ContactInfoSummary from './ContactInfoSummary';
 import PaymentInfoSummary from './PaymentInfoSummary';
+// import { CheckoutInfo } from '../../@types/checkout';
 
-interface ConfirmationProps {
-  formMethods: UseFormReturn;
-}
-
-function Confirmation({ formMethods }: ConfirmationProps) {
-  const { getCartItems, getTotalCartAmount } = useContext(
+function Confirmation() {
+  const { getCartItems, getTotalCartAmount, checkoutInfo } = useContext(
     CartContext
   ) as CartContextType;
   console.log(getCartItems());
-  const { getValues } = formMethods;
-  const { firstName, lastName, email, userName, cardNumber, expiryDate } =
-    getValues();
 
   const bill = {
-    firstName,
-    lastName,
-    email,
-    userName,
+    firstName: checkoutInfo.firstName,
+    lastName: checkoutInfo.lastName,
+    email: checkoutInfo.email,
+    userName: checkoutInfo.userName,
   };
 
   const payment = {
-    cardNumber,
-    expiryDate,
+    fullName: checkoutInfo.fullName,
+    cardNumber: checkoutInfo.cardNumber,
+    expiryDate: checkoutInfo.expiryDate,
+    cvv: checkoutInfo.cvv,
   };
 
   return (

@@ -1,63 +1,55 @@
 import { useState, useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
+import { useForm, UseFormReturn } from 'react-hook-form';
 import BillingInfo from '../components/cart/BillingInfo';
 import CartStep from '../components/cart/CartStep';
 import PaymentInfo from '../components/cart/PaymentInfo';
 import Confirmation from '../components/cart/Confirmation';
-import { UserBillInfo, CardPaymentInfo } from '../@types/checkout';
-import { CartContextType } from '../@types/cartContext';
+import { CartContextType, CheckoutInfoType } from '../@types/cartContext';
 import { CartContext } from '../context/Cart.context';
-import * as yup from 'yup';
-
-interface CheckoutInfo extends UserBillInfo, CardPaymentInfo {}
-
-const CheckoutSchema = yup.object({
-  firstName: yup
-    .string()
-    .required('First Name is required')
-    .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
-  lastName: yup
-    .string()
-    .required('Last Name is required')
-    .matches(/^[aA-zZ\s]+$/, 'Only alphabets are allowed for this field '),
-  email: yup.string().email('Invalid email').required('Email is required'),
-  userName: yup.string().required('User Name is required'),
-});
-
-const PaymentSchema = yup.object({
-  cardNumber: yup
-    .string()
-    .required('Card Number is required')
-    .length(16, 'Card Number should be exactly 16 digits'),
-  expiryDate: yup
-    .string()
-    .required('Expiry Date is required')
-    .matches(
-      /^(0[1-9]|1[0-2])\/?([0-9]{4}|[0-9]{2})$/,
-      'Expiry Date should be in the format MM/YY or MM/YYYY'
-    ),
-});
+import {
+  userBillSchema,
+  cardPaymentSchema,
+} from '../components/cart/validationSchema';
+import { CardPaymentInfo, UserBillInfo } from '../@types/checkout';
 
 function CheckoutPage() {
   const [step, setStep] = useState(0);
-  const checkoutSchema = step === 0 ? CheckoutSchema : PaymentSchema;
-  const formMethods = useForm({
-    resolver: yupResolver(checkoutSchema),
-  });
-  const { handleSubmit } = formMethods;
+  const { addCheckoutInfo, clearCart } = useContext(
+    CartContext
+  ) as CartContextType;
 
-  const { addCheckoutInfo } = useContext(CartContext) as CartContextType;
+  const navigate = useNavigate();
+
+  const billingFormMethods = useForm<UserBillInfo>({
+    resolver: yupResolver(userBillSchema),
+  });
+
+  const paymentFormMethods = useForm<CardPaymentInfo>({
+    resolver: yupResolver(cardPaymentSchema),
+  });
+  console.log('paymentFormMethods', paymentFormMethods);
+
+  const formMethods = [billingFormMethods, paymentFormMethods];
 
   const formSteps = [
     {
-      component: <BillingInfo formMethods={formMethods} />,
+      component: (
+        <BillingInfo
+          formMethods={billingFormMethods as UseFormReturn<UserBillInfo>}
+        />
+      ),
     },
     {
-      component: <PaymentInfo formMethods={formMethods} />,
+      component: (
+        <PaymentInfo
+          formMethods={paymentFormMethods as UseFormReturn<CardPaymentInfo>}
+        />
+      ),
     },
     {
-      component: <Confirmation formMethods={formMethods} />,
+      component: <Confirmation />,
     },
   ];
 
@@ -66,8 +58,10 @@ function CheckoutPage() {
 
     if (step === formSteps.length - 1) return;
 
-    const isValid = await formMethods.trigger();
+    const isValid = await formMethods[step].trigger();
     if (isValid) {
+      const data = formMethods[step].getValues();
+      addCheckoutInfo(data as CheckoutInfoType);
       setStep((prevStep) => prevStep + 1);
     }
   };
@@ -78,9 +72,9 @@ function CheckoutPage() {
     setStep((prevStep) => prevStep - 1);
   };
 
-  const handleConfirm = (data: CheckoutInfo) => {
-    console.log('Confirm', data);
-    addCheckoutInfo(data);
+  const handleConfirm = () => {
+    clearCart();
+    navigate('/success');
   };
 
   const renderButton = () => {
@@ -109,7 +103,7 @@ function CheckoutPage() {
       <CartStep currentStep={step} />
       <form
         className="flex flex-col justify-center items-center"
-        onSubmit={handleSubmit(handleConfirm)}
+        onSubmit={handleConfirm}
       >
         <div className="h-3/6 py-3">{formSteps[step].component}</div>
 

@@ -1,8 +1,7 @@
 import InfoItem from './InfoItem';
-import { CardPaymentInfo } from '../../@types/checkout';
 
 interface PaymentInfoSummaryProps {
-  payment: CardPaymentInfo;
+  payment: { cardNumber: string; expiryDate: string };
 }
 
 function PaymentInfoSummary({ payment }: PaymentInfoSummaryProps) {

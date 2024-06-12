@@ -3,7 +3,7 @@ import InputField from '../common/InputField';
 import { CardPaymentInfo } from '../../@types/checkout';
 
 interface PaymentInfoProps {
-  formMethods: UseFormReturn;
+  formMethods: UseFormReturn<CardPaymentInfo>;
 }
 
 function PaymentInfo({ formMethods }: PaymentInfoProps) {
@@ -20,28 +20,28 @@ function PaymentInfo({ formMethods }: PaymentInfoProps) {
             label="Full Name"
             name="fullName"
             register={register}
-            error={errors.fullName}
+            error={errors.fullName?.message}
           />
 
           <InputField<CardPaymentInfo>
             label="Card Number"
             name="cardNumber"
             register={register}
-            error={errors.cardNumber}
+            error={errors.cardNumber?.message}
           />
 
           <InputField<CardPaymentInfo>
             label="Expiry Date"
             name="expiryDate"
             register={register}
-            error={errors.expiryDate}
+            error={errors.expiryDate?.message}
           />
 
           <InputField<CardPaymentInfo>
             label="CVV"
             name="cvv"
             register={register}
-            error={errors.cvv}
+            error={errors.cvv?.message}
           />
         </div>
       </div>

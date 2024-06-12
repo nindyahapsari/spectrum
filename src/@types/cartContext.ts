@@ -1,20 +1,16 @@
 import { Flight } from './flight';
-import { UserBillInfo, CardPaymentInfo } from './checkout';
+import { UserBillInfo, CardPaymentInfo, CheckoutInfo } from './checkout';
 
 export interface CartItem extends Flight {
   quantity: number;
 }
 
-interface CheckoutInfoState {
-  bill: UserBillInfo;
-  payment: CardPaymentInfo;
-}
+// export interface CheckoutInfo extends UserBillInfo, CardPaymentInfo {}
 
-export type CheckoutInfoType = {
-  bill: Partial<UserBillInfo>;
-  payment: Partial<CardPaymentInfo>;
-  [key: string]: Partial<UserBillInfo> | Partial<CardPaymentInfo>;
-};
+export type CheckoutInfoType = Partial<
+  UserBillInfo &
+    CardPaymentInfo & { firstName: string; lastName: string; userName: string }
+>;
 export interface CartContextType {
   initData: Flight[];
   cart: { [key: string]: number };
@@ -24,5 +20,6 @@ export interface CartContextType {
   removeFromCart: (id: number) => void;
   checkout: (userId: string) => Promise<void>;
   addCheckoutInfo: (checkoutData: Partial<CheckoutInfoType>) => void;
-  checkoutInfo: CheckoutInfoState;
+  checkoutInfo: CheckoutInfo;
+  clearCart: () => void;
 }
