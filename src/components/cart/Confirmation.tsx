@@ -10,7 +10,6 @@ function Confirmation() {
   const { getCartItems, getTotalCartAmount, checkoutInfo } = useContext(
     CartContext
   ) as CartContextType;
-  console.log(getCartItems());
 
   const bill = {
     firstName: checkoutInfo.firstName,

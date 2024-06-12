@@ -108,7 +108,6 @@ function CartContextProvider(props: CartContextProviderProps) {
   };
 
   const addCheckoutInfo = (checkoutData: Partial<CheckoutInfo>) => {
-    console.log('checkoutData', checkoutData);
     setCheckoutInfo((prevInfo) => ({
       ...prevInfo,
       ...checkoutData,
