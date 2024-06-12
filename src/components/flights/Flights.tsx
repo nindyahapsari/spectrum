@@ -43,7 +43,7 @@ function Flights({ filteredResults }: FlightsProps) {
 
   return (
     <div>
-      <div className="flex flex-row justify-between my-10 ">
+      <div className="flex flex-row justify-center my-10 ">
         <div>
           {isTicketAdded && (
             <div className="fixed top-20 left-1/2 transform -translate-x-1/2 z-50">
@@ -67,9 +67,6 @@ function Flights({ filteredResults }: FlightsProps) {
               </Button>
             </div>
           ))}
-        </div>
-        <div className="mx-20 mb-2 rounded-lg border border-blue-gray-100 px-4 ">
-          <div>Filter functions</div>
         </div>
       </div>
     </div>
