@@ -1,7 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
 import useSignup from '../hooks/useSignup';
+import InputField from '../components/common/InputField';
 
 interface SignupUser {
   email: string;
@@ -9,11 +12,24 @@ interface SignupUser {
   name: string;
 }
 
+const schema = yup.object().shape({
+  name: yup.string().required('Name is required'),
+  email: yup.string().email('Invalid email').required('Email is required'),
+  password: yup.string().required('Password is required'),
+});
+
 function SignupPage() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { register, handleSubmit } = useForm({
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: { name: '', email: '', password: '' },
+    resolver: yupResolver(schema),
   });
+
   const { signup } = useSignup();
 
   const handleSignupSubmit = (data: SignupUser) => {
@@ -45,31 +61,28 @@ function SignupPage() {
             onSubmit={handleSubmit(handleSignupSubmit)}
           >
             <div className="flex flex-col justify-center items-start">
-              <label className=" my-3" htmlFor="name">
-                Email
-              </label>
-              <input
-                className="w-full input input-bordered rounded-md flex items-center gap-2 "
-                {...register('name')}
+              <InputField
+                label="Full Name"
+                name="name"
+                register={register}
+                error={errors.name?.message}
               />
             </div>
             <div className="flex flex-col justify-center items-start">
-              <label className=" my-3" htmlFor="email">
-                Email
-              </label>
-              <input
-                className="w-full input input-bordered rounded-md flex items-center gap-2 "
-                {...register('email')}
+              <InputField
+                label="Email"
+                name="email"
+                register={register}
+                error={errors.email?.message}
               />
             </div>
             <div className="flex flex-col justify-center items-start">
-              <label className=" my-3" htmlFor="password">
-                Email
-              </label>
-              <input
+              <InputField
+                label="Password"
+                name="password"
                 type="password"
-                className="w-full input input-bordered rounded-md flex items-center gap-2 "
-                {...register('password')}
+                register={register}
+                error={errors.password?.message}
               />
             </div>
 
@@ -89,5 +102,4 @@ function SignupPage() {
     </div>
   );
 }
-
 export default SignupPage;
