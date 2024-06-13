@@ -2,18 +2,32 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import useLogin from '../hooks/useLogin';
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from 'yup';
+
+import InputField from '../components/common/InputField';
 
 interface LoginUser {
   email: string;
   password: string;
 }
 
+const schema = yup.object().shape({
+  email: yup.string().email().required(),
+  password: yup.string().required(),
+});
+
 function LoginPage() {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: { email: '', password: '' },
+    resolver: yupResolver(schema),
   });
-  const { login } = useLogin();
+  const { login, isLoading } = useLogin();
 
   const handleLoginSubmit = (data: LoginUser) => {
     login(data).catch((error) => {
@@ -31,6 +45,14 @@ function LoginPage() {
     }
   }
 
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
     <div className="h-screen flex flex-col justify-center items-center">
       <div className="text-lg text-center">
@@ -44,22 +66,20 @@ function LoginPage() {
             onSubmit={handleSubmit(handleLoginSubmit)}
           >
             <div className="flex flex-col justify-center items-start">
-              <label className=" my-3" htmlFor="email">
-                Email
-              </label>
-              <input
-                className="w-full input input-bordered rounded-md flex items-center gap-2 "
-                {...register('email')}
+              <InputField
+                label="Email"
+                name="email"
+                register={register}
+                error={errors.email?.message}
               />
             </div>
             <div className="flex flex-col justify-center items-start">
-              <label className=" my-3" htmlFor="password">
-                Password
-              </label>
-              <input
+              <InputField
                 type="password"
-                className="w-full input input-bordered rounded-md flex items-center gap-2 "
-                {...register('password')}
+                label="Password"
+                name="password"
+                register={register}
+                error={errors.password?.message}
               />
             </div>
 
