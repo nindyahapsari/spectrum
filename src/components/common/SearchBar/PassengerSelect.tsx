@@ -16,7 +16,7 @@ function PassengerSelect({ name, control }: PassengerSelectProps) {
         control={control}
         render={({ field }) => (
           <select
-            className="form-select block w-full form-input mt-1 h-10 border rounded px-4  bg-gray-50"
+            className="form-select block w-full form-input mt-1 h-10 border rounded px-2 bg-gray-50"
             {...field}
           >
             <option value="1">1 Person</option>

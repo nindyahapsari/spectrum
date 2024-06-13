@@ -4,21 +4,17 @@ import * as yup from 'yup';
 import InputField from './InputField';
 import PassengerSelect from './PassengerSelect';
 import DatePickerField from './DatePickerField';
-import FlightTypeRadioGroup from './FlightTypeRadioGroup';
 import SearchBarErrorMessage from './SearchBarErrorMessage';
 
 import { FormInput } from '../../../@types/formInput';
 
 import './SearchBar.css';
 
-const labels = ['Return', 'One way', 'Multi City', 'Direct Flights'];
-
 const schema = yup.object({
   destination: yup.string().required('Destination is required'),
   departureDate: yup.date().required('Departure date is required'),
   returnDate: yup.date().required('Return date is required'),
   passengers: yup.string().required('Passengers is required'),
-  flightType: yup.string().required('Flight type is required'),
 });
 
 interface SearchBarProps {
@@ -44,7 +40,7 @@ function SearchBar({ setDestinationInput }: SearchBarProps) {
       onSubmit={handleSubmit(onSubmit)}
       className=" h-60 my-10 py-3 px-20 border-2 rounded-lg bg-gray-300 backdrop-opacity-50"
     >
-      <div className="flex flex-row justify-between items-center my-5">
+      <div className="flex flex-row flex-wrap gap-4 justify-between items-center my-5">
         <InputField
           label="Departure"
           placeholder="From"
@@ -70,14 +66,6 @@ function SearchBar({ setDestinationInput }: SearchBarProps) {
           control={control}
         />
         <PassengerSelect name="passengers" control={control} errors={errors} />
-      </div>
-
-      <div className="flex flex-row justify-between">
-        <FlightTypeRadioGroup
-          labels={labels}
-          name="flightType"
-          control={control}
-        />
         <button
           type="submit"
           className="mt-6 px-4 py-2 bg-spectrum-primary text-black rounded-md"
