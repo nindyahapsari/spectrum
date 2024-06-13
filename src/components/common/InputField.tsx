@@ -1,6 +1,7 @@
 import { UseFormRegister, FieldValues, Path } from 'react-hook-form';
 
 interface InputFieldProps<T extends FieldValues> {
+  type?: string;
   label: string;
   name: keyof T;
   register: UseFormRegister<T>;
@@ -8,6 +9,7 @@ interface InputFieldProps<T extends FieldValues> {
 }
 
 function InputField<T extends FieldValues>({
+  type = 'text',
   label,
   name,
   register,
@@ -19,6 +21,7 @@ function InputField<T extends FieldValues>({
         {label}
       </label>
       <input
+        type={type}
         className={`w-full input input-bordered rounded-md my-3 ${error ? 'border-red-500' : ''}`}
         {...register(name as Path<T>)}
       />

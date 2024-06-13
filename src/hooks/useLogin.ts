@@ -11,7 +11,7 @@ type LoginUser = {
 
 const useLogin = () => {
   const navigate = useNavigate();
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUser, isLoading } = useContext(AuthContext);
 
   const login = (data: LoginUser) => {
     const requestBody = {
@@ -28,7 +28,7 @@ const useLogin = () => {
       });
   };
 
-  return { login };
+  return { login, isLoading };
 };
 
 export default useLogin;
