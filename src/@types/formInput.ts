@@ -3,5 +3,4 @@ export interface FormInput {
   departureDate: Date;
   returnDate: Date;
   passengers: string;
-  flightType: string;
 }
