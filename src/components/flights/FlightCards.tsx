@@ -1,7 +1,5 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/Cart.context';
-import firstIcon from '../../assets/airline-icon-first.png';
-import secondIcon from '../../assets/airline-icon-second.png';
 import bagsIcon from '../../assets/bags.png';
 import separator from '../../assets/separator.png';
 
@@ -35,14 +33,12 @@ function FlightCards({ flight }: FlightCardsProps) {
     <div className="flight-card my-5">
       <div className="flex flex-col justify-evenly px-2">
         <TicketFlightInfo
-          icon={firstIcon}
           depTimestamp={flight.departureTime}
           arrivalTimestamp={flight.arrivalTime}
           depCity="Berlin"
           destination={flight.destination}
         />
         <TicketFlightInfo
-          icon={secondIcon}
           depTimestamp={flight.arrivalTime}
           arrivalTimestamp={flight.departureTime}
           depCity={flight.destination}
