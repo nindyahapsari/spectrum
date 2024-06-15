@@ -13,7 +13,6 @@ type ApiData<T> = T[];
 function HomePage() {
   const [flights, setFlights] = useState<ApiData<Flight>>([]);
   const [filteredResults, setFilteredResults] = useState<Flight[]>([]);
-  const [destinationInput, setDestinationInput] = useState<string>('');
 
   const initFlightsData = useContext(DataSourceContext);
 
@@ -51,7 +50,7 @@ function HomePage() {
 
   return (
     <div className="px-20">
-      <SearchBar setDestinationInput={setDestinationInput} />
+      <SearchBar />
 
       {renderContent()}
     </div>
