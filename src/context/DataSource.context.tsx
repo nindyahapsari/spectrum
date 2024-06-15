@@ -35,8 +35,10 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
     fetchData();
   }, []);
 
+  const dataSourceValue: Flight[] = initFlightsData;
+
   return (
-    <DataSourceContext.Provider value={initFlightsData}>
+    <DataSourceContext.Provider value={dataSourceValue}>
       {children}
     </DataSourceContext.Provider>
   );
