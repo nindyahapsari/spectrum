@@ -1,12 +1,18 @@
+import { useContext } from 'react';
+import { DataSourceContext } from '../context/DataSource.context';
 import InfoCard from '../components/cards/InfoCard';
 import SearchBar from '../components/common/SearchBar/SearchBar';
+import Flights from '../components/flights/Flights';
 
 function HomePage() {
-  function renderContent() {
-    // If there is no search query, show the InfoCard
-    // Otherwise, show the search results
+  const { flights } = useContext(DataSourceContext);
 
-    return <InfoCard />;
+  function renderContent() {
+    if (flights.length === 0) {
+      return <InfoCard />;
+    }
+
+    return <Flights />;
   }
 
   return (

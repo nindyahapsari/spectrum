@@ -33,7 +33,6 @@ function CheckoutPage() {
   const paymentFormMethods = useForm<CardPaymentInfo>({
     resolver: yupResolver(cardPaymentSchema),
   });
-  console.log('paymentFormMethods', paymentFormMethods);
 
   const formMethods = [billingFormMethods, paymentFormMethods];
 
