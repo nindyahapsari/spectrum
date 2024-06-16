@@ -6,7 +6,7 @@ import separator from '../../assets/separator.png';
 import { Button } from 'react-daisyui';
 import './FlightCards.css';
 import TicketFlightInfo from './TicketFlightInfo';
-import { Flight } from '../../@types/flight';
+import { Flight } from '../../types';
 
 interface FlightCardsProps {
   flight: Flight;

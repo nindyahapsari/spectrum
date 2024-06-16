@@ -1,7 +1,6 @@
 import { createContext, useContext, useState, ReactNode } from 'react';
-import { Flight } from '../@types/flight';
+import { Flight, CompareTicketsContextType } from '../types';
 import { DataSourceContext } from './DataSource.context';
-import { CompareTicketsContextType } from '../@types/compareTicketContext';
 
 interface CompareTicketsProviderProps {
   children: ReactNode;

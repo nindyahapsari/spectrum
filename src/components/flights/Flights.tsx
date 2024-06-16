@@ -1,7 +1,6 @@
 import { useState, useContext } from 'react';
 
-import { Flight } from '../../@types/flight';
-import { CompareTicketsContextType } from '../../@types/compareTicketContext';
+import { Flight, CompareTicketsContextType } from '../../types';
 import { CompareTicketsContext } from '../../context/CompareTickets.context';
 
 import { Button, Toast, Alert } from 'react-daisyui';

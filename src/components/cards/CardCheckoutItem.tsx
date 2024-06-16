@@ -2,8 +2,7 @@ import { useContext } from 'react';
 import { CartContext } from '../../context/Cart.context';
 import { Card } from 'react-daisyui';
 
-import { Flight } from '../../@types/flight';
-import { CartContextType } from '../../@types/cartContext';
+import { Flight, CartContextType } from '../../types';
 
 interface CardCheckoutItemProps {
   flight: Flight;

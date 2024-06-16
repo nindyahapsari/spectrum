@@ -6,13 +6,17 @@ import BillingInfo from '../components/cart/BillingInfo';
 import CartStep from '../components/cart/CartStep';
 import PaymentInfo from '../components/cart/PaymentInfo';
 import Confirmation from '../components/cart/Confirmation';
-import { CartContextType, CheckoutInfoType } from '../@types/cartContext';
+import {
+  CartContextType,
+  CheckoutInfoType,
+  CardPaymentInfo,
+  UserBillInfo,
+} from '../types';
 import { CartContext } from '../context/Cart.context';
 import {
   userBillSchema,
   cardPaymentSchema,
 } from '../components/cart/validationSchema';
-import { CardPaymentInfo, UserBillInfo } from '../@types/checkout';
 
 function CheckoutPage() {
   const [step, setStep] = useState(0);

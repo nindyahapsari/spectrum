@@ -3,7 +3,7 @@ import { CartContext } from '../context/Cart.context';
 import { useNavigate } from 'react-router-dom';
 
 import CardCheckoutItem from '../components/cards/CardCheckoutItem';
-import { CartContextType } from '../@types/cartContext';
+import { CartContextType } from '../types';
 
 import { Button } from 'react-daisyui';
 

@@ -1,6 +1,6 @@
 import { UseFormReturn } from 'react-hook-form';
 import InputField from '../common/InputField';
-import { CardPaymentInfo } from '../../@types/checkout';
+import { CardPaymentInfo } from '../../types';
 
 interface PaymentInfoProps {
   formMethods: UseFormReturn<CardPaymentInfo>;

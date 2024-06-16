@@ -2,17 +2,17 @@ import { useState, useEffect, useCallback, useContext } from 'react';
 
 import { DataSourceContext } from '../context/DataSource.context';
 
-import { Flight } from '../@types/flight';
+import { Flight } from '../types';
 
 import InfoCard from '../components/cards/InfoCard';
 import SearchBar from '../components/common/SearchBar/SearchBar';
-import Flights from '../components/flights/Flights';
+// import Flights from '../components/flights/Flights';
 
 type ApiData<T> = T[];
 
 function HomePage() {
   const [flights, setFlights] = useState<ApiData<Flight>>([]);
-  const [filteredResults, setFilteredResults] = useState<Flight[]>([]);
+  // const [filteredResults, setFilteredResults] = useState<Flight[]>([]);
 
   const initFlightsData = useContext(DataSourceContext);
 
@@ -30,20 +30,19 @@ function HomePage() {
   }, []);
 
   useEffect(() => {
-    const query = destinationInput.trim().toLowerCase();
-    const results = filterData(flights, query);
-
-    setFilteredResults(results);
-  }, [flights, destinationInput, filterData]);
+    // const query = destinationInput.trim().toLowerCase();
+    // const results = filterData(flights, query);
+    // setFilteredResults(results);
+  }, [flights, filterData]);
 
   function renderContent() {
-    if (destinationInput !== '' && filteredResults.length > 0) {
-      return <Flights filteredResults={filteredResults} />;
-    }
+    // if (destinationInput !== '' && filteredResults.length > 0) {
+    //   return <Flights filteredResults={filteredResults} />;
+    // }
 
-    if (destinationInput.trim() !== '') {
-      return <p>No flights found for the specified destination</p>;
-    }
+    // if (destinationInput.trim() !== '') {
+    //   return <p>No flights found for the specified destination</p>;
+    // }
 
     return <InfoCard />;
   }

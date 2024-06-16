@@ -2,7 +2,7 @@ import { useContext } from 'react';
 import { CompareTicketsContext } from '../context/CompareTickets.context';
 
 import CompareTicketCard from '../components/flights/CompareTicketCard';
-import { CompareTicketsContextType } from '../@types/compareTicketContext';
+import { CompareTicketsContextType } from '../types';
 
 interface ComparisonCardProps {
   _id: number;

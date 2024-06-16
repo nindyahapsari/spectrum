@@ -1,6 +1,6 @@
 import { useState, useEffect, createContext } from 'react';
 import axios from 'axios';
-import { Flight } from '../@types/flight';
+import { Flight } from '../types';
 import { FLIGHTS_ALL_API } from '../utils/endpoints';
 
 type TDataSourceProvider = {

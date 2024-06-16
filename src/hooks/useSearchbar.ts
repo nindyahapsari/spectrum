@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import useGetCities from './useGetCities';
-import { FormInput } from '../@types/formInput';
+import { FormInput } from '../types';
 
 interface City {
   name_translations: {

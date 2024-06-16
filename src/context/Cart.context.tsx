@@ -2,9 +2,7 @@ import { createContext, useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { PURCHASE_API, FLIGHTS_ALL_API } from '../utils/endpoints';
-import { Flight } from '../@types/flight';
-import { CartContextType, CartItem } from '../@types/cartContext';
-import { CheckoutInfo } from '../@types/checkout';
+import { Flight, CartContextType, CartItem, CheckoutInfo } from '../types';
 
 type CartContextProviderProps = {
   children: React.ReactNode;

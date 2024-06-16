@@ -1,5 +1,5 @@
 import InfoItem from './InfoItem';
-import { UserBillInfo } from '../../@types/checkout';
+import { UserBillInfo } from '../../types';
 
 interface ContactInfoSummaryProps {
   bill: UserBillInfo;

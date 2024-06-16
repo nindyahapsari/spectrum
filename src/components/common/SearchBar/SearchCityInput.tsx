@@ -1,6 +1,6 @@
 import { UseFormRegister } from 'react-hook-form';
 
-import { FormInput } from '../../../@types/formInput';
+import { FormInput } from '../../../types';
 
 interface City {
   name_translations: {

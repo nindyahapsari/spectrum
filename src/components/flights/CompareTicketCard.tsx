@@ -1,8 +1,7 @@
 import { useContext } from 'react';
 import { CartContext } from '../../context/Cart.context';
 import { CompareTicketsContext } from '../../context/CompareTickets.context';
-import { CartContextType } from '../../@types/cartContext';
-import { CompareTicketsContextType } from '../../@types/compareTicketContext';
+import { CartContextType, CompareTicketsContextType } from '../../types';
 
 import { Card, Button } from 'react-daisyui';
 
