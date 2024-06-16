@@ -10,15 +10,17 @@ export type FormInput = {
 };
 
 export type Flight = {
-  _id: number;
-  flightNumber: string;
-  departureTime: string;
-  arrivalTime: string;
-  airline: string;
+  _id: string;
+  date: string;
+  flight_number: string;
+  departure_at: string;
+  return_at?: string;
+  airline?: string;
   origin: string;
   destination: string;
   price: number;
   currency: string;
+  transfers?: number;
 };
 
 export type DataSourceContextType = {
@@ -62,12 +64,11 @@ export type CheckoutInfoType = Partial<
     CardPaymentInfo & { firstName: string; lastName: string; userName: string }
 >;
 export type CartContextType = {
-  initData: Flight[];
   cart: { [key: string]: number };
   getCartItems: () => CartItem[];
   getTotalCartAmount: () => number;
   addToCart: (id: string) => void;
-  removeFromCart: (id: number) => void;
+  removeFromCart: (id: string) => void;
   checkout: (userId: string) => Promise<void>;
   addCheckoutInfo: (checkoutData: Partial<CheckoutInfoType>) => void;
   checkoutInfo: CheckoutInfo;
