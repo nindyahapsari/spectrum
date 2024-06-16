@@ -61,7 +61,6 @@ function useSearchbar() {
   }, [departureValue, destinationValue, cities, filterCities]);
 
   const handleSelectDeparture = (departure: { name: string; code: string }) => {
-    console.log('handleSelectDeparture', departure);
     setValue('departure', departure.name ?? '');
     setIataCode((prev) => ({ ...prev, departure: departure.code }));
     setFilteredDeparture([]);
@@ -76,9 +75,16 @@ function useSearchbar() {
     setFilteredDestinations([]);
   };
 
+  const convertDateToISO = (departureDate: Date): string => {
+    return departureDate.toISOString().split('T')[0];
+  };
+
   const handleSearchFlight = (data: FormInput) => {
-    console.log('handleSearchFlight', data);
+    const departureDate = convertDateToISO(data.departureDate);
+    const returnDate = convertDateToISO(data.returnDate);
     const flightParams = {
+      depart_date: departureDate,
+      return_date: returnDate,
       destination: iatacode.destination,
       origin: iatacode.departure,
     };
