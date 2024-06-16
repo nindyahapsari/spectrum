@@ -2,15 +2,7 @@ import { useContext } from 'react';
 import { CompareTicketsContext } from '../context/CompareTickets.context';
 
 import CompareTicketCard from '../components/flights/CompareTicketCard';
-import { CompareTicketsContextType } from '../types';
-
-interface ComparisonCardProps {
-  _id: number;
-  airline: string;
-  destination: string;
-  seatAvailability?: number;
-  price: number;
-}
+import { CompareTicketsContextType, Flight } from '../types';
 
 function ComparisonPage() {
   const { ticketsToCompare } = useContext(
@@ -24,19 +16,12 @@ function ComparisonPage() {
       </div>
       <div className="my-5 flex flex-row flex-wrap justify-center">
         {ticketsToCompare?.map(
-          ({
-            _id,
-            airline,
-            destination,
-            seatAvailability,
-            price,
-          }: ComparisonCardProps) => (
+          ({ _id, airline, destination, price }: Flight) => (
             <CompareTicketCard
               key={_id}
-              id={_id}
-              airline={airline}
+              id={_id ?? 'N.A'}
+              airline={airline ?? 'N.A'}
               destination={destination}
-              seatAvailability={seatAvailability}
               price={price}
             />
           )
