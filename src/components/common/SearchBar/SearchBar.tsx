@@ -1,60 +1,56 @@
-import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
-import * as yup from 'yup';
-import InputField from './InputField';
+import useSearchbar from '../../../hooks/useSearchbar';
+import SearchCityInput from './SearchCityInput';
 import PassengerSelect from './PassengerSelect';
 import DatePickerField from './DatePickerField';
 import SearchBarErrorMessage from './SearchBarErrorMessage';
 
-import { FormInput } from '../../../@types/formInput';
-
 import './SearchBar.css';
 
-const schema = yup.object({
-  destination: yup.string().required('Destination is required'),
-  departureDate: yup.date().required('Departure date is required'),
-  returnDate: yup.date().required('Return date is required'),
-  passengers: yup.string().required('Passengers is required'),
-});
-
-interface SearchBarProps {
-  setDestinationInput: (value: string) => void;
-}
-
-function SearchBar({ setDestinationInput }: SearchBarProps) {
+function SearchBar() {
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors },
-  } = useForm<FormInput>({
-    resolver: yupResolver(schema),
-  });
-
-  const onSubmit = (data: FormInput) => {
-    setDestinationInput(data.destination);
-  };
+    errors,
+    filteredDeparture,
+    filteredDestinations,
+    handleSelectDeparture,
+    handleSelectDestination,
+    handleSearchFlight,
+  } = useSearchbar();
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(handleSearchFlight)}
       className=" h-60 my-10 py-3 px-20 border-2 rounded-lg bg-gray-300 backdrop-opacity-50"
     >
       <div className="flex flex-row flex-wrap gap-4 justify-between items-center my-5">
-        <InputField
-          label="Departure"
-          placeholder="From"
-          name="departureDate"
-          register={register}
-          value="Berlin"
-          readOnly
-        />
-        <InputField
-          label="Destination"
-          placeholder="Where to"
-          name="destination"
-          register={register}
-        />
+        <div className="dropdown dropdown-bottom">
+          <div tabIndex={0}>
+            <SearchCityInput
+              label="Departure"
+              placeholder="From"
+              name="departure"
+              register={register}
+              filteredCities={filteredDeparture}
+              handleCities={handleSelectDeparture}
+            />
+          </div>
+        </div>
+
+        <div className="dropdown dropdown-bottom">
+          <div tabIndex={0}>
+            <SearchCityInput
+              label="Destination"
+              placeholder="Where to"
+              name="destination"
+              register={register}
+              filteredCities={filteredDestinations}
+              handleCities={handleSelectDestination}
+            />
+          </div>
+        </div>
+
         <DatePickerField
           label="Departure Date"
           name="departureDate"

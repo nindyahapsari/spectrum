@@ -1,7 +1,5 @@
-import { createContext, useContext, useState, ReactNode } from 'react';
-import { Flight } from '../@types/flight';
-import { DataSourceContext } from './DataSource.context';
-import { CompareTicketsContextType } from '../@types/compareTicketContext';
+import { createContext, useState, ReactNode } from 'react';
+import { Flight, CompareTicketsContextType } from '../types';
 
 interface CompareTicketsProviderProps {
   children: ReactNode;
@@ -13,7 +11,6 @@ const CompareTicketsContext = createContext<
 
 const CompareTicketsProvider = ({ children }: CompareTicketsProviderProps) => {
   const [ticketsToCompare, setTicketsToCompare] = useState<Flight[]>([]);
-  const initFlightsData = useContext(DataSourceContext);
 
   const findFlightById = (selectedtTicketId: string) => {
     if (
@@ -25,10 +22,10 @@ const CompareTicketsProvider = ({ children }: CompareTicketsProviderProps) => {
       return;
     }
 
-    const ticket = initFlightsData.find(
-      (ticket: Flight) => ticket._id.toString() === selectedtTicketId
-    );
-    if (ticket) setTicketsToCompare((prevTicket) => [...prevTicket, ticket]);
+    // const ticket = initFlightsData.find(
+    //   (ticket: Flight) => ticket._id.toString() === selectedtTicketId
+    // );
+    // if (ticket) setTicketsToCompare((prevTicket) => [...prevTicket, ticket]);
   };
 
   const removeTicketFromCompare = (selectedTicketId: string) => {

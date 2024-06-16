@@ -1,10 +1,9 @@
 import { useContext } from 'react';
 
 import { CartContext } from '../../context/Cart.context';
-import { CartContextType } from '../../@types/cartContext';
+import { CartContextType } from '../../types';
 import ContactInfoSummary from './ContactInfoSummary';
 import PaymentInfoSummary from './PaymentInfoSummary';
-// import { CheckoutInfo } from '../../@types/checkout';
 
 function Confirmation() {
   const { getCartItems, getTotalCartAmount, checkoutInfo } = useContext(

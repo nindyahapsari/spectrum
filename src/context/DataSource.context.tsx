@@ -1,42 +1,69 @@
-import { useState, useEffect, createContext } from 'react';
-import axios from 'axios';
-import { Flight } from '../@types/flight';
-import { FLIGHTS_ALL_API } from '../utils/endpoints';
+import { useState, createContext } from 'react';
+import axios, { AxiosError } from 'axios';
+import { Flight, DataSourceContextType } from '../types';
 
 type TDataSourceProvider = {
   children: React.ReactNode;
 };
 
-function fetchAllFlights(): Promise<Flight[]> {
-  return axios
-    .get(FLIGHTS_ALL_API)
-    .then((response) => {
-      const returnedData = response.data;
-      return returnedData;
-    })
-    .catch((error) => {
-      console.error(error);
-      return [];
-    });
-}
+const HEADERS = {
+  'x-rapidapi-key': import.meta.env.VITE_X_RAPIDAPI_KEY as string,
+  'x-rapidapi-host': import.meta.env.VITE_X_RAPIDAPI_HOST as string,
+  'X-Access-Token': import.meta.env.VITE_TRAVELPAYOUTS_TOKEN_API as string,
+};
 
-const DataSourceContext = createContext<Flight[]>([]);
+const FLIGHT_ENDPOINT = import.meta.env
+  .VITE_TRAVELPAYOUTS_FLIGHT_MONTH_URL as string;
+
+const DataSourceContext = createContext<DataSourceContextType>({
+  flights: [],
+  fetchFlight: async () => {},
+  isLoading: false,
+  error: null,
+});
 
 function DataSourceProvider({ children }: TDataSourceProvider) {
-  const [initFlightsData, setInitFlightData] = useState<Flight[]>([]);
+  const [flights, setFlights] = useState<Flight[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<AxiosError | null>(null);
 
-  useEffect(() => {
-    function fetchData() {
-      fetchAllFlights().then((data) => {
-        setInitFlightData(data);
-      });
+  async function fetchFlight(params: { [key: string]: string }) {
+    const options = {
+      method: 'GET',
+      url: FLIGHT_ENDPOINT,
+      params: {
+        destination: params.destination,
+        currency: 'EUR',
+        origin: params.origin,
+      },
+      headers: HEADERS,
+    };
+
+    setIsLoading(true);
+
+    try {
+      const response = await axios.request(options);
+      setFlights(response.data.data);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        setError(error);
+      } else {
+        console.log('error fetch', error);
+      }
+    } finally {
+      setIsLoading(false);
     }
+  }
 
-    fetchData();
-  }, []);
+  const dataSourceValue = {
+    flights,
+    fetchFlight,
+    isLoading,
+    error,
+  };
 
   return (
-    <DataSourceContext.Provider value={initFlightsData}>
+    <DataSourceContext.Provider value={dataSourceValue}>
       {children}
     </DataSourceContext.Provider>
   );
