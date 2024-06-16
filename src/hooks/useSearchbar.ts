@@ -1,24 +1,10 @@
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import useGetCities from './useGetCities';
-import { FormInput } from '../types';
-
-interface City {
-  name_translations: {
-    en: string;
-  };
-  cases: number | null;
-  country_code: string;
-  code: string;
-  time_zone: string;
-  name: string | null;
-  coordinates: {
-    lat: number;
-    lon: number;
-  };
-}
+import { FormInput, City } from '../types';
+import { DataSourceContext } from '../context/DataSource.context';
 
 const schema = yup.object({
   departure: yup.string().required('Departure is required'),
@@ -44,6 +30,9 @@ function useSearchbar() {
 
   const [filteredDeparture, setFilteredDeparture] = useState<City[]>([]);
   const [filteredDestinations, setFilteredDestinations] = useState<City[]>([]);
+  const [iatacode, setIataCode] = useState({ departure: '', destination: '' });
+
+  const { fetchFlight } = useContext(DataSourceContext);
 
   const destinationValue = watch('destination');
   const departureValue = watch('departure');
@@ -71,18 +60,30 @@ function useSearchbar() {
     }
   }, [departureValue, destinationValue, cities, filterCities]);
 
-  const handleSelectDeparture = (departure: string) => {
-    setValue('departure', departure);
+  const handleSelectDeparture = (departure: { name: string; code: string }) => {
+    console.log('handleSelectDeparture', departure);
+    setValue('departure', departure.name ?? '');
+    setIataCode((prev) => ({ ...prev, departure: departure.code }));
     setFilteredDeparture([]);
   };
 
-  const handleSelectDestination = (destination: string) => {
-    setValue('destination', destination);
+  const handleSelectDestination = (destination: {
+    name: string;
+    code: string;
+  }) => {
+    setValue('destination', destination.name ?? '');
+    setIataCode((prev) => ({ ...prev, destination: destination.code }));
     setFilteredDestinations([]);
   };
 
   const handleSearchFlight = (data: FormInput) => {
-    console.log(data);
+    console.log('handleSearchFlight', data);
+    const flightParams = {
+      destination: iatacode.destination,
+      origin: iatacode.departure,
+    };
+
+    fetchFlight(flightParams);
   };
 
   return {

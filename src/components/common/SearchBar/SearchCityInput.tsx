@@ -1,32 +1,4 @@
-import { UseFormRegister } from 'react-hook-form';
-
-import { FormInput } from '../../../types';
-
-interface City {
-  name_translations: {
-    en: string;
-  };
-  cases: number | null;
-  country_code: string;
-  code: string;
-  time_zone: string;
-  name: string | null;
-  coordinates: {
-    lat: number;
-    lon: number;
-  };
-}
-
-interface InputFieldProps<T extends City> {
-  label: string;
-  placeholder: string;
-  register: UseFormRegister<FormInput>;
-  name: keyof FormInput;
-  readOnly?: boolean;
-  value?: string;
-  filteredCities: T[];
-  handleCities: (city: string) => void;
-}
+import { City, InputFieldProps } from '../../../types';
 
 function SearchCityInput<T extends City>({
   label,
@@ -61,7 +33,7 @@ function SearchCityInput<T extends City>({
             <li
               key={index}
               className="menu-title"
-              onClick={() => handleCities(city.name ?? '')}
+              onClick={() => handleCities({ name: city.name, code: city.code })}
             >
               <div className="flex flex-row justify-between text-black">
                 <div>{city.name}</div>
