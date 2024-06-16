@@ -8,7 +8,6 @@ interface ProtectedRouteProps {
 
 function ProtectedRoute({ children }: ProtectedRouteProps) {
   const { isLoggedIn, isLoading } = useContext(AuthContext);
-  console.log('isLoggedin', isLoggedIn);
   const navigate = useNavigate();
 
   useEffect(() => {
