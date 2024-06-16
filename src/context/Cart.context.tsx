@@ -1,17 +1,12 @@
-import { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { PURCHASE_API, FLIGHTS_ALL_API } from '../utils/endpoints';
-import { Flight, CartContextType, CartItem, CheckoutInfo } from '../types';
+import { PURCHASE_API } from '../utils/endpoints';
+import { CartContextType, CartItem, CheckoutInfo } from '../types';
+import { DataSourceContext } from './DataSource.context';
 
 type CartContextProviderProps = {
   children: React.ReactNode;
-};
-
-const fetchingData = async (): Promise<Flight[]> => {
-  const response = await axios.get(FLIGHTS_ALL_API);
-  const returnedData = response.data;
-  return returnedData;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -28,26 +23,20 @@ const initialCheckoutInfo: CheckoutInfo = {
 };
 
 function CartContextProvider(props: CartContextProviderProps) {
-  const [initData, setInitData] = useState<Flight[]>([]);
+  // const [initData, setInitData] = useState<Flight[]>([]);
   const [cart, setCart] = useState<{ [key: string]: number }>({});
   const [checkoutInfo, setCheckoutInfo] =
     useState<CheckoutInfo>(initialCheckoutInfo);
 
-  const navigate = useNavigate();
+  const { flights } = useContext(DataSourceContext);
 
-  useEffect(() => {
-    const fetchFlightData = async () => {
-      const returnedData = await fetchingData();
-      setInitData(returnedData);
-    };
-    fetchFlightData();
-  }, []);
+  const navigate = useNavigate();
 
   const getTotalCartAmount = () => {
     let totalAmount = 0;
     for (const ticket in cart) {
       if (cart[ticket] > 0) {
-        const ticketData = initData.find((t) => t._id.toString() === ticket);
+        const ticketData = flights.find((t) => t._id.toString() === ticket);
         if (ticketData) {
           totalAmount += ticketData.price * cart[ticket];
         }
@@ -59,7 +48,7 @@ function CartContextProvider(props: CartContextProviderProps) {
   const getCartItems = () => {
     return Object.keys(cart)
       .map((id) => {
-        const item = initData.find((f) => f._id.toString() === id);
+        const item = flights.find((f) => f._id.toString() === id);
         if (!item) return null;
 
         return {
@@ -74,17 +63,16 @@ function CartContextProvider(props: CartContextProviderProps) {
     setCart({ ...cart, [id]: (cart[id] || 0) + 1 });
   };
 
-  const removeFromCart = (id: number) => {
-    const ticketId = id.toString();
+  const removeFromCart = (id: string) => {
     setCart((prevCart) => {
       const updatedCart = { ...prevCart };
 
-      if (updatedCart[ticketId] === 1) {
-        delete updatedCart[ticketId];
+      if (updatedCart[id] === 1) {
+        delete updatedCart[id];
         return updatedCart;
       }
 
-      updatedCart[ticketId] -= 1;
+      updatedCart[id] -= 1;
       return updatedCart;
     });
   };
@@ -118,7 +106,6 @@ function CartContextProvider(props: CartContextProviderProps) {
   };
 
   const contextValue: CartContextType = {
-    initData,
     cart,
     getCartItems,
     getTotalCartAmount,
