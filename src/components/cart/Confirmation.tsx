@@ -40,21 +40,17 @@ function Confirmation() {
                     <div className="flex flex-col">
                       <div>
                         <p className="text-sm my-3">
-                          {flight.airline} - {flight.flightNumber}
+                          {flight.airline} - {flight.flight_number}
                         </p>
                         <p className="text-sm my-3">
                           Departure:{' '}
-                          {new Date(flight.departureTime).toLocaleString()}
+                          {new Date(flight.departure_at).toLocaleString()}
                         </p>
                       </div>
 
                       <div>
                         <p className="text-sm my-3">
                           Destination: {flight.destination}
-                        </p>
-                        <p className="text-sm my-3">
-                          Arrival:{' '}
-                          {new Date(flight.arrivalTime).toLocaleString()}
                         </p>
                       </div>
                     </div>
