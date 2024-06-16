@@ -1,4 +1,5 @@
 import { useState, createContext } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import axios, { AxiosError } from 'axios';
 import { Flight, DataSourceContextType } from '../types';
 
@@ -13,7 +14,7 @@ const HEADERS = {
 };
 
 const FLIGHT_ENDPOINT = import.meta.env
-  .VITE_TRAVELPAYOUTS_FLIGHT_MONTH_URL as string;
+  .VITE_TRAVELPAYOUTS_FLIGHT_DAY_OF_MONTH_URL as string;
 
 const DataSourceContext = createContext<DataSourceContextType>({
   flights: [],
@@ -32,9 +33,12 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
       method: 'GET',
       url: FLIGHT_ENDPOINT,
       params: {
+        calendar_type: 'departure_date',
         destination: params.destination,
         currency: 'EUR',
         origin: params.origin,
+        return_date: params.return_date,
+        depart_date: params.depart_date,
       },
       headers: HEADERS,
     };
@@ -43,7 +47,15 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
 
     try {
       const response = await axios.request(options);
-      setFlights(response.data.data);
+
+      const data = response.data.data;
+      const flights = Object.keys(data).map((key) => ({
+        _id: uuidv4(),
+        date: key,
+        ...data[key],
+      }));
+
+      setFlights(flights);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         setError(error);

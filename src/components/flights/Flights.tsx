@@ -1,8 +1,8 @@
 import { useState, useContext } from 'react';
 
-import { Flight, CompareTicketsContextType } from '../../types';
+import { CompareTicketsContextType } from '../../types';
 import { CompareTicketsContext } from '../../context/CompareTickets.context';
-
+import { DataSourceContext } from '../../context/DataSource.context';
 import { Button, Toast, Alert } from 'react-daisyui';
 
 import FlightCards from './FlightCards';
@@ -20,19 +20,20 @@ import FlightCards from './FlightCards';
 //   'Security Check',
 // ];
 
-type FlightsProps = {
-  filteredResults: Flight[];
-};
+// type FlightsProps = {
+//   filteredResults: Flight[];
+// };
 
-function Flights({ filteredResults }: FlightsProps) {
+function Flights() {
   const [isTicketAdded, setIsTicketAdded] = useState(false);
   const { findFlightById } = useContext(
     CompareTicketsContext
   ) as CompareTicketsContextType;
 
-  const handleTicketComparison = (ticketId: number) => {
-    const id = ticketId.toString();
-    findFlightById(id);
+  const { flights } = useContext(DataSourceContext);
+
+  const handleTicketComparison = (ticketId: string) => {
+    findFlightById(ticketId);
 
     setIsTicketAdded(true);
     setTimeout(() => {
@@ -54,11 +55,11 @@ function Flights({ filteredResults }: FlightsProps) {
             </div>
           )}
           <div></div>
-          {filteredResults.map((flight) => (
-            <div key={flight._id} className="flex flex-row items-center">
+          {flights.map((flight) => (
+            <div key={flight.date} className="flex flex-row items-center">
               <FlightCards flight={flight} />
               <Button
-                onClick={() => handleTicketComparison(flight._id)}
+                onClick={() => handleTicketComparison(flight.date)}
                 className="mx-3 h-2 w-4 text-4xl"
                 variant="outline"
               >
