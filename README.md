@@ -16,14 +16,14 @@ Booking Process: Easily select and book flights with a seamless booking process.
 User Profile: Users have access to their profile where they can view their booking history and manage account settings.
 Technologies Used
 
-Frontend: React.js, Material-UI
+Frontend: React.js, Typescript, Tailwind, Daisy UI
 Backend: Node.js, Express.js
 Database: MongoDB
 Authentication: JSON Web Tokens (JWT)
 Other Libraries: Axios (for API requests), bcryptjs (for password hashing), mongoose (for MongoDB object modeling)
 Purpose
 
-Spectrum Airlines Booking System streamlines the flight booking process, making it convenient for users to find and book business class flights for their travel needs. Whether users are planning a vacation, business trip, or any other journey, this application simplifies the search and booking process for business class, providing a hassle-free experience.
+Spectrum Airlines Booking System streamlines the flight booking process, making it convenient for users to find and book flights for their travel needs. Whether users are planning a vacation, business trip, or any other journey, this application simplifies the search and booking process for business class, providing a hassle-free experience.
 
 
 
