@@ -1,3 +1,6 @@
+import { UseFormRegister } from 'react-hook-form';
+import { AxiosError } from 'axios';
+
 export type FormInput = {
   departure: string;
   destination: string;
@@ -16,6 +19,13 @@ export type Flight = {
   destination: string;
   price: number;
   currency: string;
+};
+
+export type DataSourceContextType = {
+  flights: Flight[];
+  fetchFlight: (params: { [key: string]: string }) => Promise<void>;
+  isLoading: boolean;
+  error: AxiosError | null;
 };
 
 export type CompareTicketsContextType = {
@@ -62,4 +72,30 @@ export type CartContextType = {
   addCheckoutInfo: (checkoutData: Partial<CheckoutInfoType>) => void;
   checkoutInfo: CheckoutInfo;
   clearCart: () => void;
+};
+
+export type City = {
+  name_translations: {
+    en: string;
+  };
+  cases: number | null;
+  country_code: string;
+  code: string;
+  time_zone: string;
+  name: string;
+  coordinates: {
+    lat: number;
+    lon: number;
+  };
+};
+
+export type InputFieldProps<T extends City> = {
+  label: string;
+  placeholder: string;
+  register: UseFormRegister<FormInput>;
+  name: keyof FormInput;
+  readOnly?: boolean;
+  value?: string;
+  filteredCities: T[];
+  handleCities: (city: { name: string; code: string }) => void;
 };
