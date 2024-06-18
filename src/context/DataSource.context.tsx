@@ -1,7 +1,9 @@
 import { useState, createContext } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+// import { v4 as uuidv4 } from 'uuid';
 import axios, { AxiosError } from 'axios';
 import { Flight, DataSourceContextType } from '../types';
+import useFlightInfoTranslator from '../hooks/useFlightInfoTranslator';
+// import { CodeContext } from './Code.context';
 
 type TDataSourceProvider = {
   children: React.ReactNode;
@@ -13,12 +15,12 @@ const HEADERS = {
   'X-Access-Token': import.meta.env.VITE_TRAVELPAYOUTS_TOKEN_API as string,
 };
 
-const FLIGHT_ENDPOINT = import.meta.env
-  .VITE_TRAVELPAYOUTS_FLIGHT_DAY_OF_MONTH_URL as string;
+const CHEAPEST_FLIGHT_ENDPOINT =
+  'https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap';
 
 const DataSourceContext = createContext<DataSourceContextType>({
   flights: [],
-  fetchFlight: async () => {},
+  fetchCheapestFlight: async () => {},
   isLoading: false,
   error: null,
 });
@@ -28,17 +30,19 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
 
-  async function fetchFlight(params: { [key: string]: string }) {
+  const { formatFlights } = useFlightInfoTranslator();
+  // const { isDataLoaded } = useContext(CodeContext);
+
+  async function fetchCheapestFlight(params: { [key: string]: string }) {
+    // if (!isDataLoaded) return;
     const options = {
-      method: 'GET',
-      url: FLIGHT_ENDPOINT,
       params: {
         calendar_type: 'departure_date',
-        destination: params.destination,
         currency: 'EUR',
+        page: '1',
+        destination: params.destination || '-',
         origin: params.origin,
-        return_date: params.return_date,
-        depart_date: params.depart_date,
+        return_date: params.return_date || '',
       },
       headers: HEADERS,
     };
@@ -46,16 +50,20 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
     setIsLoading(true);
 
     try {
-      const response = await axios.request(options);
+      const response = await axios.get(CHEAPEST_FLIGHT_ENDPOINT, options);
 
       const data = response.data.data;
-      const flights = Object.keys(data).map((key) => ({
-        _id: uuidv4(),
-        date: key,
-        ...data[key],
-      }));
+      console.log('data', data);
+      const formatedCheapestFlights = formatFlights(data);
+      console.log('chepaest flight', formatedCheapestFlights);
+      // NEed to patch to cheapest flight from useFlightTrnaslator
+      // const flights = Object.keys(data).map((key) => ({
+      //   _id: uuidv4(),
+      //   date: key,
+      //   ...data[key],
+      // }));
 
-      setFlights(flights);
+      setFlights([]);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         setError(error);
@@ -69,7 +77,7 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
 
   const dataSourceValue = {
     flights,
-    fetchFlight,
+    fetchCheapestFlight,
     isLoading,
     error,
   };

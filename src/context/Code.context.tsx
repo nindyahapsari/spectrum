@@ -38,6 +38,7 @@ type Airline = {
 type CodeContextType = {
   cities: CityCodeName[];
   airlines: AirlineCodeName[];
+  isDataLoaded: boolean;
 };
 
 const HEADERS = {
@@ -55,42 +56,95 @@ const AIRLINES_ENDPOINT =
 const CodeContext = createContext<CodeContextType>({
   cities: [],
   airlines: [],
+  isDataLoaded: false,
 });
 
 const CodeProvider = ({ children }: ReactNode) => {
   const [cities, setCities] = useState([]);
   const [airlines, setAirlines] = useState([]);
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
+
+  //   const fetchCities = async () => {
+  //     const cities =
+
+  //     const cityCodeName = cities.data.map((city: City) => {
+  //       return {
+  //         [city.code]: city.name_translations.en,
+  //       };
+  //     });
+
+  //     setCities(cityCodeName);
+  //   };
+
+  //   const fetchAirlines = async () => {
+  //     const airlines = await axios.get(AIRLINES_ENDPOINT, { headers: HEADERS });
+  //     const airlineCodeName = airlines.data.map((airline: Airline) => {
+  //       return {
+  //         [airline.code]: airline.name_translations.en,
+  //       };
+  //     });
+  //     setAirlines(airlineCodeName);
+  //   };
 
   useEffect(() => {
-    const fetchCities = async () => {
-      const cities = await axios.get(CITIES_ENDPOINT, { headers: HEADERS });
+    const fetchData = async () => {
+      const cachedCities = localStorage.getItem('cities');
+      const cachedAirlines = localStorage.getItem('airlines');
 
-      const cityCodeName = cities.data.map((city: City) => {
-        return {
-          [city.code]: city.name_translations.en,
-        };
-      });
+      if (cachedCities && cachedAirlines) {
+        setCities(JSON.parse(cachedCities));
+        setAirlines(JSON.parse(cachedAirlines));
+        setIsDataLoaded(true);
+        return;
+      }
 
-      setCities(cityCodeName);
+      try {
+        setIsDataLoaded(true);
+
+        const [citiesResponse, airlineResponse] = await Promise.all([
+          await axios.get(CITIES_ENDPOINT, { headers: HEADERS }),
+          await axios.get(AIRLINES_ENDPOINT, { headers: HEADERS }),
+        ]);
+
+        const cityCodeName = citiesResponse.data.reduce(
+          (acc: CityCodeName[], city: City) => {
+            acc[city.code] = city.name_translations.en;
+            return acc;
+          },
+          {}
+        );
+
+        const airlineCodeName = airlineResponse.data.reduce(
+          (acc: AirlineCodeName[], airline: Airline) => {
+            acc[airline.code] = airline.name_translations.en;
+            return acc;
+          },
+          {}
+        );
+
+        localStorage.setItem('cities', JSON.stringify(cityCodeName));
+        localStorage.setItem('airlines', JSON.stringify(airlineCodeName));
+
+        setCities(cityCodeName);
+        setAirlines(airlineCodeName);
+        setIsDataLoaded(false);
+      } catch (error) {
+        console.log('error fetching data', error);
+      }
     };
 
-    const fetchAirlines = async () => {
-      const airlines = await axios.get(AIRLINES_ENDPOINT, { headers: HEADERS });
-      const airlineCodeName = airlines.data.map((airline: Airline) => {
-        return {
-          [airline.code]: airline.name_translations.en,
-        };
-      });
-      setAirlines(airlineCodeName);
-    };
+    setIsDataLoaded(false);
 
-    fetchCities();
-    fetchAirlines();
+    fetchData();
   }, []);
+
+  console.log('cities context', cities);
+  console.log('airlines context', airlines);
 
   const value = {
     cities,
     airlines,
+    isDataLoaded,
   };
 
   return <CodeContext.Provider value={value}>{children}</CodeContext.Provider>;

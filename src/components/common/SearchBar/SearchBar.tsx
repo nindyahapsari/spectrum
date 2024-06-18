@@ -1,7 +1,7 @@
 import useSearchbar from '../../../hooks/useSearchbar';
 import SearchCityInput from './SearchCityInput';
-import PassengerSelect from './PassengerSelect';
-import DatePickerField from './DatePickerField';
+import SearchType from './SearchType';
+// import DatePickerField from './DatePickerField';
 import SearchBarErrorMessage from './SearchBarErrorMessage';
 
 import './SearchBar.css';
@@ -13,9 +13,9 @@ function SearchBar() {
     control,
     errors,
     filteredDeparture,
-    filteredDestinations,
+    // filteredDestinations,
     handleSelectDeparture,
-    handleSelectDestination,
+    // handleSelectDestination,
     handleSearchFlight,
   } = useSearchbar();
 
@@ -38,7 +38,7 @@ function SearchBar() {
           </div>
         </div>
 
-        <div className="dropdown dropdown-bottom">
+        {/* <div className="dropdown dropdown-bottom">
           <div tabIndex={0}>
             <SearchCityInput
               label="Destination"
@@ -49,9 +49,9 @@ function SearchBar() {
               handleCities={handleSelectDestination}
             />
           </div>
-        </div>
+        </div> */}
 
-        <DatePickerField
+        {/* <DatePickerField
           label="Departure Date"
           name="departureDate"
           control={control}
@@ -60,8 +60,8 @@ function SearchBar() {
           label="Return Date"
           name="returnDate"
           control={control}
-        />
-        <PassengerSelect name="passengers" control={control} errors={errors} />
+        /> */}
+        <SearchType name="SearchType" control={control} errors={errors} />
         <button
           type="submit"
           className="mt-6 px-4 py-2 bg-spectrum-primary text-black rounded-md"

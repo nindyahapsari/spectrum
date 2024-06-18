@@ -7,11 +7,8 @@ import { FormInput, City } from '../types';
 import { DataSourceContext } from '../context/DataSource.context';
 
 const schema = yup.object({
-  departure: yup.string().required('Departure is required'),
-  destination: yup.string().required('Destination is required'),
-  departureDate: yup.date().required('Departure date is required'),
-  returnDate: yup.date().required('Return date is required'),
-  passengers: yup.string().required('Passengers is required'),
+  departure: yup.string(),
+  searchType: yup.string(),
 });
 
 function useSearchbar() {
@@ -32,7 +29,7 @@ function useSearchbar() {
   const [filteredDestinations, setFilteredDestinations] = useState<City[]>([]);
   const [iatacode, setIataCode] = useState({ departure: '', destination: '' });
 
-  const { fetchFlight } = useContext(DataSourceContext);
+  const { fetchCheapestFlight } = useContext(DataSourceContext);
 
   const destinationValue = watch('destination');
   const departureValue = watch('departure');
@@ -75,21 +72,21 @@ function useSearchbar() {
     setFilteredDestinations([]);
   };
 
-  const convertDateToISO = (departureDate: Date): string => {
-    return departureDate.toISOString().split('T')[0];
-  };
+  // const convertDateToISO = (departureDate: Date): string => {
+  //   return departureDate.toISOString().split('T')[0];
+  // };
 
-  const handleSearchFlight = (data: FormInput) => {
-    const departureDate = convertDateToISO(data.departureDate);
-    const returnDate = convertDateToISO(data.returnDate);
+  const handleSearchFlight = () => {
+    // const departureDate = convertDateToISO(data.departureDate);
+    // const returnDate = convertDateToISO(data.returnDate);
     const flightParams = {
-      depart_date: departureDate,
-      return_date: returnDate,
+      // depart_date: departureDate,
+      // return_date: returnDate,
       destination: iatacode.destination,
       origin: iatacode.departure,
     };
 
-    fetchFlight(flightParams);
+    fetchCheapestFlight(flightParams);
   };
 
   return {

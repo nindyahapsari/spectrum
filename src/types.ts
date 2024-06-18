@@ -3,10 +3,7 @@ import { AxiosError } from 'axios';
 
 export type FormInput = {
   departure: string;
-  destination: string;
-  departureDate: Date;
-  returnDate: Date;
-  passengers: string;
+  searchType: string;
 };
 
 export type Flight = {
@@ -25,7 +22,7 @@ export type Flight = {
 
 export type DataSourceContextType = {
   flights: Flight[];
-  fetchFlight: (params: { [key: string]: string }) => Promise<void>;
+  fetchCheapestFlight: (params: { [key: string]: string }) => Promise<void>;
   isLoading: boolean;
   error: AxiosError | null;
 };

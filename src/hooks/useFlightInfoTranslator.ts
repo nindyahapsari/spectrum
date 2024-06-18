@@ -31,35 +31,38 @@ type Flight = {
 };
 
 function useFlightInfoTranslator() {
-  const { airlines, cities } = useContext(CodeContext);
+  const { airlines, cities, isDataLoaded } = useContext(CodeContext);
+  // console.log('airlines useFlightInfo', airlines);
 
   const translateAirline = (airlineCode: string) => {
-    return airlines.reduce((acc, airline) => {
-      return Object.keys(airline).includes(airlineCode)
-        ? airline[airlineCode]
-        : acc;
-    }, 'N.A');
+    console.log('airlineCode', airlineCode, airlines);
+    return airlines[airlineCode] || 'N.A';
   };
 
   const translateCity = (cityCode: string) => {
-    return cities.reduce((acc, city) => {
-      return Object.keys(city).includes(cityCode) ? city[cityCode] : acc;
-    }, 'N.A');
+    return cities[cityCode] || 'N.A';
   };
 
-  const cheapestFlight = (flights: Flight[]) => {
+  const formatFlights = (flights: Flight[]) => {
+    console.log(isDataLoaded);
+    if (isDataLoaded) return [];
+    console.log('flights formatflight', flights);
+    // if (!isDataLoaded) return [];
     return Object.keys(flights).flatMap((key) => {
       const city = translateCity(key);
       return Object.keys(flights[key]).map((flight_id) => {
         const flight = flights[key][flight_id];
-        const airline = translateAirline(flight.airline);
-        console.log('airline', airline);
+        let airline;
+        if (airlines.length === 0) {
+          airline = translateAirline(flight.airline);
+        }
+        console.log('airline formatFLights', airline);
         return { city, flight_id, ...flight, airline };
       });
     });
   };
 
-  return { cheapestFlight };
+  return { formatFlights };
 }
 
 export default useFlightInfoTranslator;
