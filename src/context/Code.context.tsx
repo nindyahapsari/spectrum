@@ -22,8 +22,22 @@ type CityCodeName = {
   [key: string]: string;
 };
 
+type AirlineCodeName = {
+  [key: string]: string;
+};
+
+type Airline = {
+  name_translation: {
+    en: string;
+  };
+  code: string;
+  is_lowcost: boolean;
+  name: string | null;
+};
+
 type CodeContextType = {
   cities: CityCodeName[];
+  airlines: AirlineCodeName[];
 };
 
 const HEADERS = {
@@ -32,17 +46,24 @@ const HEADERS = {
   'X-Access-Token': import.meta.env.VITE_TRAVELPAYOUTS_TOKEN_API as string,
 };
 
-const CodeContext = createContext<CodeContextType | null>(null);
+const CITIES_ENDPOINT =
+  'https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/cities.json';
+
+const AIRLINES_ENDPOINT =
+  'https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/airlines.json';
+
+const CodeContext = createContext<CodeContextType>({
+  cities: [],
+  airlines: [],
+});
 
 const CodeProvider = ({ children }: ReactNode) => {
   const [cities, setCities] = useState([]);
+  const [airlines, setAirlines] = useState([]);
 
   useEffect(() => {
     const fetchCities = async () => {
-      const cities = await axios.get(
-        'https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/cities.json',
-        { headers: HEADERS }
-      );
+      const cities = await axios.get(CITIES_ENDPOINT, { headers: HEADERS });
 
       const cityCodeName = cities.data.map((city: City) => {
         return {
@@ -53,11 +74,23 @@ const CodeProvider = ({ children }: ReactNode) => {
       setCities(cityCodeName);
     };
 
+    const fetchAirlines = async () => {
+      const airlines = await axios.get(AIRLINES_ENDPOINT, { headers: HEADERS });
+      const airlineCodeName = airlines.data.map((airline: Airline) => {
+        return {
+          [airline.code]: airline.name_translations.en,
+        };
+      });
+      setAirlines(airlineCodeName);
+    };
+
     fetchCities();
+    fetchAirlines();
   }, []);
 
   const value = {
     cities,
+    airlines,
   };
 
   return <CodeContext.Provider value={value}>{children}</CodeContext.Provider>;
