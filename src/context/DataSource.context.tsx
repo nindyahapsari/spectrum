@@ -67,7 +67,6 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
 
       const data = response.data.data;
       const formatedCheapestFlights = formatFlights(data);
-      console.log('chepaest flight', formatedCheapestFlights);
 
       setFlights(formatedCheapestFlights);
     } catch (error: unknown) {

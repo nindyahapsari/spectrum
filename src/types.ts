@@ -147,3 +147,14 @@ export type CheapestFlight = {
     };
   };
 };
+
+export type CheapestFlightFormated = {
+  _id: string;
+  city: string;
+  flight_id: string;
+  airline: string;
+  departure_at: string;
+  return_at: string;
+  price: number;
+  flight_number: number;
+};

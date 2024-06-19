@@ -7,30 +7,13 @@ import { Button, Toast, Alert } from 'react-daisyui';
 
 import FlightCards from './FlightCards';
 
-// const STOPS = ['Direct', '1 Stop', '2+ Stops'];
-// const DepTimes = [
-//   { type: 'Outbound', time: '12:00 AM - 11:59 PM' },
-//   { type: 'Return', time: '12:00 AM - 11:59 PM' },
-// ];
-// const RATINGS = [
-//   'Food',
-//   'Service',
-//   'Cleanliness',
-//   'Seat Space',
-//   'Security Check',
-// ];
-
-// type FlightsProps = {
-//   filteredResults: Flight[];
-// };
-
 function Flights() {
   const [isTicketAdded, setIsTicketAdded] = useState(false);
   const { findFlightById } = useContext(
     CompareTicketsContext
   ) as CompareTicketsContextType;
 
-  const { flights } = useContext(DataSourceContext);
+  const { flights, isLoading } = useContext(DataSourceContext);
 
   const handleTicketComparison = (ticketId: string) => {
     findFlightById(ticketId);
@@ -41,8 +24,16 @@ function Flights() {
     }, 3000);
   };
 
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
       <div className="flex flex-row justify-center my-10 ">
         <div>
           {isTicketAdded && (
@@ -56,7 +47,7 @@ function Flights() {
           )}
           <div></div>
           {flights.map((flight) => (
-            <div key={flight.date} className="flex flex-row items-center">
+            <div key={flight._id} className="flex flex-row items-center">
               <FlightCards flight={flight} />
               <Button
                 onClick={() => handleTicketComparison(flight.date)}
