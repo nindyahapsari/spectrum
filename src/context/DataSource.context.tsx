@@ -20,14 +20,13 @@ const HEADERS = {
   'X-Access-Token': import.meta.env.VITE_TRAVELPAYOUTS_TOKEN_API as string,
 };
 
-const CHEAPEST_FLIGHT_ENDPOINT =
-  'https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/v1/prices/cheap';
+const CHEAPEST_FLIGHT_ENDPOINT = import.meta.env
+  .VITE_TRAVELPAYOUTS_CHEAPEST_FLIGHT_URL as string;
 
-const CITIES_ENDPOINT =
-  'https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/cities.json';
+const CITIES_ENDPOINT = import.meta.env.VITE_TRAVELPAYOUTS_CITIES_URL as string;
 
-const AIRLINES_ENDPOINT =
-  'https://travelpayouts-travelpayouts-flight-data-v1.p.rapidapi.com/data/en-GB/airlines.json';
+const AIRLINES_ENDPOINT = import.meta.env
+  .VITE_TRAVELPAYOUTS_AIRLINES_URL as string;
 
 const DataSourceContext = createContext<DataSourceContextType>({
   flights: [],
@@ -46,6 +45,8 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
 
   async function fetchCheapestFlight(params: { [key: string]: string }) {
     const options = {
@@ -69,6 +70,7 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
       const formatedCheapestFlights = formatFlights(data);
 
       setFlights(formatedCheapestFlights);
+      setTotalPages(Math.ceil(formatedCheapestFlights.length / 10));
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         setError(error);
@@ -162,6 +164,9 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
     cities,
     airlines,
     isDataLoaded,
+    currentPage,
+    totalPages,
+    setCurrentPage,
   };
 
   return (

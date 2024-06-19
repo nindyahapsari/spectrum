@@ -4,6 +4,7 @@ import { CompareTicketsContextType } from '../../types';
 import { CompareTicketsContext } from '../../context/CompareTickets.context';
 import { DataSourceContext } from '../../context/DataSource.context';
 import { Button, Toast, Alert } from 'react-daisyui';
+import Pagination from '../common/Pagination';
 
 import FlightCards from './FlightCards';
 
@@ -13,7 +14,8 @@ function Flights() {
     CompareTicketsContext
   ) as CompareTicketsContextType;
 
-  const { flights, isLoading } = useContext(DataSourceContext);
+  const { flights, isLoading, currentPage, totalPages, setCurrentPage } =
+    useContext(DataSourceContext);
 
   const handleTicketComparison = (ticketId: string) => {
     findFlightById(ticketId);
@@ -22,6 +24,10 @@ function Flights() {
     setTimeout(() => {
       setIsTicketAdded(false);
     }, 3000);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
   };
 
   if (isLoading) {
@@ -45,7 +51,13 @@ function Flights() {
               </Toast>
             </div>
           )}
-          <div></div>
+          <div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
           {flights.map((flight) => (
             <div key={flight._id} className="flex flex-row items-center">
               <FlightCards flight={flight} />
