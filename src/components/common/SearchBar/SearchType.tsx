@@ -1,11 +1,11 @@
 import { Controller, Control, FieldErrors } from 'react-hook-form';
 import { FormInput } from '../../../types';
 
-interface SearchTypeProps {
+type SearchTypeProps = {
   name: 'SearchType';
   control: Control<FormInput>;
   errors?: FieldErrors;
-}
+};
 
 function SearchType({ name, control }: SearchTypeProps) {
   return (
@@ -14,13 +14,14 @@ function SearchType({ name, control }: SearchTypeProps) {
       <Controller
         name={name}
         control={control}
+        defaultValue="cheapestTicket"
         render={({ field }) => (
           <select
             className="form-select block w-full form-input mt-1 h-10 border rounded px-2 bg-gray-50"
             {...field}
           >
-            <option value="1">Cheapest Ticket</option>
-            <option value="2">
+            <option value="cheapestTicket">Cheapest Ticket</option>
+            <option disabled value="priceDayInAMonth">
               Cheapest Ticket every day in a month (coming soon)
             </option>
           </select>

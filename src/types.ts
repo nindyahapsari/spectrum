@@ -25,6 +25,9 @@ export type DataSourceContextType = {
   fetchCheapestFlight: (params: { [key: string]: string }) => Promise<void>;
   isLoading: boolean;
   error: AxiosError | null;
+  cities: CityCodeName;
+  airlines: AirlineCodeName;
+  isDataLoaded: boolean;
 };
 
 export type CompareTicketsContextType = {
@@ -96,4 +99,51 @@ export type InputFieldProps<T extends City> = {
   value?: string;
   filteredCities: T[];
   handleCities: (city: { name: string; code: string }) => void;
+};
+
+type City = {
+  name_translations: {
+    en: string;
+  };
+  cases: {
+    su: string;
+  };
+  country_code: string;
+  code: string;
+  time_zone: string;
+  name: string;
+  coordinates: {
+    lat: number;
+    lon: number;
+  };
+};
+
+export type CityCodeName = {
+  [key: string]: string;
+};
+
+export type AirlineCodeName = {
+  [key: string]: string;
+};
+
+export type Airline = {
+  name_translation: {
+    en: string;
+  };
+  code: string;
+  is_lowcost: boolean;
+  name: string | null;
+};
+
+export type CheapestFlight = {
+  [key: string]: {
+    [key: string]: {
+      airline: string;
+      departure_at: string;
+      return_at: string;
+      expires_at: string;
+      price: number;
+      flight_number: number;
+    };
+  };
 };

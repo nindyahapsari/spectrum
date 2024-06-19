@@ -7,7 +7,6 @@ import { AuthProviderWrapper } from './context/Auth.context.js';
 import { CartContextProvider } from './context/Cart.context.js';
 import { DataSourceProvider } from './context/DataSource.context.js';
 import { CompareTicketsProvider } from './context/CompareTickets.context.js';
-import { CodeProvider } from './context/Code.context.js';
 
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <React.StrictMode>
@@ -16,9 +15,7 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
         <DataSourceProvider>
           <CartContextProvider>
             <CompareTicketsProvider>
-              <CodeProvider>
-                <App />
-              </CodeProvider>
+              <App />
             </CompareTicketsProvider>
           </CartContextProvider>
         </DataSourceProvider>

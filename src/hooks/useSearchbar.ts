@@ -72,16 +72,15 @@ function useSearchbar() {
     setFilteredDestinations([]);
   };
 
+  // TODO: Still need it for next feature, don't delete it
   // const convertDateToISO = (departureDate: Date): string => {
   //   return departureDate.toISOString().split('T')[0];
   // };
 
   const handleSearchFlight = () => {
-    // const departureDate = convertDateToISO(data.departureDate);
-    // const returnDate = convertDateToISO(data.returnDate);
     const flightParams = {
-      // depart_date: departureDate,
-      // return_date: returnDate,
+      // depart_date: convertDateToISO(data.departureDate),
+      // return_date: convertDateToISO(data.returnDate),
       destination: iatacode.destination,
       origin: iatacode.departure,
     };
