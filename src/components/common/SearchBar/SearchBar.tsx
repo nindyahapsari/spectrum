@@ -22,7 +22,7 @@ function SearchBar() {
   return (
     <form
       onSubmit={handleSubmit(handleSearchFlight)}
-      className=" h-60 my-10 py-3 px-20 border-2 rounded-lg bg-gray-300 backdrop-opacity-50"
+      className="mx-auto w-2/3 h-60 my-10 py-3 px-20 border-2 rounded-lg bg-gray-300 backdrop-opacity-50"
     >
       <div className="flex flex-row flex-wrap gap-4 justify-between items-center my-5">
         <div className="dropdown dropdown-bottom">
