@@ -1,7 +1,6 @@
 import useSearchbar from '../../../hooks/useSearchbar';
 import SearchCityInput from './SearchCityInput';
 import SearchType from './SearchType';
-// import DatePickerField from './DatePickerField';
 import SearchBarErrorMessage from './SearchBarErrorMessage';
 
 import './SearchBar.css';
@@ -38,30 +37,7 @@ function SearchBar() {
           </div>
         </div>
 
-        {/* <div className="dropdown dropdown-bottom">
-          <div tabIndex={0}>
-            <SearchCityInput
-              label="Destination"
-              placeholder="Where to"
-              name="destination"
-              register={register}
-              filteredCities={filteredDestinations}
-              handleCities={handleSelectDestination}
-            />
-          </div>
-        </div> */}
-
-        {/* <DatePickerField
-          label="Departure Date"
-          name="departureDate"
-          control={control}
-        />
-        <DatePickerField
-          label="Return Date"
-          name="returnDate"
-          control={control}
-        /> */}
-        <SearchType name="SearchType" control={control} errors={errors} />
+        <SearchType name="searchType" control={control} errors={errors} />
         <button
           type="submit"
           className="mt-6 px-4 py-2 bg-spectrum-primary text-black rounded-md"
