@@ -3,25 +3,29 @@ import { AxiosError } from 'axios';
 
 export type FormInput = {
   departure: string;
-  searchType: string;
+  searchType?: string;
 };
 
 export type Flight = {
   _id: string;
-  date: string;
+  date?: string;
   flight_number: string;
   departure_at: string;
   return_at?: string;
   airline?: string;
   origin: string;
-  destination: string;
+  destination?: string;
   price: number;
-  currency: string;
   transfers?: number;
 };
 
+export type FetchCheapestFlightsInfo = {
+  departure: string;
+  flights: CheapestFlightFormated[];
+};
+
 export type DataSourceContextType = {
-  flights: Flight[];
+  allFlights: FetchCheapestFlightsInfo;
   fetchCheapestFlight: (params: { [key: string]: string }) => Promise<void>;
   isLoading: boolean;
   error: AxiosError | null;
@@ -32,7 +36,6 @@ export type DataSourceContextType = {
   totalPages: number;
   setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
   setTotalPages: React.Dispatch<React.SetStateAction<number>>;
-  currentFlights: Flight[];
 };
 
 export type CompareTicketsContextType = {
@@ -80,21 +83,6 @@ export type CartContextType = {
   clearCart: () => void;
 };
 
-export type City = {
-  name_translations: {
-    en: string;
-  };
-  cases: number | null;
-  country_code: string;
-  code: string;
-  time_zone: string;
-  name: string;
-  coordinates: {
-    lat: number;
-    lon: number;
-  };
-};
-
 export type InputFieldProps<T extends City> = {
   label: string;
   placeholder: string;
@@ -106,7 +94,7 @@ export type InputFieldProps<T extends City> = {
   handleCities: (city: { name: string; code: string }) => void;
 };
 
-type City = {
+export type City = {
   name_translations: {
     en: string;
   };
@@ -132,7 +120,7 @@ export type AirlineCodeName = {
 };
 
 export type Airline = {
-  name_translation: {
+  name_translations: {
     en: string;
   };
   code: string;
@@ -161,5 +149,7 @@ export type CheapestFlightFormated = {
   departure_at: string;
   return_at: string;
   price: number;
-  flight_number: number;
+  flight_number: string;
+  date: string;
+  origin: string;
 };

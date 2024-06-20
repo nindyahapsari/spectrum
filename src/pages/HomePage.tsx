@@ -5,10 +5,10 @@ import SearchBar from '../components/common/SearchBar/SearchBar';
 import Flights from '../components/flights/Flights';
 
 function HomePage() {
-  const { flights } = useContext(DataSourceContext);
+  const { allFlights } = useContext(DataSourceContext);
 
   function renderContent() {
-    if (flights.length === 0) {
+    if (allFlights.flights.length === 0) {
       return <InfoCard />;
     }
 

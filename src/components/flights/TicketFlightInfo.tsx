@@ -4,7 +4,7 @@ type TicketFlightInfoProps = {
   depTimestamp: string;
   returnTimestamp: string;
   city: string;
-  flightNumber: number;
+  flightNumber: string;
   airline: string;
 };
 

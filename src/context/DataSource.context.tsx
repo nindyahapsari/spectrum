@@ -2,12 +2,13 @@ import { useState, createContext, useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import axios, { AxiosError } from 'axios';
 import {
-  Flight,
+  FetchCheapestFlightsInfo,
   DataSourceContextType,
   City,
   CityCodeName,
   AirlineCodeName,
   Airline,
+  CheapestFlight,
 } from '../types';
 
 type TDataSourceProvider = {
@@ -29,19 +30,26 @@ const AIRLINES_ENDPOINT = import.meta.env
   .VITE_TRAVELPAYOUTS_AIRLINES_URL as string;
 
 const DataSourceContext = createContext<DataSourceContextType>({
-  flights: [],
+  allFlights: { departure: '', flights: [] },
   fetchCheapestFlight: async () => {},
   isLoading: false,
   error: null,
   cities: {},
   airlines: {},
   isDataLoaded: false,
+  currentPage: 1,
+  totalPages: 1,
+  setCurrentPage: () => {},
+  setTotalPages: () => {},
 });
 
 function DataSourceProvider({ children }: TDataSourceProvider) {
-  const [flights, setFlights] = useState<Flight[]>([]);
-  const [cities, setCities] = useState({});
-  const [airlines, setAirlines] = useState({});
+  const [allFlights, setAllFlights] = useState<FetchCheapestFlightsInfo>({
+    departure: '',
+    flights: [],
+  });
+  const [cities, setCities] = useState<CityCodeName>({});
+  const [airlines, setAirlines] = useState<AirlineCodeName>({});
   const [isDataLoaded, setIsDataLoaded] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<AxiosError | null>(null);
@@ -69,7 +77,10 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
       const data = response.data.data;
       const formatedCheapestFlights = formatFlights(data);
 
-      setFlights(formatedCheapestFlights);
+      setAllFlights({
+        departure: params.departure,
+        flights: formatedCheapestFlights,
+      });
       setTotalPages(Math.ceil(formatedCheapestFlights.length / 10));
       setCurrentPage(1);
     } catch (error: unknown) {
@@ -104,15 +115,15 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
         ]);
 
         const cityCodeName = citiesResponse.data.reduce(
-          (acc: CityCodeName[], city: City) => {
-            acc[city.code] = city.name_translations.en;
+          (acc: CityCodeName, city: City) => {
+            acc[city.code as keyof CityCodeName] = city.name_translations.en;
             return acc;
           },
           {}
         );
 
         const airlineCodeName = airlineResponse.data.reduce(
-          (acc: AirlineCodeName[], airline: Airline) => {
+          (acc: AirlineCodeName, airline: Airline) => {
             acc[airline.code] = airline.name_translations.en;
             return acc;
           },
@@ -143,7 +154,7 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
     return cities[cityCode] || 'N.A';
   };
 
-  const formatFlights = (flights: CheapestFlight[]) => {
+  const formatFlights = (flights: CheapestFlight) => {
     if (!isDataLoaded) return [];
     return Object.keys(flights).flatMap((key) => {
       const city = translateCity(key);
@@ -152,14 +163,25 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
         const airline = translateAirline(flight.airline);
         const _id = uuidv4();
 
-        return { _id, city, flight_id, ...flight, airline };
+        return {
+          _id,
+          city,
+          flight_id,
+          airline,
+          departure_at: flight.departure_at,
+          return_at: flight.return_at,
+          price: flight.price,
+          flight_number: flight.flight_number.toString(),
+          date: flight.expires_at,
+          origin: key,
+        };
       });
     });
   };
 
   const dataSourceValue = {
-    flights,
-    setFlights,
+    allFlights,
+    setAllFlights,
     fetchCheapestFlight,
     isLoading,
     error,
@@ -169,6 +191,7 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
     currentPage,
     setCurrentPage,
     totalPages,
+    setTotalPages,
   };
 
   return (

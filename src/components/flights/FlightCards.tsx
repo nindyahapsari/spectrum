@@ -8,9 +8,9 @@ import './FlightCards.css';
 import TicketFlightInfo from './TicketFlightInfo';
 import { CheapestFlightFormated } from '../../types';
 
-interface FlightCardsProps {
-  flight: CheapestFlightFormated;
-}
+type FlightCardsProps = {
+  flight: Partial<CheapestFlightFormated>;
+};
 
 function FlightCards({ flight }: FlightCardsProps) {
   const cartContext = useContext(CartContext);
@@ -34,7 +34,7 @@ function FlightCards({ flight }: FlightCardsProps) {
           depTimestamp={formatDateTime(departure_at ?? '')}
           returnTimestamp={formatDateTime(return_at ?? '')}
           city={city ?? 'N.A'}
-          flightNumber={flight_number ?? 'N.A'}
+          flightNumber={flight_number?.toString() ?? 'N.A'}
           airline={airline ?? 'N.A'}
         />
       </div>

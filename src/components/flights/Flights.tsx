@@ -14,7 +14,7 @@ function Flights() {
     CompareTicketsContext
   ) as CompareTicketsContextType;
 
-  const { flights, isLoading, currentPage, setCurrentPage, totalPages } =
+  const { allFlights, isLoading, currentPage, setCurrentPage, totalPages } =
     useContext(DataSourceContext);
 
   const handleTicketComparison = (ticketId: string) => {
@@ -32,7 +32,7 @@ function Flights() {
 
   const startIndex = (currentPage - 1) * 10;
   const endIndex = startIndex + 10;
-  const currentFlights = flights.slice(startIndex, endIndex);
+  const currentFlights = allFlights.flights.slice(startIndex, endIndex);
 
   if (isLoading) {
     return (
@@ -44,6 +44,13 @@ function Flights() {
 
   return (
     <div className="flex flex-col justify-center items-center">
+      <div>
+        <div className="flex flex-row justify-center">
+          <div className="text-2xl font-semibold">
+            Departure City: {allFlights.departure}
+          </div>
+        </div>
+      </div>
       <div className="flex flex-row justify-center my-10 ">
         <div>
           {isTicketAdded && (
@@ -66,7 +73,7 @@ function Flights() {
             <div key={flight._id} className="flex flex-row items-center">
               <FlightCards flight={flight} />
               <Button
-                onClick={() => handleTicketComparison(flight.date)}
+                onClick={() => handleTicketComparison(flight._id)}
                 className="mx-3 h-2 w-4 text-4xl"
                 variant="outline"
               >
