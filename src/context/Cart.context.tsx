@@ -1,3 +1,4 @@
+/*
 import { createContext, useState, useContext } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
@@ -36,7 +37,9 @@ function CartContextProvider(props: CartContextProviderProps) {
     let totalAmount = 0;
     for (const ticket in cart) {
       if (cart[ticket] > 0) {
-        const ticketData = flights.find((t) => t._id.toString() === ticket);
+        const ticketData = flights.find(
+          (t) => t._id.toString() === ticket
+        );
         if (ticketData) {
           totalAmount += ticketData.price * cart[ticket];
         }
@@ -125,3 +128,4 @@ function CartContextProvider(props: CartContextProviderProps) {
 }
 
 export { CartContext, CartContextProvider };
+*/

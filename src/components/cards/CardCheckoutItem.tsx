@@ -1,3 +1,4 @@
+/*
 import { useContext } from 'react';
 import { CartContext } from '../../context/Cart.context';
 import { Card } from 'react-daisyui';
@@ -43,3 +44,4 @@ function CardCheckoutItem({ flight }: CardCheckoutItemProps) {
 }
 
 export default CardCheckoutItem;
+*/
