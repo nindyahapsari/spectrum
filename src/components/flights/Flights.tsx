@@ -14,7 +14,7 @@ function Flights() {
     CompareTicketsContext
   ) as CompareTicketsContextType;
 
-  const { flights, isLoading, currentPage, totalPages, setCurrentPage } =
+  const { flights, isLoading, currentPage, setCurrentPage, totalPages } =
     useContext(DataSourceContext);
 
   const handleTicketComparison = (ticketId: string) => {
@@ -29,6 +29,10 @@ function Flights() {
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
+
+  const startIndex = (currentPage - 1) * 10;
+  const endIndex = startIndex + 10;
+  const currentFlights = flights.slice(startIndex, endIndex);
 
   if (isLoading) {
     return (
@@ -58,7 +62,7 @@ function Flights() {
               onPageChange={handlePageChange}
             />
           </div>
-          {flights.map((flight) => (
+          {currentFlights.map((flight) => (
             <div key={flight._id} className="flex flex-row items-center">
               <FlightCards flight={flight} />
               <Button

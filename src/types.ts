@@ -28,6 +28,11 @@ export type DataSourceContextType = {
   cities: CityCodeName;
   airlines: AirlineCodeName;
   isDataLoaded: boolean;
+  currentPage: number;
+  totalPages: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>;
+  currentFlights: Flight[];
 };
 
 export type CompareTicketsContextType = {

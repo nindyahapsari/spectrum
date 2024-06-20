@@ -26,7 +26,7 @@ function Pagination({
       >
         Previous
       </button>
-      {pageNumbers.map((number) => (
+      {/* {pageNumbers.map((number) => (
         <button
           key={number}
           onClick={() => onPageChange(number)}
@@ -34,7 +34,7 @@ function Pagination({
         >
           {number}
         </button>
-      ))}
+      ))} */}
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}

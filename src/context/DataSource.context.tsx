@@ -71,6 +71,7 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
 
       setFlights(formatedCheapestFlights);
       setTotalPages(Math.ceil(formatedCheapestFlights.length / 10));
+      setCurrentPage(1);
     } catch (error: unknown) {
       if (axios.isAxiosError(error)) {
         setError(error);
@@ -158,6 +159,7 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
 
   const dataSourceValue = {
     flights,
+    setFlights,
     fetchCheapestFlight,
     isLoading,
     error,
@@ -165,8 +167,8 @@ function DataSourceProvider({ children }: TDataSourceProvider) {
     airlines,
     isDataLoaded,
     currentPage,
-    totalPages,
     setCurrentPage,
+    totalPages,
   };
 
   return (
