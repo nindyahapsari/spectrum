@@ -9,8 +9,6 @@ function ComparisonPage() {
     CompareTicketsContext
   ) as CompareTicketsContextType;
 
-  console.log('ticketsToCompare', ticketsToCompare);
-
   return (
     <div className="p-4 flex flex-col justify-center">
       <div className="text-center text-2xl font-bold my-20">
