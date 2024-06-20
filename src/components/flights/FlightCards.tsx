@@ -1,5 +1,3 @@
-import { useContext } from 'react';
-import { CartContext } from '../../context/Cart.context';
 import bagsIcon from '../../assets/bags.png';
 import separator from '../../assets/separator.png';
 
@@ -13,12 +11,6 @@ type FlightCardsProps = {
 };
 
 function FlightCards({ flight }: FlightCardsProps) {
-  const cartContext = useContext(CartContext);
-
-  if (!cartContext) {
-    throw new Error('CartContext must be used within a CartContextProvider');
-  }
-
   const formatDateTime = (datetime: string) => {
     const date = new Date(datetime);
     return date.toLocaleString();
