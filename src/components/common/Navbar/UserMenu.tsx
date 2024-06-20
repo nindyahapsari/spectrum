@@ -10,7 +10,6 @@ type UserMenuProps = {
 const links = [
   { to: '/', label: 'Home' },
   { to: '/comparison', label: 'Compare Tickets' },
-  { to: '/cart', label: 'Cart' },
 ];
 
 function UserMenu({ logOutUser, isOpen }: UserMenuProps) {
