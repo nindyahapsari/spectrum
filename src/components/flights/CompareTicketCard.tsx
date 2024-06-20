@@ -1,14 +1,13 @@
 import { useContext } from 'react';
-import { CartContext } from '../../context/Cart.context';
 import { CompareTicketsContext } from '../../context/CompareTickets.context';
-import { CartContextType, CompareTicketsContextType } from '../../types';
+import { CompareTicketsContextType } from '../../types';
 
 import { Card, Button } from 'react-daisyui';
 
 interface CompareTicketCardProps {
   id: string;
   airline: string;
-  destination: string;
+  destination?: string;
   seatAvailability?: number;
   price: number;
 }
@@ -20,14 +19,9 @@ function CompareTicketCard({
   seatAvailability,
   price,
 }: CompareTicketCardProps) {
-  const { addToCart } = useContext(CartContext) as CartContextType;
   const { removeTicketFromCompare } = useContext(
     CompareTicketsContext
   ) as CompareTicketsContextType;
-
-  const handleAddToCart = (id: string) => {
-    addToCart(id);
-  };
 
   const handleRemoveCard = (id: string) => {
     removeTicketFromCompare(id);
@@ -47,9 +41,6 @@ function CompareTicketCard({
       <div className="flex flex-col justify-between my-10">
         <Button onClick={() => handleRemoveCard(id)} className="text-md">
           Remove
-        </Button>
-        <Button onClick={() => handleAddToCart(id)} className="text-xl my-1">
-          Book Flight
         </Button>
       </div>
     </Card>
