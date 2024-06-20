@@ -3,27 +3,27 @@ import './InfoCard.css';
 const context = [
   {
     number: '01',
-    title: 'FIND',
+    title: 'SEARCH DEALS',
     description:
-      'Effortlessly discover tailored flights that match your preferences and travel needs with our intuitive search feature.',
+      'Quickly locate the best flight deals from your chosen city with our efficient search system.',
     advertisementText:
-      'Your journey begins with a seamless and personalized search experience, ensuring you find the ideal options for your travel adventure.',
+      'Experience the ease of finding great flight deals tailored to your travel schedule.',
   },
   {
     number: '02',
-    title: 'COMPARE',
+    title: 'BOOKMARK',
     description:
-      'Compare ratings, read passenger reviews, and weigh amenities to make informed choices.',
+      'Bookmark the flights you are interested in for quick access and decision-making later.',
     advertisementText:
-      'Our comprehensive feature empowers you to select the airline that best aligns with your preferences, promising an unparalleled travel experience.',
+      'Easily bookmark flights you like, making it simpler to compare and decide later.',
   },
   {
     number: '03',
-    title: 'CHOOSE',
+    title: 'EXPORT',
     description:
-      'Choose the perfect flight from a curated list that meets your criteria, prioritizing comfort, in-flight services, or budget considerations.',
+      'Export your flight options to a PDF for seamless offline access and sharing with others.',
     advertisementText:
-      'Elevate your travel experience by making a decision that resonates with your unique preferences.',
+      'Download your flight search results in a convenient PDF format for easy sharing and offline use.',
   },
 ];
 
