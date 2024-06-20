@@ -2,7 +2,7 @@ import { Controller, Control, FieldErrors } from 'react-hook-form';
 import { FormInput } from '../../../types';
 
 type SearchTypeProps = {
-  name: 'SearchType';
+  name: 'searchType';
   control: Control<FormInput>;
   errors?: FieldErrors;
 };
