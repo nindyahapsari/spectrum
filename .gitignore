@@ -34,3 +34,12 @@ cypress/downloads
 *.njsproj
 *.sln
 *.sw?
+
+# temporary ignore files
+src/components/cards/CardCheckoutItem.tsx
+src/components/cart/Confirmation.tsx
+src/components/common/SearchBar/DatePickerField.tsx
+src/components/flights/CompareTicketCard.tsx
+src/context/Cart.context.tsx
+src/pages/CartPage.tsx
+src/pages/CheckoutPage.tsx
