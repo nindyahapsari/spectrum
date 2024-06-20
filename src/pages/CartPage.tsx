@@ -1,3 +1,4 @@
+/*
 import { useContext } from 'react';
 import { CartContext } from '../context/Cart.context';
 import { useNavigate } from 'react-router-dom';
@@ -56,3 +57,4 @@ function Cart() {
 }
 
 export default Cart;
+*/

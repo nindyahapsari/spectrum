@@ -4,25 +4,9 @@ import { CompareTicketsContextType } from '../../types';
 import { CompareTicketsContext } from '../../context/CompareTickets.context';
 import { DataSourceContext } from '../../context/DataSource.context';
 import { Button, Toast, Alert } from 'react-daisyui';
+import Pagination from '../common/Pagination';
 
 import FlightCards from './FlightCards';
-
-// const STOPS = ['Direct', '1 Stop', '2+ Stops'];
-// const DepTimes = [
-//   { type: 'Outbound', time: '12:00 AM - 11:59 PM' },
-//   { type: 'Return', time: '12:00 AM - 11:59 PM' },
-// ];
-// const RATINGS = [
-//   'Food',
-//   'Service',
-//   'Cleanliness',
-//   'Seat Space',
-//   'Security Check',
-// ];
-
-// type FlightsProps = {
-//   filteredResults: Flight[];
-// };
 
 function Flights() {
   const [isTicketAdded, setIsTicketAdded] = useState(false);
@@ -30,7 +14,8 @@ function Flights() {
     CompareTicketsContext
   ) as CompareTicketsContextType;
 
-  const { flights } = useContext(DataSourceContext);
+  const { allFlights, isLoading, currentPage, setCurrentPage, totalPages } =
+    useContext(DataSourceContext);
 
   const handleTicketComparison = (ticketId: string) => {
     findFlightById(ticketId);
@@ -41,8 +26,31 @@ function Flights() {
     }, 3000);
   };
 
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const startIndex = (currentPage - 1) * 10;
+  const endIndex = startIndex + 10;
+  const currentFlights = allFlights.flights.slice(startIndex, endIndex);
+
+  if (isLoading) {
+    return (
+      <div className="w-full h-screen flex justify-center items-center">
+        <span className="loading loading-bars loading-lg"></span>
+      </div>
+    );
+  }
+
   return (
-    <div>
+    <div className="flex flex-col justify-center items-center">
+      <div>
+        <div className="flex flex-row justify-center">
+          <div className="text-2xl font-semibold">
+            Departure City: {allFlights.departure}
+          </div>
+        </div>
+      </div>
       <div className="flex flex-row justify-center my-10 ">
         <div>
           {isTicketAdded && (
@@ -54,12 +62,18 @@ function Flights() {
               </Toast>
             </div>
           )}
-          <div></div>
-          {flights.map((flight) => (
-            <div key={flight.date} className="flex flex-row items-center">
+          <div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageChange={handlePageChange}
+            />
+          </div>
+          {currentFlights.map((flight) => (
+            <div key={flight._id} className="flex flex-row items-center">
               <FlightCards flight={flight} />
               <Button
-                onClick={() => handleTicketComparison(flight.date)}
+                onClick={() => handleTicketComparison(flight._id)}
                 className="mx-3 h-2 w-4 text-4xl"
                 variant="outline"
               >

@@ -3,31 +3,39 @@ import { AxiosError } from 'axios';
 
 export type FormInput = {
   departure: string;
-  destination: string;
-  departureDate: Date;
-  returnDate: Date;
-  passengers: string;
+  searchType?: string;
 };
 
 export type Flight = {
   _id: string;
-  date: string;
+  date?: string;
   flight_number: string;
   departure_at: string;
   return_at?: string;
   airline?: string;
   origin: string;
-  destination: string;
+  destination?: string;
   price: number;
-  currency: string;
   transfers?: number;
 };
 
+export type FetchCheapestFlightsInfo = {
+  departure: string;
+  flights: CheapestFlightFormated[];
+};
+
 export type DataSourceContextType = {
-  flights: Flight[];
-  fetchFlight: (params: { [key: string]: string }) => Promise<void>;
+  allFlights: FetchCheapestFlightsInfo;
+  fetchCheapestFlight: (params: { [key: string]: string }) => Promise<void>;
   isLoading: boolean;
   error: AxiosError | null;
+  cities: CityCodeName;
+  airlines: AirlineCodeName;
+  isDataLoaded: boolean;
+  currentPage: number;
+  totalPages: number;
+  setCurrentPage: React.Dispatch<React.SetStateAction<number>>;
+  setTotalPages: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export type CompareTicketsContextType = {
@@ -75,11 +83,24 @@ export type CartContextType = {
   clearCart: () => void;
 };
 
+export type InputFieldProps<T extends City> = {
+  label: string;
+  placeholder: string;
+  register: UseFormRegister<FormInput>;
+  name: keyof FormInput;
+  readOnly?: boolean;
+  value?: string;
+  filteredCities: T[];
+  handleCities: (city: { name: string; code: string }) => void;
+};
+
 export type City = {
   name_translations: {
     en: string;
   };
-  cases: number | null;
+  cases: {
+    su: string;
+  };
   country_code: string;
   code: string;
   time_zone: string;
@@ -90,13 +111,45 @@ export type City = {
   };
 };
 
-export type InputFieldProps<T extends City> = {
-  label: string;
-  placeholder: string;
-  register: UseFormRegister<FormInput>;
-  name: keyof FormInput;
-  readOnly?: boolean;
-  value?: string;
-  filteredCities: T[];
-  handleCities: (city: { name: string; code: string }) => void;
+export type CityCodeName = {
+  [key: string]: string;
+};
+
+export type AirlineCodeName = {
+  [key: string]: string;
+};
+
+export type Airline = {
+  name_translations: {
+    en: string;
+  };
+  code: string;
+  is_lowcost: boolean;
+  name: string | null;
+};
+
+export type CheapestFlight = {
+  [key: string]: {
+    [key: string]: {
+      airline: string;
+      departure_at: string;
+      return_at: string;
+      expires_at: string;
+      price: number;
+      flight_number: number;
+    };
+  };
+};
+
+export type CheapestFlightFormated = {
+  _id: string;
+  city: string;
+  flight_id: string;
+  airline: string;
+  departure_at: string;
+  return_at: string;
+  price: number;
+  flight_number: string;
+  date: string;
+  origin: string;
 };

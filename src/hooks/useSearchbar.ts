@@ -7,11 +7,8 @@ import { FormInput, City } from '../types';
 import { DataSourceContext } from '../context/DataSource.context';
 
 const schema = yup.object({
-  departure: yup.string().required('Departure is required'),
-  destination: yup.string().required('Destination is required'),
-  departureDate: yup.date().required('Departure date is required'),
-  returnDate: yup.date().required('Return date is required'),
-  passengers: yup.string().required('Passengers is required'),
+  departure: yup.string().required('Departure city is required'),
+  searchType: yup.string(),
 });
 
 function useSearchbar() {
@@ -29,12 +26,10 @@ function useSearchbar() {
   const { cities } = useGetCities();
 
   const [filteredDeparture, setFilteredDeparture] = useState<City[]>([]);
-  const [filteredDestinations, setFilteredDestinations] = useState<City[]>([]);
   const [iatacode, setIataCode] = useState({ departure: '', destination: '' });
 
-  const { fetchFlight } = useContext(DataSourceContext);
+  const { fetchCheapestFlight } = useContext(DataSourceContext);
 
-  const destinationValue = watch('destination');
   const departureValue = watch('departure');
 
   const filterCities = useCallback(
@@ -53,12 +48,7 @@ function useSearchbar() {
       const filtered = filterCities(departureValue);
       setFilteredDeparture(filtered);
     }
-
-    if (destinationValue) {
-      const filtered = filterCities(destinationValue);
-      setFilteredDestinations(filtered);
-    }
-  }, [departureValue, destinationValue, cities, filterCities]);
+  }, [departureValue, cities, filterCities]);
 
   const handleSelectDeparture = (departure: { name: string; code: string }) => {
     setValue('departure', departure.name ?? '');
@@ -66,30 +56,19 @@ function useSearchbar() {
     setFilteredDeparture([]);
   };
 
-  const handleSelectDestination = (destination: {
-    name: string;
-    code: string;
-  }) => {
-    setValue('destination', destination.name ?? '');
-    setIataCode((prev) => ({ ...prev, destination: destination.code }));
-    setFilteredDestinations([]);
-  };
+  // TODO: Still need it for next feature, don't delete it
+  // const convertDateToISO = (departureDate: Date): string => {
+  //   return departureDate.toISOString().split('T')[0];
+  // };
 
-  const convertDateToISO = (departureDate: Date): string => {
-    return departureDate.toISOString().split('T')[0];
-  };
-
-  const handleSearchFlight = (data: FormInput) => {
-    const departureDate = convertDateToISO(data.departureDate);
-    const returnDate = convertDateToISO(data.returnDate);
+  const handleSearchFlight = (data: { departure: string }) => {
     const flightParams = {
-      depart_date: departureDate,
-      return_date: returnDate,
+      ...data,
       destination: iatacode.destination,
       origin: iatacode.departure,
     };
 
-    fetchFlight(flightParams);
+    fetchCheapestFlight(flightParams);
   };
 
   return {
@@ -98,9 +77,7 @@ function useSearchbar() {
     control,
     errors,
     filteredDeparture,
-    filteredDestinations,
     handleSelectDeparture,
-    handleSelectDestination,
     handleSearchFlight,
   };
 }

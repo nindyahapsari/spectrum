@@ -18,7 +18,8 @@ class Time {
     const date = new Date(timestamp);
     const day = String(date.getDate()).padStart(2, '0');
     const month = date.toLocaleString('default', { month: 'short' });
-    return `${day} ${month}`;
+    const year = date.getFullYear();
+    return `${day} ${month} ${year}`;
   }
 }
 

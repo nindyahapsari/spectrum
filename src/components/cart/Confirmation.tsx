@@ -1,3 +1,4 @@
+/*
 import { useContext } from 'react';
 
 import { CartContext } from '../../context/Cart.context';
@@ -86,3 +87,4 @@ function Confirmation() {
 }
 
 export default Confirmation;
+*/
