@@ -4,19 +4,19 @@ import { CompareTicketsContextType } from '../../types';
 
 import { Card, Button } from 'react-daisyui';
 
-interface CompareTicketCardProps {
+type CompareTicketCardProps = {
   id: string;
   airline: string;
-  destination?: string;
-  seatAvailability?: number;
+  city?: string;
+  flightNumber?: string;
   price: number;
-}
+};
 
 function CompareTicketCard({
   id,
   airline,
-  destination,
-  seatAvailability,
+  city,
+  flightNumber,
   price,
 }: CompareTicketCardProps) {
   const { removeTicketFromCompare } = useContext(
@@ -33,12 +33,11 @@ function CompareTicketCard({
         {airline}
       </Card.Title>
       <Card.Body className="p-5">
-        <div className="py-2">Airline: {airline}</div>
-        <div className="py-2">Destination: {destination}</div>
-        <div className="py-2">Seat: {seatAvailability}</div>
+        <div className="py-2">City: {city}</div>
+        <div className="py-2">Flight number: {flightNumber}</div>
         <div className="py-2 text-lg">Price: ${price}</div>
       </Card.Body>
-      <div className="flex flex-col justify-between my-10">
+      <div className="flex flex-col justify-center">
         <Button onClick={() => handleRemoveCard(id)} className="text-md">
           Remove
         </Button>

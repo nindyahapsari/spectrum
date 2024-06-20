@@ -9,6 +9,7 @@ export type FormInput = {
 export type Flight = {
   _id: string;
   date?: string;
+  city?: string;
   flight_number: string;
   departure_at: string;
   return_at?: string;
