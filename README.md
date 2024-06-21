@@ -13,7 +13,7 @@ Features
 - User Authentication: Securely sign up and log in to access additional features.
 - Flight Comparison: Compare flights based on ratings, passenger reviews, amenities, and more (login required).
 - User Profile: Access and manage your search history and account settings (login required).
-- Download PDF (Coming Soon): Export flight details to a PDF for easy reference and sharing (login required).
+- Download PDF: Export flight details to a PDF for easy reference and sharing (login required).
 - Bookmark Flights (Coming Soon): Save your favorite flights for easy access later.
 - More Comprehensive Comparison (Coming Soon): Enhanced features for comparing ticket options.
 
