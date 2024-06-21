@@ -3,28 +3,36 @@
 
 check the live demo: https://bookflight-spectrum.netlify.app/
 
-Spectrum Airlines Booking System
+## Spectrum Airlines Flight Finder
 
-Spectrum Airlines Booking System is a web application designed to help users easily find and book flights based on their preferences and travel needs. This system provides a user-friendly interface for searching flights, comparing options, and making bookings.
+Spectrum Airlines Flight Finder is a web application designed to help users easily find the cheapest flights based on their preferences and travel needs. This system provides a user-friendly interface for searching flights and comparing options.
 
 Features
 
-User Authentication: Users can sign up for an account and log in securely to access the booking system.
-Flight Search: Effortlessly discover tailored flights based on destination, departure time, and other criteria.
-Flight Comparison: Compare flights based on ratings, passenger reviews, amenities, and more.
-Booking Process: Easily select and book flights with a seamless booking process.
-User Profile: Users have access to their profile where they can view their booking history and manage account settings.
-Technologies Used
+- Flight Search: Find the cheapest flights based on your departure city and other criteria. No sign-up or login required.
+- User Authentication: Securely sign up and log in to access additional features.
+- Flight Comparison: Compare flights based on ratings, passenger reviews, amenities, and more (login required).
+- User Profile: Access and manage your search history and account settings (login required).
+- Download PDF (Coming Soon): Export flight details to a PDF for easy reference and sharing (login required).
+- Bookmark Flights (Coming Soon): Save your favorite flights for easy access later.
+- More Comprehensive Comparison (Coming Soon): Enhanced features for comparing ticket options.
 
+## Technologies Used
 Frontend: React.js, Typescript, Tailwind, Daisy UI
 Backend: Node.js, Express.js
 Database: MongoDB
 Authentication: JSON Web Tokens (JWT)
 Other Libraries: Axios (for API requests), bcryptjs (for password hashing), mongoose (for MongoDB object modeling)
-Purpose
 
-Spectrum Airlines Booking System streamlines the flight booking process, making it convenient for users to find and book flights for their travel needs. Whether users are planning a vacation, business trip, or any other journey, this application simplifies the search and booking process for business class, providing a hassle-free experience.
+## How to Use
+1. Search Flights: Use the search bar to find the cheapest flights from your chosen city. No login required.
+2. Sign Up/Login: Create an account or log in to access additional features.
+3. Compare Options: Log in to view and compare detailed flight information.
+4. Manage Profile: Log in to access your profile, view search history, and update settings.
+5. Download PDF (Coming Soon): Log in to export your flight details to a PDF for offline access.
 
+### Note
+Spectrum Airlines Flight Finder does not handle flight bookings.
 
 
 
