@@ -17,6 +17,7 @@
     "@heroicons/react": "^2.1.1",
     "@hookform/resolvers": "^3.4.2",
     "@material-tailwind/html": "^2.2.2",
+    "@react-pdf/renderer": "^3.4.4",
     "axios": "^1.6.7",
     "date-fns": "^3.3.1",
     "dotenv": "^16.4.5",
